@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F70373AD1D7BF78700FBB057 /* SecurityKeyBLETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373AC1D7BF78700FBB057 /* SecurityKeyBLETests.swift */; };
+		F70373B51D7BF7E100FBB057 /* ClientRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373B41D7BF7E100FBB057 /* ClientRequest.swift */; };
+		F70373B61D7C025200FBB057 /* ClientRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373B41D7BF7E100FBB057 /* ClientRequest.swift */; };
+		F70373B81D7C092B00FBB057 /* AuthenticatorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373B71D7C092B00FBB057 /* AuthenticatorResponse.swift */; };
+		F70373B91D7C0C2400FBB057 /* AuthenticatorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373B71D7C092B00FBB057 /* AuthenticatorResponse.swift */; };
+		F70373BE1D7C138200FBB057 /* Framable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373BD1D7C138200FBB057 /* Framable.swift */; };
+		F70373BF1D7C1B0D00FBB057 /* Framable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373BD1D7C138200FBB057 /* Framable.swift */; };
 		F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78C5BE41D78854B001BB080 /* AppDelegate.swift */; };
 		F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78C5BE61D78854B001BB080 /* ViewController.swift */; };
 		F78C5BEA1D78854B001BB080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F78C5BE81D78854B001BB080 /* Main.storyboard */; };
@@ -15,7 +22,23 @@
 		F78C5BF71D78862D001BB080 /* SecurityKeyPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78C5BF61D78862D001BB080 /* SecurityKeyPeripheral.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		F70373AF1D7BF78700FBB057 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F78C5BD91D78854A001BB080 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F78C5BE01D78854A001BB080;
+			remoteInfo = SecurityKeyBLE;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		F70373AA1D7BF78700FBB057 /* SecurityKeyBLETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecurityKeyBLETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70373AC1D7BF78700FBB057 /* SecurityKeyBLETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityKeyBLETests.swift; sourceTree = "<group>"; };
+		F70373AE1D7BF78700FBB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F70373B41D7BF7E100FBB057 /* ClientRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientRequest.swift; sourceTree = "<group>"; };
+		F70373B71D7C092B00FBB057 /* AuthenticatorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorResponse.swift; sourceTree = "<group>"; };
+		F70373BD1D7C138200FBB057 /* Framable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Framable.swift; sourceTree = "<group>"; };
 		F78C5BE11D78854A001BB080 /* SecurityKeyBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F78C5BE41D78854B001BB080 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F78C5BE61D78854B001BB080 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,6 +50,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F70373A71D7BF78700FBB057 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F78C5BDE1D78854A001BB080 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -37,10 +67,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F70373AB1D7BF78700FBB057 /* SecurityKeyBLETests */ = {
+			isa = PBXGroup;
+			children = (
+				F70373AC1D7BF78700FBB057 /* SecurityKeyBLETests.swift */,
+				F70373AE1D7BF78700FBB057 /* Info.plist */,
+			);
+			path = SecurityKeyBLETests;
+			sourceTree = "<group>";
+		};
 		F78C5BD81D78854A001BB080 = {
 			isa = PBXGroup;
 			children = (
 				F78C5BE31D78854A001BB080 /* SecurityKeyBLE */,
+				F70373AB1D7BF78700FBB057 /* SecurityKeyBLETests */,
 				F78C5BE21D78854A001BB080 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				F78C5BE11D78854A001BB080 /* SecurityKeyBLE.app */,
+				F70373AA1D7BF78700FBB057 /* SecurityKeyBLETests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -63,6 +104,9 @@
 				F78C5BEB1D78854B001BB080 /* Assets.xcassets */,
 				F78C5BED1D78854B001BB080 /* LaunchScreen.storyboard */,
 				F78C5BF01D78854B001BB080 /* Info.plist */,
+				F70373B41D7BF7E100FBB057 /* ClientRequest.swift */,
+				F70373B71D7C092B00FBB057 /* AuthenticatorResponse.swift */,
+				F70373BD1D7C138200FBB057 /* Framable.swift */,
 			);
 			path = SecurityKeyBLE;
 			sourceTree = "<group>";
@@ -70,6 +114,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F70373A91D7BF78700FBB057 /* SecurityKeyBLETests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F70373B11D7BF78700FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyBLETests" */;
+			buildPhases = (
+				F70373A61D7BF78700FBB057 /* Sources */,
+				F70373A71D7BF78700FBB057 /* Frameworks */,
+				F70373A81D7BF78700FBB057 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F70373B01D7BF78700FBB057 /* PBXTargetDependency */,
+			);
+			name = SecurityKeyBLETests;
+			productName = SecurityKeyBLETests;
+			productReference = F70373AA1D7BF78700FBB057 /* SecurityKeyBLETests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F78C5BE01D78854A001BB080 /* SecurityKeyBLE */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F78C5BF31D78854B001BB080 /* Build configuration list for PBXNativeTarget "SecurityKeyBLE" */;
@@ -97,6 +159,10 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = GitHub;
 				TargetAttributes = {
+					F70373A91D7BF78700FBB057 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = F78C5BE01D78854A001BB080;
+					};
 					F78C5BE01D78854A001BB080 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -116,11 +182,19 @@
 			projectRoot = "";
 			targets = (
 				F78C5BE01D78854A001BB080 /* SecurityKeyBLE */,
+				F70373A91D7BF78700FBB057 /* SecurityKeyBLETests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F70373A81D7BF78700FBB057 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F78C5BDF1D78854A001BB080 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,17 +208,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F70373A61D7BF78700FBB057 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F70373B61D7C025200FBB057 /* ClientRequest.swift in Sources */,
+				F70373AD1D7BF78700FBB057 /* SecurityKeyBLETests.swift in Sources */,
+				F70373B91D7C0C2400FBB057 /* AuthenticatorResponse.swift in Sources */,
+				F70373BF1D7C1B0D00FBB057 /* Framable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F78C5BDD1D78854A001BB080 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
+				F70373BE1D7C138200FBB057 /* Framable.swift in Sources */,
+				F70373B81D7C092B00FBB057 /* AuthenticatorResponse.swift in Sources */,
 				F78C5BF71D78862D001BB080 /* SecurityKeyPeripheral.swift in Sources */,
+				F70373B51D7BF7E100FBB057 /* ClientRequest.swift in Sources */,
 				F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F70373B01D7BF78700FBB057 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F78C5BE01D78854A001BB080 /* SecurityKeyBLE */;
+			targetProxy = F70373AF1D7BF78700FBB057 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F78C5BE81D78854B001BB080 /* Main.storyboard */ = {
@@ -166,6 +262,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		F70373B21D7BF78700FBB057 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SecurityKeyBLETests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLETests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SecurityKeyBLE.app/SecurityKeyBLE";
+			};
+			name = Debug;
+		};
+		F70373B31D7BF78700FBB057 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SecurityKeyBLETests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLETests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SecurityKeyBLE.app/SecurityKeyBLE";
+			};
+			name = Release;
+		};
 		F78C5BF11D78854B001BB080 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -274,6 +394,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F70373B11D7BF78700FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyBLETests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F70373B21D7BF78700FBB057 /* Debug */,
+				F70373B31D7BF78700FBB057 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		F78C5BDC1D78854A001BB080 /* Build configuration list for PBXProject "SecurityKeyBLE" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
