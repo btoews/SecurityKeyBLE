@@ -9,15 +9,6 @@
 import Foundation
 import CoreBluetooth
 
-let u2fServiceUUID = CBUUID(string: "FFFD")
-let u2fControlPointCharacteristicUUID = CBUUID(string: "F1D0FFF1-DEAA-ECEE-B42F-C9BA7ED623BB")
-let u2fStatusCharacteristicUUID = CBUUID(string: "F1D0FFF2-DEAA-ECEE-B42F-C9BA7ED623BB")
-let u2fControlPointLengthCharacteristicUUID = CBUUID(string: "F1D0FFF3-DEAA-ECEE-B42F-C9BA7ED623BB")
-let u2fServiceRevisionCharacteristicUUID = CBUUID(string: "2A28")
-
-var ControlPointLengthMaxInt = 512
-let ControlPointLengthMax = NSData(bytes: &ControlPointLengthMaxInt, length: 2)
-
 class SecurityKeyPeripheral: NSObject, CBPeripheralManagerDelegate {
     private var peripheralManager: CBPeripheralManager?
     
@@ -56,7 +47,8 @@ class SecurityKeyPeripheral: NSObject, CBPeripheralManagerDelegate {
         u2fControlPointLengthCharacteristic = CBMutableCharacteristic(
             type: u2fControlPointLengthCharacteristicUUID,
             properties: CBCharacteristicProperties.Read,
-            value: ControlPointLengthMax,
+            // Max BLE characteristic size for ctrl pt len.
+            value: NSData(int: CharacteristicMaxSize, size: 2),
             permissions: CBAttributePermissions.Readable
         )
         

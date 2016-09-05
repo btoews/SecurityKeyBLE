@@ -8,12 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		F70373AD1D7BF78700FBB057 /* SecurityKeyBLETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373AC1D7BF78700FBB057 /* SecurityKeyBLETests.swift */; };
-		F70373B51D7BF7E100FBB057 /* ClientRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373B41D7BF7E100FBB057 /* ClientRequest.swift */; };
-		F70373B61D7C025200FBB057 /* ClientRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373B41D7BF7E100FBB057 /* ClientRequest.swift */; };
-		F70373B81D7C092B00FBB057 /* AuthenticatorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373B71D7C092B00FBB057 /* AuthenticatorResponse.swift */; };
-		F70373B91D7C0C2400FBB057 /* AuthenticatorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373B71D7C092B00FBB057 /* AuthenticatorResponse.swift */; };
-		F70373BE1D7C138200FBB057 /* Framable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373BD1D7C138200FBB057 /* Framable.swift */; };
-		F70373BF1D7C1B0D00FBB057 /* Framable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373BD1D7C138200FBB057 /* Framable.swift */; };
+		F70373C11D7D129400FBB057 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C01D7D129400FBB057 /* Errors.swift */; };
+		F70373C21D7D12BE00FBB057 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C01D7D129400FBB057 /* Errors.swift */; };
+		F70373C41D7D3F2100FBB057 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C31D7D3F2100FBB057 /* Message.swift */; };
+		F70373C51D7D3F3900FBB057 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C31D7D3F2100FBB057 /* Message.swift */; };
+		F70373C71D7D3F6B00FBB057 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C61D7D3F6B00FBB057 /* Constants.swift */; };
+		F70373C81D7D3F8200FBB057 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C61D7D3F6B00FBB057 /* Constants.swift */; };
+		F70373CA1D7D3FEC00FBB057 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */; };
+		F70373CB1D7D467A00FBB057 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */; };
+		F70373D81D7D5F5900FBB057 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C31D7D3F2100FBB057 /* Message.swift */; };
+		F70373D91D7D5F5D00FBB057 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C01D7D129400FBB057 /* Errors.swift */; };
+		F70373DA1D7D5F6100FBB057 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C61D7D3F6B00FBB057 /* Constants.swift */; };
+		F70373DB1D7D5F6500FBB057 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */; };
+		F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373E21D7D64A900FBB057 /* AppDelegate.swift */; };
+		F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373E41D7D64A900FBB057 /* ViewController.swift */; };
+		F70373E71D7D64A900FBB057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F70373E61D7D64A900FBB057 /* Assets.xcassets */; };
+		F70373EA1D7D64A900FBB057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70373E81D7D64A900FBB057 /* Main.storyboard */; };
 		F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78C5BE41D78854B001BB080 /* AppDelegate.swift */; };
 		F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78C5BE61D78854B001BB080 /* ViewController.swift */; };
 		F78C5BEA1D78854B001BB080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F78C5BE81D78854B001BB080 /* Main.storyboard */; };
@@ -32,13 +42,33 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F70373CE1D7D5F2500FBB057 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		F70373AA1D7BF78700FBB057 /* SecurityKeyBLETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecurityKeyBLETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70373AC1D7BF78700FBB057 /* SecurityKeyBLETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityKeyBLETests.swift; sourceTree = "<group>"; };
 		F70373AE1D7BF78700FBB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F70373B41D7BF7E100FBB057 /* ClientRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientRequest.swift; sourceTree = "<group>"; };
-		F70373B71D7C092B00FBB057 /* AuthenticatorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorResponse.swift; sourceTree = "<group>"; };
-		F70373BD1D7C138200FBB057 /* Framable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Framable.swift; sourceTree = "<group>"; };
+		F70373C01D7D129400FBB057 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		F70373C31D7D3F2100FBB057 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		F70373C61D7D3F6B00FBB057 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtensions.swift; sourceTree = "<group>"; };
+		F70373D01D7D5F2500FBB057 /* SecurityKeyClient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SecurityKeyClient; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70373E01D7D64A900FBB057 /* SecurityKeyTestClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyTestClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70373E21D7D64A900FBB057 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F70373E41D7D64A900FBB057 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F70373E61D7D64A900FBB057 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F70373E91D7D64A900FBB057 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F70373EB1D7D64A900FBB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F78C5BE11D78854A001BB080 /* SecurityKeyBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F78C5BE41D78854B001BB080 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F78C5BE61D78854B001BB080 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +81,20 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		F70373A71D7BF78700FBB057 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F70373CD1D7D5F2500FBB057 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F70373DD1D7D64A900FBB057 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,11 +120,24 @@
 			path = SecurityKeyBLETests;
 			sourceTree = "<group>";
 		};
+		F70373E11D7D64A900FBB057 /* SecurityKeyTestClient */ = {
+			isa = PBXGroup;
+			children = (
+				F70373E21D7D64A900FBB057 /* AppDelegate.swift */,
+				F70373E41D7D64A900FBB057 /* ViewController.swift */,
+				F70373E61D7D64A900FBB057 /* Assets.xcassets */,
+				F70373E81D7D64A900FBB057 /* Main.storyboard */,
+				F70373EB1D7D64A900FBB057 /* Info.plist */,
+			);
+			path = SecurityKeyTestClient;
+			sourceTree = "<group>";
+		};
 		F78C5BD81D78854A001BB080 = {
 			isa = PBXGroup;
 			children = (
 				F78C5BE31D78854A001BB080 /* SecurityKeyBLE */,
 				F70373AB1D7BF78700FBB057 /* SecurityKeyBLETests */,
+				F70373E11D7D64A900FBB057 /* SecurityKeyTestClient */,
 				F78C5BE21D78854A001BB080 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +147,8 @@
 			children = (
 				F78C5BE11D78854A001BB080 /* SecurityKeyBLE.app */,
 				F70373AA1D7BF78700FBB057 /* SecurityKeyBLETests.xctest */,
+				F70373D01D7D5F2500FBB057 /* SecurityKeyClient */,
+				F70373E01D7D64A900FBB057 /* SecurityKeyTestClient.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,9 +163,10 @@
 				F78C5BEB1D78854B001BB080 /* Assets.xcassets */,
 				F78C5BED1D78854B001BB080 /* LaunchScreen.storyboard */,
 				F78C5BF01D78854B001BB080 /* Info.plist */,
-				F70373B41D7BF7E100FBB057 /* ClientRequest.swift */,
-				F70373B71D7C092B00FBB057 /* AuthenticatorResponse.swift */,
-				F70373BD1D7C138200FBB057 /* Framable.swift */,
+				F70373C31D7D3F2100FBB057 /* Message.swift */,
+				F70373C01D7D129400FBB057 /* Errors.swift */,
+				F70373C61D7D3F6B00FBB057 /* Constants.swift */,
+				F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */,
 			);
 			path = SecurityKeyBLE;
 			sourceTree = "<group>";
@@ -131,6 +191,40 @@
 			productName = SecurityKeyBLETests;
 			productReference = F70373AA1D7BF78700FBB057 /* SecurityKeyBLETests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F70373CF1D7D5F2500FBB057 /* SecurityKeyClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F70373D41D7D5F2500FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyClient" */;
+			buildPhases = (
+				F70373CC1D7D5F2500FBB057 /* Sources */,
+				F70373CD1D7D5F2500FBB057 /* Frameworks */,
+				F70373CE1D7D5F2500FBB057 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SecurityKeyClient;
+			productName = SecurityKeyClient;
+			productReference = F70373D01D7D5F2500FBB057 /* SecurityKeyClient */;
+			productType = "com.apple.product-type.tool";
+		};
+		F70373DF1D7D64A900FBB057 /* SecurityKeyTestClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F70373EC1D7D64A900FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyTestClient" */;
+			buildPhases = (
+				F70373DC1D7D64A900FBB057 /* Sources */,
+				F70373DD1D7D64A900FBB057 /* Frameworks */,
+				F70373DE1D7D64A900FBB057 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SecurityKeyTestClient;
+			productName = SecurityKeyTestClient;
+			productReference = F70373E01D7D64A900FBB057 /* SecurityKeyTestClient.app */;
+			productType = "com.apple.product-type.application";
 		};
 		F78C5BE01D78854A001BB080 /* SecurityKeyBLE */ = {
 			isa = PBXNativeTarget;
@@ -163,6 +257,12 @@
 						CreatedOnToolsVersion = 7.3.1;
 						TestTargetID = F78C5BE01D78854A001BB080;
 					};
+					F70373CF1D7D5F2500FBB057 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					F70373DF1D7D64A900FBB057 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					F78C5BE01D78854A001BB080 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -183,6 +283,8 @@
 			targets = (
 				F78C5BE01D78854A001BB080 /* SecurityKeyBLE */,
 				F70373A91D7BF78700FBB057 /* SecurityKeyBLETests */,
+				F70373CF1D7D5F2500FBB057 /* SecurityKeyClient */,
+				F70373DF1D7D64A900FBB057 /* SecurityKeyTestClient */,
 			);
 		};
 /* End PBXProject section */
@@ -192,6 +294,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F70373DE1D7D64A900FBB057 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F70373E71D7D64A900FBB057 /* Assets.xcassets in Resources */,
+				F70373EA1D7D64A900FBB057 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,10 +323,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F70373B61D7C025200FBB057 /* ClientRequest.swift in Sources */,
+				F70373C21D7D12BE00FBB057 /* Errors.swift in Sources */,
+				F70373C51D7D3F3900FBB057 /* Message.swift in Sources */,
 				F70373AD1D7BF78700FBB057 /* SecurityKeyBLETests.swift in Sources */,
-				F70373B91D7C0C2400FBB057 /* AuthenticatorResponse.swift in Sources */,
-				F70373BF1D7C1B0D00FBB057 /* Framable.swift in Sources */,
+				F70373C81D7D3F8200FBB057 /* Constants.swift in Sources */,
+				F70373CB1D7D467A00FBB057 /* CoreExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F70373CC1D7D5F2500FBB057 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F70373D91D7D5F5D00FBB057 /* Errors.swift in Sources */,
+				F70373D81D7D5F5900FBB057 /* Message.swift in Sources */,
+				F70373DB1D7D5F6500FBB057 /* CoreExtensions.swift in Sources */,
+				F70373DA1D7D5F6100FBB057 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F70373DC1D7D64A900FBB057 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */,
+				F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,11 +356,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
-				F70373BE1D7C138200FBB057 /* Framable.swift in Sources */,
-				F70373B81D7C092B00FBB057 /* AuthenticatorResponse.swift in Sources */,
 				F78C5BF71D78862D001BB080 /* SecurityKeyPeripheral.swift in Sources */,
-				F70373B51D7BF7E100FBB057 /* ClientRequest.swift in Sources */,
+				F70373CA1D7D3FEC00FBB057 /* CoreExtensions.swift in Sources */,
+				F70373C41D7D3F2100FBB057 /* Message.swift in Sources */,
 				F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */,
+				F70373C11D7D129400FBB057 /* Errors.swift in Sources */,
+				F70373C71D7D3F6B00FBB057 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +376,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		F70373E81D7D64A900FBB057 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F70373E91D7D64A900FBB057 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		F78C5BE81D78854B001BB080 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -283,6 +424,56 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLETests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SecurityKeyBLE.app/SecurityKeyBLE";
+			};
+			name = Release;
+		};
+		F70373D51D7D5F2500FBB057 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F70373D61D7D5F2500FBB057 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F70373ED1D7D64A900FBB057 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SecurityKeyTestClient/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyTestClient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F70373EE1D7D64A900FBB057 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SecurityKeyTestClient/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyTestClient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -399,6 +590,22 @@
 			buildConfigurations = (
 				F70373B21D7BF78700FBB057 /* Debug */,
 				F70373B31D7BF78700FBB057 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F70373D41D7D5F2500FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F70373D51D7D5F2500FBB057 /* Debug */,
+				F70373D61D7D5F2500FBB057 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F70373EC1D7D64A900FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyTestClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F70373ED1D7D64A900FBB057 /* Debug */,
+				F70373EE1D7D64A900FBB057 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

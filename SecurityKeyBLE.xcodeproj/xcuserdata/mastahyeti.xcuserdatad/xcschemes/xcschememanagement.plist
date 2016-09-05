@@ -9,10 +9,30 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>SecurityKeyClient.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>SecurityKeyTestClient.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>F70373A91D7BF78700FBB057</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F70373CF1D7D5F2500FBB057</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F70373DF1D7D64A900FBB057</key>
 		<dict>
 			<key>primary</key>
 			<true/>
