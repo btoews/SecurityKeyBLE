@@ -27,7 +27,7 @@
 		F78C5BEF1D78854B001BB080 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F78C5BED1D78854B001BB080 /* LaunchScreen.storyboard */; };
 		F78C5BF71D78862D001BB080 /* SecurityKeyPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78C5BF61D78862D001BB080 /* SecurityKeyPeripheral.swift */; };
 		F7F1BC981D7D674C00A72BA6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C61D7D3F6B00FBB057 /* Constants.swift */; };
-		F7F1BC9A1D7E38BA00A72BA6 /* SecurityKeyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F1BC991D7E38BA00A72BA6 /* SecurityKeyRequest.swift */; };
+		F7F1BC9B1D7E854C00A72BA6 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,6 @@
 		F78C5BEE1D78854B001BB080 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F78C5BF01D78854B001BB080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F78C5BF61D78862D001BB080 /* SecurityKeyPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityKeyPeripheral.swift; sourceTree = "<group>"; };
-		F7F1BC991D7E38BA00A72BA6 /* SecurityKeyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityKeyRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +103,6 @@
 			children = (
 				F70373E21D7D64A900FBB057 /* AppDelegate.swift */,
 				F70373E41D7D64A900FBB057 /* ViewController.swift */,
-				F7F1BC991D7E38BA00A72BA6 /* SecurityKeyRequest.swift */,
 				F70373E61D7D64A900FBB057 /* Assets.xcassets */,
 				F70373E81D7D64A900FBB057 /* Main.storyboard */,
 				F70373EB1D7D64A900FBB057 /* Info.plist */,
@@ -294,8 +292,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */,
-				F7F1BC9A1D7E38BA00A72BA6 /* SecurityKeyRequest.swift in Sources */,
 				F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */,
+				F7F1BC9B1D7E854C00A72BA6 /* CoreExtensions.swift in Sources */,
 				F7F1BC981D7D674C00A72BA6 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

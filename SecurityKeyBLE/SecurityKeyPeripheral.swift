@@ -113,15 +113,19 @@ class SecurityKeyPeripheral: NSObject, CBPeripheralManagerDelegate {
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
-        print("A new CBCentral has subscribed to this device's CBServices")
+        print("A new CBCentral has subscribed to this service's characteristic")
         print(central.description)
         
         print("Updating subbed char")
+        // these calls return boolean false if the queue is blocked. peripheralManagerIsReadyToUpdateSubscribers is called
+        // when it's free again.
         peripheralManager!.updateValue("shit".dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: u2fStatusCharacteristic!, onSubscribedCentrals: nil)
+        peripheralManager!.updateValue("shit2".dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: u2fStatusCharacteristic!, onSubscribedCentrals: nil)
+        peripheralManager!.updateValue("shit3".dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: u2fStatusCharacteristic!, onSubscribedCentrals: nil)
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFromCharacteristic characteristic: CBCharacteristic) {
-        print("\(central.description) has unsubbed from this device's CBServices")
+        print("\(central.description) has unsubbed from this device's characteristic")
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, didReceiveReadRequest request: CBATTRequest) {
@@ -171,5 +175,6 @@ class SecurityKeyPeripheral: NSObject, CBPeripheralManagerDelegate {
     
     func peripheralManagerIsReadyToUpdateSubscribers(peripheral: CBPeripheralManager) {
         print("Updating subscribed devices")
+        peripheralManager!.updateValue("shit123".dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: u2fStatusCharacteristic!, onSubscribedCentrals: nil)
     }
 }

@@ -54,4 +54,22 @@ extension NSData {
         getBytes(&byte, range: range)
         return byte
     }
+    
+    func getInt(size: Int, endian: Endian = .Big) -> Int {
+        var int = 0
+        var byte: UInt8 = 0
+    
+        for i in 0..<size {
+            getBytes(&byte, range: NSRange(location: i, length: 1))
+
+            switch endian {
+            case .Big:
+                int += Int(byte) << ((size - i - 1) * 8)
+            case .Little: ()
+                int += Int(byte) << i * 8
+            }
+        }
+        
+        return int
+    }
 }
