@@ -11,7 +11,7 @@ import CoreBluetooth
 
 class SecurityKeyPeripheral: NSObject, CBPeripheralManagerDelegate {
     private var peripheralManager: CBPeripheralManager?
-    
+    private var u2fService: CBMutableService?
     private var u2fControlPointCharacteristic: CBMutableCharacteristic?
     private var u2fStatusCharacteristic: CBMutableCharacteristic?
     private var u2fControlPointLengthCharacteristic: CBMutableCharacteristic?
@@ -19,60 +19,77 @@ class SecurityKeyPeripheral: NSObject, CBPeripheralManagerDelegate {
     
     override init() {
         super.init()
-
-        peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
-    }
-    
-    func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
-        if (peripheralManager!.state != CBPeripheralManagerState.PoweredOn) {
-            return
-        }
         
-        print("peripheralManager powered on.")
+        peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
         
         u2fControlPointCharacteristic = CBMutableCharacteristic(
             type: u2fControlPointCharacteristicUUID,
-            properties: CBCharacteristicProperties.Write,
+            properties: .Write,
             value: nil,
-            permissions: CBAttributePermissions.Writeable
+            permissions: CBAttributePermissions(rawValue: CBAttributePermissions.Writeable.rawValue | CBAttributePermissions.WriteEncryptionRequired.rawValue)
         )
         
         u2fStatusCharacteristic = CBMutableCharacteristic(
             type: u2fStatusCharacteristicUUID,
-            properties: CBCharacteristicProperties.Notify,
+            properties: CBCharacteristicProperties(rawValue:CBCharacteristicProperties.Notify.rawValue | CBCharacteristicProperties.NotifyEncryptionRequired.rawValue),
             value: nil,
-            permissions: CBAttributePermissions.Readable
+            permissions: CBAttributePermissions(rawValue: CBAttributePermissions.Readable.rawValue | CBAttributePermissions.ReadEncryptionRequired.rawValue)
         )
         
         u2fControlPointLengthCharacteristic = CBMutableCharacteristic(
             type: u2fControlPointLengthCharacteristicUUID,
-            properties: CBCharacteristicProperties.Read,
+            properties: .Read,
             // Max BLE characteristic size for ctrl pt len.
             value: NSData(int: CharacteristicMaxSize, size: 2),
-            permissions: CBAttributePermissions.Readable
+            permissions: CBAttributePermissions(rawValue: CBAttributePermissions.Readable.rawValue | CBAttributePermissions.ReadEncryptionRequired.rawValue)
         )
         
         u2fServiceRevisionCharacteristic = CBMutableCharacteristic(
             type: u2fServiceRevisionCharacteristicUUID,
-            properties: CBCharacteristicProperties.Read,
-            value: nil,
-            permissions: CBAttributePermissions.Readable
+            properties: .Read,
+            value: "1.0".dataUsingEncoding(NSUTF8StringEncoding),
+            permissions: CBAttributePermissions(rawValue: CBAttributePermissions.Readable.rawValue | CBAttributePermissions.ReadEncryptionRequired.rawValue)
         )
         
-        let u2fService = CBMutableService(
+        u2fService = CBMutableService(
             type: u2fServiceUUID,
             primary: true
         )
         
-        u2fService.characteristics = [
+        u2fService!.characteristics = [
             u2fControlPointCharacteristic!,
             u2fStatusCharacteristic!,
             u2fControlPointLengthCharacteristic!,
             u2fServiceRevisionCharacteristic!
         ]
-        
-        peripheralManager!.addService(u2fService)
-        
+    }
+    
+    func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
+        switch peripheralManager!.state {
+        case .Unknown:
+            print("peripheralManager state: Unknown")
+        case .Resetting:
+            print("peripheralManager state: Resetting")
+        case .Unsupported:
+            print("peripheralManager state: Unsupported")
+        case .Unauthorized:
+            print("peripheralManager state: Unauthorized")
+        case .PoweredOff:
+            print("peripheralManager state: PoweredOff")
+        case .PoweredOn:
+            print("peripheralManager state: PoweredOn")
+        }
+
+        if (peripheralManager!.state == CBPeripheralManagerState.PoweredOn) {
+            print("Adding service")
+            peripheralManager!.addService(u2fService!)
+        } else {
+            print("Stopping advertising")
+            peripheralManager!.stopAdvertising()
+            
+            print("Removing service")
+            peripheralManager!.removeService(u2fService!)
+        }
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, didAddService service: CBService, error: NSError?) {
