@@ -9,390 +9,318 @@
 import Cocoa
 import CoreBluetooth
 
-class ClientState: NSObject {
-    var client: Client
-    var nextState: ClientState.Type? { return nil }
-    var failState: ClientState.Type? { return InitState.self }
+class ClientContext: ContextProtocol {
+    var centralManager:                   CBCentralManager? = nil
+    var activePeripheral:                 CBPeripheral?     = nil
+    var activeService:                    CBService?        = nil
+    var activeCharacteristic:             CBCharacteristic? = nil
+    var controlPointCharacteristic:       CBCharacteristic? = nil
+    var statusCharacteristic:             CBCharacteristic? = nil
+    var controlPointLengthCharacteristic: CBCharacteristic? = nil
+    var serviceRevisionCharacteristic:    CBCharacteristic? = nil
     
-    required init(client: Client) {
-        self.client = client
+    required init() {}
+}
+
+class Client: StateMachine<ClientContext>, CBCentralManagerDelegate, CBPeripheralDelegate {
+    override init() {
         super.init()
-        beforeEnter()
-        enter()
-    }
-
-    func beforeEnter() {
-        print("entering state: \(self.className)")
-    }
-    
-    func enter() {
-    }
-    
-    func proceed() {
-        exit()
-
-        guard let state = nextState else {
-            print("No next state. State machine finished.")
-            return
-        }
         
-        client.state = state.init(client: client)
-    }
-    
-    func fail() {
-        exit()
-
-        print("failing at state: \(self.className)")
+        context.centralManager = CBCentralManager(delegate: self, queue: nil)
         
-        guard let state = failState else {
-            print("No fail state. State machine finished.")
-            return
-        }
-        
-        client.state = state.init(client: client)
+        let initial = ClientInitialState(self)
+        self.failure = initial
+        proceed(to: initial)
     }
     
-    func exit() {
+    func centralManagerDidUpdateState(central: CBCentralManager) {
+        handle(event: "centralStateUpdate")
     }
     
-    // Default event handlers
-    func handleCentralStateUpdate() {
-        switch client.centralManager!.state {
-        case .Unknown:
-            print("While in \(self.className) centralManager entered state 'Unknown'. Resetting.")
-        case .Resetting:
-            print("While in \(self.className) centralManager entered state 'Resetting'. Resetting.")
-        case .Unsupported:
-            print("While in \(self.className) centralManager entered state 'Unsupported'. Resetting.")
-        case .Unauthorized:
-            print("While in \(self.className) centralManager entered state 'Unauthorized'. Resetting.")
-        case .PoweredOff:
-            print("While in \(self.className) centralManager entered state 'PoweredOff'. Resetting.")
-        case .PoweredOn:
-            print("While in \(self.className) centralManager entered state 'PoweredOn'. Resetting.")
-        }
-        fail()
+    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        context.activePeripheral = peripheral
+        handle(event: "discoveredPeripheral")
     }
     
-    func handleDiscoveredPeripheral(peripheral: CBPeripheral) {
-        print("Bad event 'DiscoveredPeripheral' while in \(self.className)")
-        fail()
+    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+        handle(event: "connectedPeripheral")
     }
     
-    func handleConncetedPeripheral() {
-        print("Bad event 'ConncetedPeripheral' while in \(self.className)")
-        fail()
-    }
-
-    func handleDiscoveredServices(error: NSError?) {
-        print("Bad event 'DiscoveredServices' while in \(self.className)")
-        fail()
+    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
+        handle(event: "discoveredServices", error: error)
     }
     
-    func handleDiscoveredCharacteristics(error: NSError?) {
-        print("Bad event 'DiscoveredCharacteristics' while in \(self.className)")
-        fail()
+    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
+        handle(event: "discoveredCharacteristics", error: error)
     }
     
-    func handleUpdatedCharacteristic(characteristic: CBCharacteristic, error: NSError?) {
-        print("Bad event 'UpdatedCharacteristic' while in \(self.className)")
-        fail()
+    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        context.activeCharacteristic = characteristic
+        defer { context.activeCharacteristic = nil }
+        handle(event: "updatedCharacteristic", error: error)
     }
     
-    func handleNotificationStateUpdate(error: NSError?) {
-        print("Bad event 'NotificationStateUpdate' while in \(self.className)")
-        fail()
+    func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        context.activeCharacteristic = characteristic
+        defer { context.activeCharacteristic = nil }
+        handle(event: "notificationStateUpdate", error: error)
     }
 }
 
-class InitState: ClientState {
-    override var nextState: ClientState.Type? { return ScanState.self }
-    
+class ClientState: State<ClientContext> {
+    override init(_ m: StateMachine<ClientContext>) {
+        super.init(m)
+    }
+}
+
+class ClientInitialState: ClientState {
     override func enter() {
-        client.activePeripheral = nil
-        client.activeService = nil
-        client.controlPointCharacteristic = nil
-        client.statusCharacteristic = nil
-        client.controlPointLengthCharacteristic = nil
-        client.serviceRevisionCharacteristic = nil
+        context.activePeripheral = nil
+        context.activeService = nil
+        context.controlPointCharacteristic = nil
+        context.statusCharacteristic = nil
+        context.controlPointLengthCharacteristic = nil
+        context.serviceRevisionCharacteristic = nil
+        
+        if context.centralManager?.state == .PoweredOn {
+            machine.proceed(to: ClientScanState(machine))
+        }
+        
+        handle(event: "centralStateUpdate", with: handleCentralStateUpdate)
     }
     
-    override func handleCentralStateUpdate() {
-        if client.centralManager?.state == .PoweredOn {
+    func handleCentralStateUpdate(error: NSError?) {
+        if let e = error { return machine.fail(because: e.localizedDescription) }
+
+        if context.centralManager?.state == .PoweredOn {
             print("centralManager powered on")
-            proceed()
+            machine.proceed(to: ClientScanState(machine))
         } else {
-            super.handleCentralStateUpdate()
+            machine.fail(because: "centralManager not powered on")
         }
     }
 }
 
-class ScanState: ClientState {
-    override var nextState: ClientState.Type? { return ConnectState.self }
-    
+class ClientScanState: ClientState {
     override func enter() {
-        client.centralManager?.scanForPeripheralsWithServices([u2fServiceUUID], options: nil)
+        context.centralManager?.scanForPeripheralsWithServices([u2fServiceUUID], options: nil)
+        
+        handle(event: "discoveredPeripheral", with: handleDiscoveredPeripheral)
     }
     
-    override func handleDiscoveredPeripheral(peripheral: CBPeripheral) {
+    func handleDiscoveredPeripheral(error: NSError?) {
+        if let e = error { return machine.fail(because: e.localizedDescription) }
+
+        guard
+            let peripheral = context.activePeripheral
+        else { return machine.fail(because: "bad context") }
+        
+        guard
+            let delegate = machine as? CBPeripheralDelegate
+        else { return machine.fail(because: "couldn't cast machine as CBPeripheralDelegate") }
+        
         print("Found peripheral: \(peripheral.name ?? "<no name>")")
-        peripheral.delegate = client
-        client.activePeripheral = peripheral
-        proceed()
+        
+        peripheral.delegate = delegate
+        machine.proceed(to: ClientConnectState(machine))
     }
     
     override func exit() {
-        client.centralManager?.stopScan()
+        context.centralManager?.stopScan()
     }
 }
 
-class ConnectState: ClientState {
-    override var nextState: ClientState.Type? { return DiscoverServiceState.self }
-    
+class ClientConnectState: ClientState {
     override func enter() {
-        if let peripheral = client.activePeripheral {
-            client.centralManager?.connectPeripheral(peripheral, options: nil)
-        }
+        guard
+            let peripheral = context.activePeripheral
+        else { return machine.fail(because: "bad context") }
+
+        context.centralManager?.connectPeripheral(peripheral, options: nil)
+        handle(event: "connectedPeripheral", with: handleConncetedPeripheral)
     }
     
-    override func handleConncetedPeripheral() {
+    func handleConncetedPeripheral(error: NSError?) {
+        if let e = error { return machine.fail(because: e.localizedDescription) }
+
         print("Peripheral connected")
-        proceed()
+        machine.proceed(to: ClientDiscoverServiceState(machine))
     }
 }
 
-class DiscoverServiceState: ClientState {
-    override var nextState: ClientState.Type? { return DiscoverCharacteristicState.self }
-    
+class ClientDiscoverServiceState: ClientState {
     override func enter() {
-        if let peripheral = client.activePeripheral {
-            peripheral.discoverServices([u2fServiceUUID])
-        }
+        guard
+            let peripheral = context.activePeripheral
+        else { return machine.fail(because: "bad context") }
+        
+        peripheral.discoverServices([u2fServiceUUID])
+        
+        handle(event: "discoveredServices", with: handleDiscoveredServices)
     }
     
-    override func handleDiscoveredServices(error: NSError?) {
-        if error != nil {
-            print("error discovering services: \(error?.localizedDescription)")
-            fail()
-            return
-        }
+    func handleDiscoveredServices(error: NSError?) {
+        if let e = error { return machine.fail(because: e.localizedDescription) }
 
         guard
-            let services = client.activePeripheral?.services,
+            let services = context.activePeripheral?.services,
             let service = services.filter({ $0.UUID == u2fServiceUUID }).first
         else {
-            print("Peripheral doesn't implement U2F service")
-            fail()
-            return
+            return machine.fail(because: "peripheral doesn't implement U2F service")
         }
         
         print("Discovered U2F service")
-        client.activeService = service
-        proceed()
+        context.activeService = service
+        machine.proceed(to: ClientDiscoverCharacteristicState(machine))
     }
 }
 
-class DiscoverCharacteristicState: ClientState {
-    override var nextState: ClientState.Type? { return ReadServiceRevisionState.self }
-    
+class ClientDiscoverCharacteristicState: ClientState {
     override func enter() {
-        if let peripheral = client.activePeripheral, let service = client.activeService {
-            peripheral.discoverCharacteristics(
-                [
-                    u2fControlPointCharacteristicUUID,
-                    u2fStatusCharacteristicUUID,
-                    u2fControlPointLengthCharacteristicUUID,
-                    u2fServiceRevisionCharacteristicUUID
-                ], forService: service
-            )
-        }
+        guard
+            let peripheral = context.activePeripheral,
+            let service = context.activeService
+        else { return machine.fail(because: "bad context") }
+        
+        peripheral.discoverCharacteristics(
+            [
+                u2fControlPointCharacteristicUUID,
+                u2fStatusCharacteristicUUID,
+                u2fControlPointLengthCharacteristicUUID,
+                u2fServiceRevisionCharacteristicUUID
+            ], forService: service
+        )
+        
+        handle(event: "discoveredCharacteristics", with: handleDiscoveredCharacteristics)
     }
     
-    override func handleDiscoveredCharacteristics(error: NSError?) {
-        if error != nil {
-            print("Error discovering characteristics: \(error!.localizedDescription)")
-            fail()
-            return
-        }
+    func handleDiscoveredCharacteristics(error: NSError?) {
+        if let e = error { return machine.fail(because: e.localizedDescription) }
         
         guard
-            let service = client.activeService,
+            let service = context.activeService,
             let characteristics = service.characteristics
-        else {
-            print("Error discovering characteristics")
-            fail()
-            return
-        }
+        else { return machine.fail(because: "bad context") }
         
         print("Discovered characteristics")
-        
         for characteristic in characteristics {
             switch characteristic.UUID {
             case u2fControlPointCharacteristicUUID:
-                client.controlPointCharacteristic = characteristic
+                context.controlPointCharacteristic = characteristic
             case u2fStatusCharacteristicUUID:
-                client.statusCharacteristic = characteristic
+                context.statusCharacteristic = characteristic
             case u2fControlPointLengthCharacteristicUUID:
-                client.controlPointLengthCharacteristic = characteristic
+                context.controlPointLengthCharacteristic = characteristic
             case u2fServiceRevisionCharacteristicUUID:
-                client.serviceRevisionCharacteristic = characteristic
+                context.serviceRevisionCharacteristic = characteristic
             default: ()
             }
         }
         
         let chars = [
-            client.controlPointCharacteristic,
-            client.statusCharacteristic,
-            client.controlPointLengthCharacteristic,
-            client.serviceRevisionCharacteristic
+            context.controlPointCharacteristic,
+            context.statusCharacteristic,
+            context.controlPointLengthCharacteristic,
+            context.serviceRevisionCharacteristic
         ]
         
         if chars.contains({ $0 == nil }) {
-            print("Error: services doesn't define all characteristics")
-            fail()
-            return
+            return machine.fail(because: "services doesn't define all characteristics")
         }
         
-        proceed()
+        machine.proceed(to: ClientReadServiceRevisionState(machine))
     }
 }
 
-class ReadServiceRevisionState: ClientState {
-    override var nextState: ClientState.Type? { return ReadControlPointLengthState.self }
-    
+class ClientReadServiceRevisionState: ClientState {
     override func enter() {
-        if let peripheral = client.activePeripheral, let characteristic = client.serviceRevisionCharacteristic {
-            peripheral.readValueForCharacteristic(characteristic)
-        }
+        guard
+            let peripheral = context.activePeripheral,
+            let characteristic = context.serviceRevisionCharacteristic
+        else { return machine.fail(because: "bad context") }
+        
+        peripheral.readValueForCharacteristic(characteristic)
+        
+        handle(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
     }
     
-    override func handleUpdatedCharacteristic(characteristic: CBCharacteristic, error: NSError?) {
-        if error != nil {
-            print("Error reading serviceRevisionCharacteristic: \(error?.localizedDescription)")
-            fail()
-            return
+    func handleUpdatedCharacteristic(error: NSError?) {
+        if let e = error { return machine.fail(because: e.localizedDescription) }
+        
+        guard
+            let characteristic = context.serviceRevisionCharacteristic,
+            let value = characteristic.value
+        else { return machine.fail(because: "bad context") }
+        
+        if String(data: value, encoding: NSUTF8StringEncoding) != "1.0" {
+            return machine.fail(because: "unknown service revision")
         }
         
-        if characteristic != client.serviceRevisionCharacteristic! {
-            print("Read wrong characteristic")
-            fail()
-            return
-        }
-        
-        let strValue = String(data: characteristic.value!, encoding: NSUTF8StringEncoding)
-        if strValue != "1.0" {
-            print("Unknown service revision")
-            fail()
-            return
-        }
-        
-        proceed()
+        print("valid service revision")
+        machine.proceed(to: ClientReadControlPointLengthState(machine))
     }
 }
 
-class ReadControlPointLengthState: ClientState {
-    override var nextState: ClientState.Type? { return ReadMessageState.self }
-    
+class ClientReadControlPointLengthState: ClientState {
     override func enter() {
-        if let peripheral = client.activePeripheral, let characteristic = client.controlPointLengthCharacteristic {
-            peripheral.readValueForCharacteristic(characteristic)
-        }
+        guard
+            let peripheral = context.activePeripheral,
+            let characteristic = context.controlPointLengthCharacteristic
+        else { return machine.fail(because: "bad context") }
+        
+        peripheral.readValueForCharacteristic(characteristic)
+        
+        handle(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
     }
     
-    override func handleUpdatedCharacteristic(characteristic: CBCharacteristic, error: NSError?) {
-        if error != nil {
-            print("Error reading controlPointLengthCharacteristic: \(error?.localizedDescription)")
-            fail()
-            return
+    func handleUpdatedCharacteristic(error: NSError?) {
+        if let e = error { return machine.fail(because: e.localizedDescription) }
+        
+        guard
+            let characteristic = context.controlPointLengthCharacteristic,
+            let value = characteristic.value
+            else { return machine.fail(because: "bad context") }
+        
+        if value.getInt(2) != 512 {
+            return machine.fail(because: "expected control point size to be 512")
         }
         
-        if characteristic != client.controlPointLengthCharacteristic! {
-            print("Read wrong characteristic")
-            fail()
-            return
-        }
-        
-        let intValue = characteristic.value!.getInt(2)
-        if intValue != 512 {
-            print("Expected control point size to be 512. Bailing...")
-            fail()
-            return
-        }
-        
-        proceed()
+        print("valid control point length")
+        machine.proceed(to: ClientReadMessageState(machine))
     }
 }
 
-class ReadMessageState: ClientState {
+class ClientReadMessageState: ClientState {
     override func enter() {
-        client.activePeripheral!.setNotifyValue(true, forCharacteristic: client.statusCharacteristic!)
+        guard
+            let peripheral = context.activePeripheral,
+            let characteristic = context.statusCharacteristic
+        else { return machine.fail(because: "bad context") }
+
+        peripheral.setNotifyValue(true, forCharacteristic: characteristic)
+        
+        handle(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
+        handle(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
     }
     
-    override func handleUpdatedCharacteristic(characteristic: CBCharacteristic, error: NSError?) {
-        if error != nil {
-            print("Error reading statusCharacteristic: \(error?.localizedDescription)")
-            fail()
-            return
-        }
+    func handleUpdatedCharacteristic(error: NSError?) {
+        if let e = error { return machine.fail(because: e.localizedDescription) }
         
-        if characteristic != client.statusCharacteristic! {
-            print("Read wrong characteristic")
-            fail()
-            return
-        }
+        guard
+            let characteristic = context.statusCharacteristic,
+            let value = characteristic.value
+        else { return machine.fail(because: "bad context") }
         
-        let strValue = String(data: characteristic.value!, encoding: NSUTF8StringEncoding)
+        let strValue = String(data: value, encoding: NSUTF8StringEncoding)
         print("Read packet: '\(strValue)'")
     }
     
-    override func handleNotificationStateUpdate(error: NSError?) {
-        print("notification state updated: notifying=\(client.statusCharacteristic!.isNotifying)")
-    }
-}
+    func handleNotificationStateUpdate(error: NSError?) {
+        guard
+            let characteristic = context.statusCharacteristic
+        else { return machine.fail(because: "bad context") }
 
-class Client: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-    var centralManager: CBCentralManager?
-    var activePeripheral: CBPeripheral?
-    var activeService: CBService?
-    var controlPointCharacteristic: CBCharacteristic?
-    var statusCharacteristic: CBCharacteristic?
-    var controlPointLengthCharacteristic: CBCharacteristic?
-    var serviceRevisionCharacteristic: CBCharacteristic?
-    
-    var state: ClientState?
-    
-    override init() {
-        super.init()
-        centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
-        state = InitState(client: self)
-    }
-    
-    func centralManagerDidUpdateState(central: CBCentralManager) {
-        state!.handleCentralStateUpdate()
-    }
-    
-    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-        state!.handleDiscoveredPeripheral(peripheral)
-    }
-    
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-        state!.handleConncetedPeripheral()
-    }
-    
-    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
-        state!.handleDiscoveredServices(error)
-    }
-    
-    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
-        state!.handleDiscoveredCharacteristics(error)
-    }
-    
-    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        state!.handleUpdatedCharacteristic(characteristic, error: error)
-    }
-    
-    func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        state!.handleNotificationStateUpdate(error)
+        print("notification state updated: notifying=\(characteristic.isNotifying)")
     }
 }
 
