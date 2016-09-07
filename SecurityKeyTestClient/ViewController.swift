@@ -27,10 +27,9 @@ class Client: StateMachine<ClientContext>, CBCentralManagerDelegate, CBPeriphera
         super.init()
         
         context.centralManager = CBCentralManager(delegate: self, queue: nil)
-        
-        let initial = ClientInitialState(self)
-        self.failure = initial
-        proceed(to: initial)
+
+        failure = ClientInitialState.self
+        proceed(ClientInitialState.self)
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager) {
@@ -68,7 +67,7 @@ class Client: StateMachine<ClientContext>, CBCentralManagerDelegate, CBPeriphera
 }
 
 class ClientState: State<ClientContext> {
-    override init(_ m: StateMachine<ClientContext>) {
+    required init(_ m: StateMachine<ClientContext>) {
         super.init(m)
     }
 }
@@ -83,20 +82,20 @@ class ClientInitialState: ClientState {
         context.serviceRevisionCharacteristic = nil
         
         if context.centralManager?.state == .PoweredOn {
-            machine.proceed(to: ClientScanState(machine))
+            proceed(ClientScanState)
         }
         
         handle(event: "centralStateUpdate", with: handleCentralStateUpdate)
     }
     
     func handleCentralStateUpdate(error: NSError?) {
-        if let e = error { return machine.fail(because: e.localizedDescription) }
+        if let e = error { return fail(e.localizedDescription) }
 
         if context.centralManager?.state == .PoweredOn {
             print("centralManager powered on")
-            machine.proceed(to: ClientScanState(machine))
+            proceed(ClientScanState)
         } else {
-            machine.fail(because: "centralManager not powered on")
+            fail("centralManager not powered on")
         }
     }
 }
@@ -109,20 +108,20 @@ class ClientScanState: ClientState {
     }
     
     func handleDiscoveredPeripheral(error: NSError?) {
-        if let e = error { return machine.fail(because: e.localizedDescription) }
+        if let e = error { return fail(e.localizedDescription) }
 
         guard
             let peripheral = context.activePeripheral
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
         
         guard
             let delegate = machine as? CBPeripheralDelegate
-        else { return machine.fail(because: "couldn't cast machine as CBPeripheralDelegate") }
+        else { return fail("couldn't cast machine as CBPeripheralDelegate") }
         
         print("Found peripheral: \(peripheral.name ?? "<no name>")")
         
         peripheral.delegate = delegate
-        machine.proceed(to: ClientConnectState(machine))
+        proceed(ClientConnectState)
     }
     
     override func exit() {
@@ -134,17 +133,17 @@ class ClientConnectState: ClientState {
     override func enter() {
         guard
             let peripheral = context.activePeripheral
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
 
         context.centralManager?.connectPeripheral(peripheral, options: nil)
         handle(event: "connectedPeripheral", with: handleConncetedPeripheral)
     }
     
     func handleConncetedPeripheral(error: NSError?) {
-        if let e = error { return machine.fail(because: e.localizedDescription) }
+        if let e = error { return fail(e.localizedDescription) }
 
         print("Peripheral connected")
-        machine.proceed(to: ClientDiscoverServiceState(machine))
+        proceed(ClientDiscoverServiceState)
     }
 }
 
@@ -152,7 +151,7 @@ class ClientDiscoverServiceState: ClientState {
     override func enter() {
         guard
             let peripheral = context.activePeripheral
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
         
         peripheral.discoverServices([u2fServiceUUID])
         
@@ -160,18 +159,18 @@ class ClientDiscoverServiceState: ClientState {
     }
     
     func handleDiscoveredServices(error: NSError?) {
-        if let e = error { return machine.fail(because: e.localizedDescription) }
+        if let e = error { return fail(e.localizedDescription) }
 
         guard
             let services = context.activePeripheral?.services,
             let service = services.filter({ $0.UUID == u2fServiceUUID }).first
         else {
-            return machine.fail(because: "peripheral doesn't implement U2F service")
+            return fail("peripheral doesn't implement U2F service")
         }
         
         print("Discovered U2F service")
         context.activeService = service
-        machine.proceed(to: ClientDiscoverCharacteristicState(machine))
+        proceed(ClientDiscoverCharacteristicState)
     }
 }
 
@@ -180,7 +179,7 @@ class ClientDiscoverCharacteristicState: ClientState {
         guard
             let peripheral = context.activePeripheral,
             let service = context.activeService
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
         
         peripheral.discoverCharacteristics(
             [
@@ -195,12 +194,12 @@ class ClientDiscoverCharacteristicState: ClientState {
     }
     
     func handleDiscoveredCharacteristics(error: NSError?) {
-        if let e = error { return machine.fail(because: e.localizedDescription) }
+        if let e = error { return fail(e.localizedDescription) }
         
         guard
             let service = context.activeService,
             let characteristics = service.characteristics
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
         
         print("Discovered characteristics")
         for characteristic in characteristics {
@@ -225,10 +224,10 @@ class ClientDiscoverCharacteristicState: ClientState {
         ]
         
         if chars.contains({ $0 == nil }) {
-            return machine.fail(because: "services doesn't define all characteristics")
+            return fail("services doesn't define all characteristics")
         }
         
-        machine.proceed(to: ClientReadServiceRevisionState(machine))
+        proceed(ClientReadServiceRevisionState)
     }
 }
 
@@ -237,7 +236,7 @@ class ClientReadServiceRevisionState: ClientState {
         guard
             let peripheral = context.activePeripheral,
             let characteristic = context.serviceRevisionCharacteristic
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
         
         peripheral.readValueForCharacteristic(characteristic)
         
@@ -245,19 +244,19 @@ class ClientReadServiceRevisionState: ClientState {
     }
     
     func handleUpdatedCharacteristic(error: NSError?) {
-        if let e = error { return machine.fail(because: e.localizedDescription) }
+        if let e = error { return fail(e.localizedDescription) }
         
         guard
             let characteristic = context.serviceRevisionCharacteristic,
             let value = characteristic.value
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
         
         if String(data: value, encoding: NSUTF8StringEncoding) != "1.0" {
-            return machine.fail(because: "unknown service revision")
+            return fail("unknown service revision")
         }
         
         print("valid service revision")
-        machine.proceed(to: ClientReadControlPointLengthState(machine))
+        proceed(ClientReadControlPointLengthState)
     }
 }
 
@@ -266,7 +265,7 @@ class ClientReadControlPointLengthState: ClientState {
         guard
             let peripheral = context.activePeripheral,
             let characteristic = context.controlPointLengthCharacteristic
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
         
         peripheral.readValueForCharacteristic(characteristic)
         
@@ -274,19 +273,19 @@ class ClientReadControlPointLengthState: ClientState {
     }
     
     func handleUpdatedCharacteristic(error: NSError?) {
-        if let e = error { return machine.fail(because: e.localizedDescription) }
+        if let e = error { return fail(e.localizedDescription) }
         
         guard
             let characteristic = context.controlPointLengthCharacteristic,
             let value = characteristic.value
-            else { return machine.fail(because: "bad context") }
+            else { return fail("bad context") }
         
         if value.getInt(2) != 512 {
-            return machine.fail(because: "expected control point size to be 512")
+            return fail("expected control point size to be 512")
         }
         
         print("valid control point length")
-        machine.proceed(to: ClientReadMessageState(machine))
+        proceed(ClientReadMessageState)
     }
 }
 
@@ -295,7 +294,7 @@ class ClientReadMessageState: ClientState {
         guard
             let peripheral = context.activePeripheral,
             let characteristic = context.statusCharacteristic
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
 
         peripheral.setNotifyValue(true, forCharacteristic: characteristic)
         
@@ -304,12 +303,12 @@ class ClientReadMessageState: ClientState {
     }
     
     func handleUpdatedCharacteristic(error: NSError?) {
-        if let e = error { return machine.fail(because: e.localizedDescription) }
+        if let e = error { return fail(e.localizedDescription) }
         
         guard
             let characteristic = context.statusCharacteristic,
             let value = characteristic.value
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
         
         let strValue = String(data: value, encoding: NSUTF8StringEncoding)
         print("Read packet: '\(strValue)'")
@@ -318,7 +317,7 @@ class ClientReadMessageState: ClientState {
     func handleNotificationStateUpdate(error: NSError?) {
         guard
             let characteristic = context.statusCharacteristic
-        else { return machine.fail(because: "bad context") }
+        else { return fail("bad context") }
 
         print("notification state updated: notifying=\(characteristic.isNotifying)")
     }
