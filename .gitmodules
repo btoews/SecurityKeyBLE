@@ -1,0 +1,3 @@
+[submodule "StateMachine"]
+	path = StateMachine
+	url = https://github.com/mastahyeti/StateMachine
