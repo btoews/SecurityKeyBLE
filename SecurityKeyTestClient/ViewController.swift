@@ -46,23 +46,26 @@ class Client: StateMachine<ClientContext>, CBCentralManagerDelegate, CBPeriphera
     }
     
     func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
-        handle(event: "discoveredServices", error: error)
+        handle(event: "discoveredServices")
     }
     
     func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
-        handle(event: "discoveredCharacteristics", error: error)
+        if let e = error { return fail(e.localizedDescription) }
+        handle(event: "discoveredCharacteristics")
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        if let e = error { return fail(e.localizedDescription) }
         context.activeCharacteristic = characteristic
         defer { context.activeCharacteristic = nil }
-        handle(event: "updatedCharacteristic", error: error)
+        handle(event: "updatedCharacteristic")
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        if let e = error { return fail(e.localizedDescription) }
         context.activeCharacteristic = characteristic
         defer { context.activeCharacteristic = nil }
-        handle(event: "notificationStateUpdate", error: error)
+        handle(event: "notificationStateUpdate")
     }
 }
 
@@ -88,9 +91,7 @@ class ClientInitialState: ClientState {
         handle(event: "centralStateUpdate", with: handleCentralStateUpdate)
     }
     
-    func handleCentralStateUpdate(error: NSError?) {
-        if let e = error { return fail(e.localizedDescription) }
-
+    func handleCentralStateUpdate() {
         if context.centralManager?.state == .PoweredOn {
             print("centralManager powered on")
             proceed(ClientScanState)
@@ -107,9 +108,7 @@ class ClientScanState: ClientState {
         handle(event: "discoveredPeripheral", with: handleDiscoveredPeripheral)
     }
     
-    func handleDiscoveredPeripheral(error: NSError?) {
-        if let e = error { return fail(e.localizedDescription) }
-
+    func handleDiscoveredPeripheral() {
         guard
             let peripheral = context.activePeripheral
         else { return fail("bad context") }
@@ -139,9 +138,7 @@ class ClientConnectState: ClientState {
         handle(event: "connectedPeripheral", with: handleConncetedPeripheral)
     }
     
-    func handleConncetedPeripheral(error: NSError?) {
-        if let e = error { return fail(e.localizedDescription) }
-
+    func handleConncetedPeripheral() {
         print("Peripheral connected")
         proceed(ClientDiscoverServiceState)
     }
@@ -158,9 +155,7 @@ class ClientDiscoverServiceState: ClientState {
         handle(event: "discoveredServices", with: handleDiscoveredServices)
     }
     
-    func handleDiscoveredServices(error: NSError?) {
-        if let e = error { return fail(e.localizedDescription) }
-
+    func handleDiscoveredServices() {
         guard
             let services = context.activePeripheral?.services,
             let service = services.filter({ $0.UUID == u2fServiceUUID }).first
@@ -193,9 +188,7 @@ class ClientDiscoverCharacteristicState: ClientState {
         handle(event: "discoveredCharacteristics", with: handleDiscoveredCharacteristics)
     }
     
-    func handleDiscoveredCharacteristics(error: NSError?) {
-        if let e = error { return fail(e.localizedDescription) }
-        
+    func handleDiscoveredCharacteristics() {
         guard
             let service = context.activeService,
             let characteristics = service.characteristics
@@ -243,9 +236,7 @@ class ClientReadServiceRevisionState: ClientState {
         handle(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
     }
     
-    func handleUpdatedCharacteristic(error: NSError?) {
-        if let e = error { return fail(e.localizedDescription) }
-        
+    func handleUpdatedCharacteristic() {
         guard
             let characteristic = context.serviceRevisionCharacteristic,
             let value = characteristic.value
@@ -272,9 +263,7 @@ class ClientReadControlPointLengthState: ClientState {
         handle(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
     }
     
-    func handleUpdatedCharacteristic(error: NSError?) {
-        if let e = error { return fail(e.localizedDescription) }
-        
+    func handleUpdatedCharacteristic() {
         guard
             let characteristic = context.controlPointLengthCharacteristic,
             let value = characteristic.value
@@ -302,9 +291,7 @@ class ClientReadMessageState: ClientState {
         handle(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
     }
     
-    func handleUpdatedCharacteristic(error: NSError?) {
-        if let e = error { return fail(e.localizedDescription) }
-        
+    func handleUpdatedCharacteristic() {
         guard
             let characteristic = context.statusCharacteristic,
             let value = characteristic.value
@@ -314,7 +301,7 @@ class ClientReadMessageState: ClientState {
         print("Read packet: '\(strValue)'")
     }
     
-    func handleNotificationStateUpdate(error: NSError?) {
+    func handleNotificationStateUpdate() {
         guard
             let characteristic = context.statusCharacteristic
         else { return fail("bad context") }
