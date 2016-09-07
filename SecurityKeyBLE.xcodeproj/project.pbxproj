@@ -20,8 +20,11 @@
 		F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373E41D7D64A900FBB057 /* ViewController.swift */; };
 		F70373E71D7D64A900FBB057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F70373E61D7D64A900FBB057 /* Assets.xcassets */; };
 		F70373EA1D7D64A900FBB057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70373E81D7D64A900FBB057 /* Main.storyboard */; };
+		F72E402F1D805A720059A0D7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C31D7D3F2100FBB057 /* Message.swift */; };
+		F72E40301D805B070059A0D7 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C01D7D129400FBB057 /* Errors.swift */; };
 		F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F51D7FB08800D28CAC /* StateMachine.swift */; };
 		F77CC2F71D7FB09200D28CAC /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F51D7FB08800D28CAC /* StateMachine.swift */; };
+		F77CC2F91D801C4200D28CAC /* SecurityKeyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F81D801C4200D28CAC /* SecurityKeyClient.swift */; };
 		F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78C5BE41D78854B001BB080 /* AppDelegate.swift */; };
 		F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78C5BE61D78854B001BB080 /* ViewController.swift */; };
 		F78C5BEA1D78854B001BB080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F78C5BE81D78854B001BB080 /* Main.storyboard */; };
@@ -57,6 +60,7 @@
 		F70373E91D7D64A900FBB057 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F70373EB1D7D64A900FBB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F77CC2F51D7FB08800D28CAC /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StateMachine.swift; path = StateMachine/StateMachine/StateMachine.swift; sourceTree = "<group>"; };
+		F77CC2F81D801C4200D28CAC /* SecurityKeyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityKeyClient.swift; sourceTree = "<group>"; };
 		F78C5BE11D78854A001BB080 /* SecurityKeyBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F78C5BE41D78854B001BB080 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F78C5BE61D78854B001BB080 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 			children = (
 				F70373E21D7D64A900FBB057 /* AppDelegate.swift */,
 				F70373E41D7D64A900FBB057 /* ViewController.swift */,
+				F77CC2F81D801C4200D28CAC /* SecurityKeyClient.swift */,
 				F70373E61D7D64A900FBB057 /* Assets.xcassets */,
 				F70373E81D7D64A900FBB057 /* Main.storyboard */,
 				F70373EB1D7D64A900FBB057 /* Info.plist */,
@@ -295,11 +300,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F77CC2F91D801C4200D28CAC /* SecurityKeyClient.swift in Sources */,
 				F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */,
 				F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */,
 				F7F1BC9B1D7E854C00A72BA6 /* CoreExtensions.swift in Sources */,
+				F72E40301D805B070059A0D7 /* Errors.swift in Sources */,
 				F77CC2F71D7FB09200D28CAC /* StateMachine.swift in Sources */,
 				F7F1BC981D7D674C00A72BA6 /* Constants.swift in Sources */,
+				F72E402F1D805A720059A0D7 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

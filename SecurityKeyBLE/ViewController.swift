@@ -10,10 +10,14 @@ import UIKit
 import CoreBluetooth
 
 class ViewController: UIViewController {
-    var securityKeyPeripheral: CBPeripheralManagerDelegate?
+//    var securityKeyPeripheral: CBPeripheralManagerDelegate?
+    var server: CBPeripheralManagerDelegate?
 
     override func viewDidLoad() {
-        securityKeyPeripheral = SecurityKeyPeripheral()
+//        securityKeyPeripheral = SecurityKeyPeripheral()
+        print("view did load")
+        server = Server()
+
         super.viewDidLoad()
     }
 
