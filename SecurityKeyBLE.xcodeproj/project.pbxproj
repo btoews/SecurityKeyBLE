@@ -53,7 +53,7 @@
 		F70373C31D7D3F2100FBB057 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		F70373C61D7D3F6B00FBB057 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtensions.swift; sourceTree = "<group>"; };
-		F70373E01D7D64A900FBB057 /* SecurityKeyTestClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyTestClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70373E01D7D64A900FBB057 /* SecurityKeyBLEClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyBLEClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70373E21D7D64A900FBB057 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F70373E41D7D64A900FBB057 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F70373E61D7D64A900FBB057 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,7 +61,7 @@
 		F70373EB1D7D64A900FBB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F77CC2F51D7FB08800D28CAC /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StateMachine.swift; path = StateMachine/StateMachine/StateMachine.swift; sourceTree = "<group>"; };
 		F77CC2F81D801C4200D28CAC /* SecurityKeyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityKeyClient.swift; sourceTree = "<group>"; };
-		F78C5BE11D78854A001BB080 /* SecurityKeyBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F78C5BE11D78854A001BB080 /* SecurityKeyBLEServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyBLEServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F78C5BE41D78854B001BB080 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F78C5BE61D78854B001BB080 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F78C5BE91D78854B001BB080 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			path = SecurityKeyBLETests;
 			sourceTree = "<group>";
 		};
-		F70373E11D7D64A900FBB057 /* SecurityKeyTestClient */ = {
+		F70373E11D7D64A900FBB057 /* SecurityKeyBLEClient */ = {
 			isa = PBXGroup;
 			children = (
 				F70373E21D7D64A900FBB057 /* AppDelegate.swift */,
@@ -115,16 +115,25 @@
 				F70373E81D7D64A900FBB057 /* Main.storyboard */,
 				F70373EB1D7D64A900FBB057 /* Info.plist */,
 			);
+			name = SecurityKeyBLEClient;
 			path = SecurityKeyTestClient;
+			sourceTree = "<group>";
+		};
+		F72E40311D81373D0059A0D7 /* StateMachine */ = {
+			isa = PBXGroup;
+			children = (
+				F77CC2F51D7FB08800D28CAC /* StateMachine.swift */,
+			);
+			name = StateMachine;
 			sourceTree = "<group>";
 		};
 		F78C5BD81D78854A001BB080 = {
 			isa = PBXGroup;
 			children = (
-				F77CC2F51D7FB08800D28CAC /* StateMachine.swift */,
-				F78C5BE31D78854A001BB080 /* SecurityKeyBLE */,
+				F72E40311D81373D0059A0D7 /* StateMachine */,
+				F78C5BE31D78854A001BB080 /* SecurityKeyBLEServer */,
 				F70373AB1D7BF78700FBB057 /* SecurityKeyBLETests */,
-				F70373E11D7D64A900FBB057 /* SecurityKeyTestClient */,
+				F70373E11D7D64A900FBB057 /* SecurityKeyBLEClient */,
 				F78C5BE21D78854A001BB080 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -132,14 +141,14 @@
 		F78C5BE21D78854A001BB080 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F78C5BE11D78854A001BB080 /* SecurityKeyBLE.app */,
+				F78C5BE11D78854A001BB080 /* SecurityKeyBLEServer.app */,
 				F70373AA1D7BF78700FBB057 /* SecurityKeyBLETests.xctest */,
-				F70373E01D7D64A900FBB057 /* SecurityKeyTestClient.app */,
+				F70373E01D7D64A900FBB057 /* SecurityKeyBLEClient.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F78C5BE31D78854A001BB080 /* SecurityKeyBLE */ = {
+		F78C5BE31D78854A001BB080 /* SecurityKeyBLEServer */ = {
 			isa = PBXGroup;
 			children = (
 				F78C5BE41D78854B001BB080 /* AppDelegate.swift */,
@@ -154,6 +163,7 @@
 				F70373C61D7D3F6B00FBB057 /* Constants.swift */,
 				F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */,
 			);
+			name = SecurityKeyBLEServer;
 			path = SecurityKeyBLE;
 			sourceTree = "<group>";
 		};
@@ -178,9 +188,9 @@
 			productReference = F70373AA1D7BF78700FBB057 /* SecurityKeyBLETests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F70373DF1D7D64A900FBB057 /* SecurityKeyTestClient */ = {
+		F70373DF1D7D64A900FBB057 /* SecurityKeyBLEClient */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F70373EC1D7D64A900FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyTestClient" */;
+			buildConfigurationList = F70373EC1D7D64A900FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyBLEClient" */;
 			buildPhases = (
 				F70373DC1D7D64A900FBB057 /* Sources */,
 				F70373DD1D7D64A900FBB057 /* Frameworks */,
@@ -190,14 +200,14 @@
 			);
 			dependencies = (
 			);
-			name = SecurityKeyTestClient;
+			name = SecurityKeyBLEClient;
 			productName = SecurityKeyTestClient;
-			productReference = F70373E01D7D64A900FBB057 /* SecurityKeyTestClient.app */;
+			productReference = F70373E01D7D64A900FBB057 /* SecurityKeyBLEClient.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F78C5BE01D78854A001BB080 /* SecurityKeyBLE */ = {
+		F78C5BE01D78854A001BB080 /* SecurityKeyBLEServer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F78C5BF31D78854B001BB080 /* Build configuration list for PBXNativeTarget "SecurityKeyBLE" */;
+			buildConfigurationList = F78C5BF31D78854B001BB080 /* Build configuration list for PBXNativeTarget "SecurityKeyBLEServer" */;
 			buildPhases = (
 				F78C5BDD1D78854A001BB080 /* Sources */,
 				F78C5BDE1D78854A001BB080 /* Frameworks */,
@@ -207,9 +217,9 @@
 			);
 			dependencies = (
 			);
-			name = SecurityKeyBLE;
+			name = SecurityKeyBLEServer;
 			productName = SecurityKeyBLE;
-			productReference = F78C5BE11D78854A001BB080 /* SecurityKeyBLE.app */;
+			productReference = F78C5BE11D78854A001BB080 /* SecurityKeyBLEServer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -247,9 +257,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F78C5BE01D78854A001BB080 /* SecurityKeyBLE */,
+				F78C5BE01D78854A001BB080 /* SecurityKeyBLEServer */,
 				F70373A91D7BF78700FBB057 /* SecurityKeyBLETests */,
-				F70373DF1D7D64A900FBB057 /* SecurityKeyTestClient */,
+				F70373DF1D7D64A900FBB057 /* SecurityKeyBLEClient */,
 			);
 		};
 /* End PBXProject section */
@@ -331,7 +341,7 @@
 /* Begin PBXTargetDependency section */
 		F70373B01D7BF78700FBB057 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F78C5BE01D78854A001BB080 /* SecurityKeyBLE */;
+			target = F78C5BE01D78854A001BB080 /* SecurityKeyBLEServer */;
 			targetProxy = F70373AF1D7BF78700FBB057 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -397,7 +407,7 @@
 				INFOPLIST_FILE = SecurityKeyTestClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyTestClient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLEClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -412,7 +422,7 @@
 				INFOPLIST_FILE = SecurityKeyTestClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyTestClient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLEClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -507,7 +517,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SecurityKeyBLE/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLE;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLEServer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -518,7 +528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SecurityKeyBLE/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLE;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLEServer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -535,7 +545,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F70373EC1D7D64A900FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyTestClient" */ = {
+		F70373EC1D7D64A900FBB057 /* Build configuration list for PBXNativeTarget "SecurityKeyBLEClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F70373ED1D7D64A900FBB057 /* Debug */,
@@ -553,7 +563,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F78C5BF31D78854B001BB080 /* Build configuration list for PBXNativeTarget "SecurityKeyBLE" */ = {
+		F78C5BF31D78854B001BB080 /* Build configuration list for PBXNativeTarget "SecurityKeyBLEServer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F78C5BF41D78854B001BB080 /* Debug */,

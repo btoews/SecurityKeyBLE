@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FA2A02508946EEE6C3FF56873795F980A50C1895",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "932A7421ADD03C810E08100EB44DBADB20A6CA04" : 0,
+    "FA2A02508946EEE6C3FF56873795F980A50C1895" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1A844225-7B6A-442B-A0BB-813514796756",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "932A7421ADD03C810E08100EB44DBADB20A6CA04" : "SecurityKeyBLE\/StateMachine\/",
+    "FA2A02508946EEE6C3FF56873795F980A50C1895" : "SecurityKeyBLE\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SecurityKeyBLE",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SecurityKeyBLE.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mastahyeti\/StateMachine",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "932A7421ADD03C810E08100EB44DBADB20A6CA04"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mastahyeti\/SecurityKeyBLE",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FA2A02508946EEE6C3FF56873795F980A50C1895"
+    }
+  ]
+}

@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F78C5BE01D78854A001BB080"
-               BuildableName = "SecurityKeyBLE.app"
-               BlueprintName = "SecurityKeyBLE"
+               BuildableName = "SecurityKeyBLEServer.app"
+               BlueprintName = "SecurityKeyBLEServer"
                ReferencedContainer = "container:SecurityKeyBLE.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,8 +43,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F78C5BE01D78854A001BB080"
-            BuildableName = "SecurityKeyBLE.app"
-            BlueprintName = "SecurityKeyBLE"
+            BuildableName = "SecurityKeyBLEServer.app"
+            BlueprintName = "SecurityKeyBLEServer"
             ReferencedContainer = "container:SecurityKeyBLE.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,8 +66,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F78C5BE01D78854A001BB080"
-            BuildableName = "SecurityKeyBLE.app"
-            BlueprintName = "SecurityKeyBLE"
+            BuildableName = "SecurityKeyBLEServer.app"
+            BlueprintName = "SecurityKeyBLEServer"
             ReferencedContainer = "container:SecurityKeyBLE.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -85,8 +85,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F78C5BE01D78854A001BB080"
-            BuildableName = "SecurityKeyBLE.app"
-            BlueprintName = "SecurityKeyBLE"
+            BuildableName = "SecurityKeyBLEServer.app"
+            BlueprintName = "SecurityKeyBLEServer"
             ReferencedContainer = "container:SecurityKeyBLE.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
