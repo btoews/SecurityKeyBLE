@@ -116,7 +116,7 @@
 				F70373EB1D7D64A900FBB057 /* Info.plist */,
 			);
 			name = SecurityKeyBLEClient;
-			path = SecurityKeyTestClient;
+			path = SecurityKeyBLEClient;
 			sourceTree = "<group>";
 		};
 		F72E40311D81373D0059A0D7 /* StateMachine */ = {
@@ -201,7 +201,7 @@
 			dependencies = (
 			);
 			name = SecurityKeyBLEClient;
-			productName = SecurityKeyTestClient;
+			productName = SecurityKeyBLEClient;
 			productReference = F70373E01D7D64A900FBB057 /* SecurityKeyBLEClient.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -404,7 +404,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SecurityKeyTestClient/Info.plist;
+				INFOPLIST_FILE = SecurityKeyBLEClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLEClient;
@@ -419,7 +419,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SecurityKeyTestClient/Info.plist;
+				INFOPLIST_FILE = SecurityKeyBLEClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLEClient;

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  SecurityKeyTestClient
+//  SecurityKeyBLEClient
 //
 //  Created by Benjamin P Toews on 9/5/16.
 //  Copyright © 2016 GitHub. All rights reserved.
