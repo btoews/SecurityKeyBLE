@@ -86,6 +86,10 @@ class ClientState: State<ClientContext> {
 
 class ClientInitialState: ClientState {
     override func enter() {
+        guard
+            let manager = context.centralManager
+            else { return fail("bad context") }
+        
         context.activePeripheral = nil
         context.activeService = nil
         context.controlPointCharacteristic = nil
@@ -93,7 +97,7 @@ class ClientInitialState: ClientState {
         context.controlPointLengthCharacteristic = nil
         context.serviceRevisionCharacteristic = nil
         
-        if context.centralManager?.state == .PoweredOn {
+        if manager.state == .PoweredOn {
             return proceed(ClientScanState)
         }
         
@@ -101,7 +105,11 @@ class ClientInitialState: ClientState {
     }
     
     func handleCentralStateUpdate() {
-        if context.centralManager?.state == .PoweredOn {
+        guard
+            let manager = context.centralManager
+            else { return fail("bad context") }
+
+        if manager.state == .PoweredOn {
             print("centralManager powered on")
             proceed(ClientScanState)
         } else {
@@ -112,7 +120,11 @@ class ClientInitialState: ClientState {
 
 class ClientScanState: ClientState {
     override func enter() {
-        context.centralManager?.scanForPeripheralsWithServices([u2fServiceUUID], options: nil)
+        guard
+            let manager = context.centralManager
+            else { return fail("bad context") }
+
+        manager.scanForPeripheralsWithServices([u2fServiceUUID], options: nil)
         
         handle(event: "discoveredPeripheral", with: handleDiscoveredPeripheral)
     }
@@ -133,17 +145,22 @@ class ClientScanState: ClientState {
     }
     
     override func exit() {
-        context.centralManager?.stopScan()
+        guard
+            let manager = context.centralManager
+            else { return fail("bad context") }
+
+        manager.stopScan()
     }
 }
 
 class ClientConnectState: ClientState {
     override func enter() {
         guard
-            let peripheral = context.activePeripheral
+            let peripheral = context.activePeripheral,
+            let manager = context.centralManager
             else { return fail("bad context") }
         
-        context.centralManager?.connectPeripheral(peripheral, options: nil)
+        manager.connectPeripheral(peripheral, options: nil)
         handle(event: "connectedPeripheral", with: handleConncetedPeripheral)
     }
     
