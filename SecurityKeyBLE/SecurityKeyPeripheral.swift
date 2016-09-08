@@ -17,8 +17,9 @@ class ServerContext: ContextProtocol {
     var u2fControlPointLengthCharacteristic: CBMutableCharacteristic?
     var u2fServiceRevisionCharacteristic:    CBMutableCharacteristic?
     
-    var activeCentral: CBCentral?
-    var activeRequest: CBATTRequest?
+    var activeCentral:    CBCentral?
+    var activeBLERequest: CBATTRequest?
+    var activeU2FRequest: Message?
     
     required init() {}
 }
@@ -61,16 +62,16 @@ class Server: StateMachine<ServerContext>, CBPeripheralManagerDelegate {
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, didReceiveReadRequest request: CBATTRequest) {
-        context.activeRequest = request
-        defer { context.activeRequest = nil }
+        context.activeBLERequest = request
         handle(event: "unexpectedReadRequestReceived")
+        context.activeBLERequest = nil
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, didReceiveWriteRequests requests: [CBATTRequest]) {
         for request in requests {
-            context.activeRequest = request
-            defer { context.activeRequest = nil }
+            context.activeBLERequest = request
             handle(event: "writeRequestReceived")
+            context.activeBLERequest = nil
         }
     }
     
@@ -198,232 +199,84 @@ class ServerAdvertisingState: ServerState {
 }
 
 class ServerRequestState: ServerState {
-    var message = Message()
-
     override func enter() {
+        context.activeU2FRequest = Message()
         handle(event: "writeRequestReceived", with: handleWriteRequestReceived)
-        handle(event: "clientUnsubscribed", with: handleClientUnsubscribed)
     }
     
     func handleWriteRequestReceived() {
         guard
-            let request = context.activeRequest,
-            let value = request.value
+            let u2fReq  = context.activeU2FRequest,
+            let manager = context.peripheralManager,
+            let bleReq  = context.activeBLERequest,
+            let fragment   = bleReq.value
         else { return fail("bad context") }
         
         do {
-            try message.readFragment(value)
+            try u2fReq.readFragment(fragment)
         } catch {
             return fail("error reading fragment")
         }
         
-        if message.isComplete {
-            guard let data = message.data else {
-                return fail("error getting data from message")
-            }
+        if u2fReq.isComplete {
+            guard
+                let data   = u2fReq.data,
+                let strMsg = String(data: data, encoding: NSUTF8StringEncoding)
+            else { return fail("error receiving message") }
 
-            let strMsg = String(data: data, encoding: NSUTF8StringEncoding)
             print("message from client: \(strMsg)")
+            proceed(ServerResponseState)
         }
-    }
-
-    func handleClientUnsubscribed() {
-        fail("client unsubscribed")
+        
+        manager.respondToRequest(bleReq, withResult: CBATTError.Success)
     }
 }
 
-class ServerSendingResponseState: ServerState {
+class ServerResponseState: ServerState {
+    var fragments: IndexingGenerator<Message>?
+    var queuedFragment: NSData?
+    
     override func enter() {
-        handle(event: "clientUnsubscribed", with: handleClientUnsubscribed)
-    }
+        guard
+            let u2fReq = context.activeU2FRequest,
+            let reqCmd = u2fReq.cmd
+        else { return fail("bad context") }
+        
+        if !u2fReq.isComplete {
+            return fail("incomplete request")
+        }
+        
+        let u2fResp = Message(cmd: reqCmd, data: "We, therefore, the Representatives of the United States of America, in General Congress, Assembled, appealing to the Supreme Judge of the world for the rectitude of our intentions, do, in the Name, and by the Authority of the good People of these Colonies, solemnly publish and declare, That these United Colonies are, and of Right ought to be Free and Independent States; that they are Absolved from all Allegiance to the British Crown, and that all political connection between them and the State of Great Britain, is and ought to be totally dissolved; and that as Free and Independent States, they have full Power to levy War, conclude Peace, contract Alliances, establish Commerce, and to do all other Acts and Things which Independent States may of right do.  And for the support of this Declaration, with a firm reliance on the Protection of Divine Providence, we mutually pledge to each other our Lives, our Fortunes and our sacred Honor.".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        fragments = u2fResp.generate()
 
-    func handleClientUnsubscribed() {
-        fail("client unsubscribed")
+        writeNextFragment()
+        handle(event: "readyToUpdate", with: writeNextFragment)
+    }
+    
+    func writeNextFragment() {
+        guard
+            let manager = context.peripheralManager,
+            let characteristic = context.u2fStatusCharacteristic
+        else { return fail("bad context") }
+        
+        guard
+            let fragment = queuedFragment ?? fragments?.next()
+        else {
+            return proceed(ServerFinishedState)
+        }
+
+        let wrote = manager.updateValue(fragment, forCharacteristic: characteristic, onSubscribedCentrals: nil)
+
+        if wrote {
+            queuedFragment = nil
+            writeNextFragment()
+        } else {
+            // wait for the characteristic to be free for writing
+            queuedFragment = fragment
+        }
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class SecurityKeyPeripheral: NSObject, CBPeripheralManagerDelegate {
-    private var peripheralManager: CBPeripheralManager?
-    private var u2fService: CBMutableService?
-    private var u2fControlPointCharacteristic: CBMutableCharacteristic?
-    private var u2fStatusCharacteristic: CBMutableCharacteristic?
-    private var u2fControlPointLengthCharacteristic: CBMutableCharacteristic?
-    private var u2fServiceRevisionCharacteristic: CBMutableCharacteristic?
-    
-    override init() {
-        super.init()
-        
-        peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
-        
-        u2fControlPointCharacteristic = CBMutableCharacteristic(
-            type: u2fControlPointCharacteristicUUID,
-            properties: .Write,
-            value: nil,
-            permissions: CBAttributePermissions(rawValue: CBAttributePermissions.Writeable.rawValue | CBAttributePermissions.WriteEncryptionRequired.rawValue)
-        )
-        
-        u2fStatusCharacteristic = CBMutableCharacteristic(
-            type: u2fStatusCharacteristicUUID,
-            properties: CBCharacteristicProperties(rawValue:CBCharacteristicProperties.Notify.rawValue | CBCharacteristicProperties.NotifyEncryptionRequired.rawValue),
-            value: nil,
-            permissions: CBAttributePermissions(rawValue: CBAttributePermissions.Readable.rawValue | CBAttributePermissions.ReadEncryptionRequired.rawValue)
-        )
-        
-        u2fControlPointLengthCharacteristic = CBMutableCharacteristic(
-            type: u2fControlPointLengthCharacteristicUUID,
-            properties: .Read,
-            // Max BLE characteristic size for ctrl pt len.
-            value: NSData(int: CharacteristicMaxSize, size: 2),
-            permissions: CBAttributePermissions(rawValue: CBAttributePermissions.Readable.rawValue | CBAttributePermissions.ReadEncryptionRequired.rawValue)
-        )
-        
-        u2fServiceRevisionCharacteristic = CBMutableCharacteristic(
-            type: u2fServiceRevisionCharacteristicUUID,
-            properties: .Read,
-            value: "1.0".dataUsingEncoding(NSUTF8StringEncoding),
-            permissions: CBAttributePermissions(rawValue: CBAttributePermissions.Readable.rawValue | CBAttributePermissions.ReadEncryptionRequired.rawValue)
-        )
-        
-        u2fService = CBMutableService(
-            type: u2fServiceUUID,
-            primary: true
-        )
-        
-        u2fService!.characteristics = [
-            u2fControlPointCharacteristic!,
-            u2fStatusCharacteristic!,
-            u2fControlPointLengthCharacteristic!,
-            u2fServiceRevisionCharacteristic!
-        ]
-    }
-    
-    func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
-        switch peripheralManager!.state {
-        case .Unknown:
-            print("peripheralManager state: Unknown")
-        case .Resetting:
-            print("peripheralManager state: Resetting")
-        case .Unsupported:
-            print("peripheralManager state: Unsupported")
-        case .Unauthorized:
-            print("peripheralManager state: Unauthorized")
-        case .PoweredOff:
-            print("peripheralManager state: PoweredOff")
-        case .PoweredOn:
-            print("peripheralManager state: PoweredOn")
-        }
-
-        if (peripheralManager!.state == CBPeripheralManagerState.PoweredOn) {
-            print("Adding service")
-            peripheralManager!.addService(u2fService!)
-        } else {
-            print("Stopping advertising")
-            peripheralManager!.stopAdvertising()
-            
-            print("Removing service")
-            peripheralManager!.removeService(u2fService!)
-        }
-    }
-    
-    func peripheralManager(peripheral: CBPeripheralManager, didAddService service: CBService, error: NSError?) {
-        if (error != nil) {
-            print("error adding service: \(error!.localizedDescription)")
-            print("Providing the reason for failure: \(error!.localizedFailureReason)")
-        }
-        else {
-            print("added service")
-            peripheralManager!.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [service.UUID]])
-        }
-    }
-    
-    func peripheralManagerDidStartAdvertising(peripheral: CBPeripheralManager, error: NSError?) {
-        if (error != nil) {
-            print("error starting advertising: \(error!.localizedDescription)")
-            print("Providing the reason for failure: \(error!.localizedFailureReason)")
-        } else {
-            print("started advertising")
-        }
-    }
-    
-    func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
-        print("A new CBCentral has subscribed to this service's characteristic")
-        print(central.description)
-        
-        print("Updating subbed char")
-        // these calls return boolean false if the queue is blocked. peripheralManagerIsReadyToUpdateSubscribers is called
-        // when it's free again.
-        peripheralManager!.updateValue("shit".dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: u2fStatusCharacteristic!, onSubscribedCentrals: nil)
-        peripheralManager!.updateValue("shit2".dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: u2fStatusCharacteristic!, onSubscribedCentrals: nil)
-        peripheralManager!.updateValue("shit3".dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: u2fStatusCharacteristic!, onSubscribedCentrals: nil)
-    }
-    
-    func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFromCharacteristic characteristic: CBCharacteristic) {
-        print("\(central.description) has unsubbed from this device's characteristic")
-    }
-    
-    func peripheralManager(peripheral: CBPeripheralManager, didReceiveReadRequest request: CBATTRequest) {
-        var char: CBMutableCharacteristic
-        
-        switch request.characteristic.UUID {
-        case u2fControlPointLengthCharacteristicUUID:
-            print("read request: u2fControlPointLengthCharacteristic")
-            char = u2fControlPointCharacteristic!
-        default:
-            print("read request for bad characteristic: \(request.characteristic.UUID)")
-            peripheralManager!.respondToRequest(request, withResult: CBATTError.ReadNotPermitted)
-            return
-        }
-        
-        if (request.offset > char.value!.length) {
-            peripheralManager?.respondToRequest(request, withResult: CBATTError.InvalidOffset)
-            return
-        }
-        
-        let cRange = NSRange(location: request.offset, length: char.value!.length - request.offset)
-        request.value = char.value?.subdataWithRange(cRange)
-
-        peripheralManager!.respondToRequest(request, withResult: CBATTError.Success)
-    }
-    
-    func peripheralManager(peripheral: CBPeripheralManager, didReceiveWriteRequests requests: [CBATTRequest]) {
-        var char: CBMutableCharacteristic
-
-        for request in requests {
-            switch request.characteristic {
-            case u2fControlPointCharacteristicUUID:
-                print("write request: u2fControlPointCharacteristic, \(request.value)")
-                char = u2fControlPointCharacteristic!
-            default:
-                print("write request for bad characteristic: \(request.characteristic.UUID)")
-                peripheralManager!.respondToRequest(request, withResult: CBATTError.WriteNotPermitted)
-                return
-            }
-            
-            // Take write offset into account? How does that work?
-            char.value = request.value
-        }
-        
-        peripheralManager!.respondToRequest(requests.first!, withResult: CBATTError.Success)
-    }
-    
-    func peripheralManagerIsReadyToUpdateSubscribers(peripheral: CBPeripheralManager) {
-        print("Updating subscribed devices")
-        peripheralManager!.updateValue("shit123".dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: u2fStatusCharacteristic!, onSubscribedCentrals: nil)
-    }
+class ServerFinishedState: ServerState {
 }

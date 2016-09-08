@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Message: CollectionType {
+class Message: CollectionType, SequenceType {
     // Possible statuses for Authenticator Response messages.
     enum Status: UInt8 {
         case KeepAlive = 0x82
@@ -213,5 +213,4 @@ class Message: CollectionType {
         
         return NSData(data: frag)
     }
-
 }

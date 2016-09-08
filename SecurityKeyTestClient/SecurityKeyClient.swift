@@ -60,15 +60,21 @@ class Client: StateMachine<ClientContext>, CBCentralManagerDelegate, CBPeriphera
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
         if let e = error { return fail(e.localizedDescription) }
         context.activeCharacteristic = characteristic
-        defer { context.activeCharacteristic = nil }
         handle(event: "updatedCharacteristic")
+        context.activeCharacteristic = nil
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
         if let e = error { return fail(e.localizedDescription) }
         context.activeCharacteristic = characteristic
-        defer { context.activeCharacteristic = nil }
         handle(event: "notificationStateUpdate")
+        context.activeCharacteristic = nil
+    }
+    
+    func peripheral(peripheral: CBPeripheral, didWriteValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        if let e = error { return fail(e.localizedDescription) }
+        if peripheral != context.activePeripheral { return fail("wrong peripheral") }
+        handle(event: "wroteCharacteristic")
     }
 }
 
@@ -272,50 +278,140 @@ class ClientReadControlPointLengthState: ClientState {
             let value = characteristic.value
             else { return fail("bad context") }
         
-        if value.getInt(2) != 512 {
-            return fail("expected control point size to be 512")
+        if value.getInt(2) != CharacteristicMaxSize {
+            return fail("expected control point size to be \(CharacteristicMaxSize)")
         }
         
         print("valid control point length")
-        proceed(ClientSendRequestState)
+        proceed(ClientSubscribeToServerState)
     }
 }
 
-class ClientSendRequestState: ClientState {
-    var message = Message(cmd: .Msg, data: "hello, world!".dataUsingEncoding(NSUTF8StringEncoding)!)
+class ClientSubscribeToServerState: ClientState {
+    override func enter() {
+        guard
+            let peripheral = context.activePeripheral,
+            let characteristic = context.statusCharacteristic
+        else { return fail("bad context") }
+        
+        peripheral.setNotifyValue(true, forCharacteristic: characteristic)
+
+        handle(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
+    }
+    
+    func handleNotificationStateUpdate() {
+        guard
+            let characteristic = context.statusCharacteristic
+        else { return fail("bad context") }
+        
+        if context.activeCharacteristic != characteristic {
+            return fail("subscribed to wrong characteristic")
+        }
+        
+        if !characteristic.isNotifying {
+            return fail("couldn't subscribe to characteristic")
+        }
+        
+        proceed(ClientRequestState)
+    }
+}
+
+class ClientRequestState: ClientState {
+    var fragments = Message(cmd: .Msg, data: "We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty, and the pursuit of Happiness. That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed, That whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it, and to institute new Government, laying its foundation on such principles and organizing its powers in such form, as to them shall seem most likely to effect their Safety and Happiness.  Prudence, indeed, will dictate that Governments long established should not be changed for light and transient causes; and accordingly all experience hath shown, that mankind are more disposed to suffer, while evils are sufferable, than to right themselves by abolishing the forms to which they are accustomed.  But when a long train of abuses and usurpations, pursuing invariably the same Object evinces a design to reduce them under absolute Despotism, it is their right, it is their duty, to throw off such Government, and to provide new Guards for their future security. --Such has been the patient sufferance of these Colonies; and such is now the necessity which constrains them to alter their former Systems of Government. The history of the present King of Great Britain is a history of repeated injuries and usurpations, all having in direct object the establishment of an absolute Tyranny over these States.  To prove this, let Facts be submitted to a candid world.".dataUsingEncoding(NSUTF8StringEncoding)!).generate()
+    
+    var nextFragment: NSData?
 
     override func enter() {
+        writeNextFragment()
+        handle(event: "wroteCharacteristic", with: writeNextFragment)
+    }
+    
+    func writeNextFragment() {
+        guard
+            let peripheral = context.activePeripheral,
+            let characteristic = context.controlPointCharacteristic
+        else { return fail("bad context") }
+
+        guard
+            let fragment = nextFragment ?? fragments.next()
+        else {
+            return proceed(ClientResponseState)
+        }
+        
+        peripheral.writeValue(fragment, forCharacteristic: characteristic, type: .WithResponse)
+        
+        nextFragment = fragments.next()
+        if nextFragment == nil {
+            // Don't wait for the server's ACK. We need to get to the response-state
+            // quickly so we don't miss a fragment.
+            return proceed(ClientResponseState)
+        }
     }
 }
 
-//class ClientReadMessageState: ClientState {
-//    override func enter() {
-//        guard
-//            let peripheral = context.activePeripheral,
-//            let characteristic = context.statusCharacteristic
-//            else { return fail("bad context") }
-//        
-//        peripheral.setNotifyValue(true, forCharacteristic: characteristic)
-//        
-//        handle(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
-//        handle(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
-//    }
-//    
-//    func handleUpdatedCharacteristic() {
-//        guard
-//            let characteristic = context.statusCharacteristic,
-//            let value = characteristic.value
-//            else { return fail("bad context") }
-//        
-//        let strValue = String(data: value, encoding: NSUTF8StringEncoding)
-//        print("Read packet: '\(strValue)'")
-//    }
-//    
-//    func handleNotificationStateUpdate() {
-//        guard
-//            let characteristic = context.statusCharacteristic
-//            else { return fail("bad context") }
-//        
-//        print("notification state updated: notifying=\(characteristic.isNotifying)")
-//    }
-//}
+class ClientResponseState: ClientState {
+    var u2fResp = Message()
+    
+    override func enter() {
+        guard
+            let peripheral = context.activePeripheral,
+            let characteristic = context.statusCharacteristic
+            else { return fail("bad context") }
+        
+        peripheral.setNotifyValue(true, forCharacteristic: characteristic)
+        
+        handle(event: "updatedCharacteristic",   with: handleUpdatedCharacteristic)
+        handle(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
+        handle(event: "wroteCharacteristic",     with: handleWroteCharacteristic)
+    }
+    
+    func handleUpdatedCharacteristic() {
+        guard
+            let characteristic = context.statusCharacteristic,
+            let fragment = characteristic.value
+            else { return fail("bad context") }
+        
+        do {
+            try u2fResp.readFragment(fragment)
+        } catch {
+            return fail("error receiving fragment")
+        }
+        
+        if u2fResp.isComplete {
+            guard
+                let data   = u2fResp.data,
+                let strMsg = String(data: data, encoding: NSUTF8StringEncoding)
+                else { return fail("error receiving message") }
+            
+            print("message from client: \(strMsg)")
+            proceed(ClientFinishedState)
+        }
+    }
+    
+    func handleNotificationStateUpdate() {
+        guard
+            let characteristic = context.statusCharacteristic
+            else { return fail("bad context") }
+        
+        if context.activeCharacteristic != characteristic {
+            return fail("subscribed to wrong characteristic")
+        }
+        
+        if !characteristic.isNotifying {
+            return fail("couldn't subscribe to characteristic")
+        }
+    }
+    
+    func handleWroteCharacteristic () {
+        // An ACK from the server for our last request packed. Don't care...
+    }
+}
+
+class ClientFinishedState: ClientState {
+    override func enter() {
+        handle(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
+    }
+
+    func handleNotificationStateUpdate() {
+    }
+}
