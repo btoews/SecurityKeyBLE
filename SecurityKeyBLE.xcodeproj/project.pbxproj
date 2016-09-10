@@ -7,33 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F70373C11D7D129400FBB057 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C01D7D129400FBB057 /* Errors.swift */; };
-		F70373C21D7D12BE00FBB057 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C01D7D129400FBB057 /* Errors.swift */; };
-		F70373C41D7D3F2100FBB057 /* BLEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C31D7D3F2100FBB057 /* BLEMessage.swift */; };
-		F70373C51D7D3F3900FBB057 /* BLEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C31D7D3F2100FBB057 /* BLEMessage.swift */; };
-		F70373C71D7D3F6B00FBB057 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C61D7D3F6B00FBB057 /* Constants.swift */; };
-		F70373C81D7D3F8200FBB057 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C61D7D3F6B00FBB057 /* Constants.swift */; };
-		F70373CA1D7D3FEC00FBB057 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */; };
-		F70373CB1D7D467A00FBB057 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */; };
 		F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373E21D7D64A900FBB057 /* AppDelegate.swift */; };
 		F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373E41D7D64A900FBB057 /* ViewController.swift */; };
 		F70373E71D7D64A900FBB057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F70373E61D7D64A900FBB057 /* Assets.xcassets */; };
 		F70373EA1D7D64A900FBB057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70373E81D7D64A900FBB057 /* Main.storyboard */; };
-		F72E402F1D805A720059A0D7 /* BLEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C31D7D3F2100FBB057 /* BLEMessage.swift */; };
-		F72E40301D805B070059A0D7 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C01D7D129400FBB057 /* Errors.swift */; };
-		F7717FED1D815761008D1CDB /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7717FEC1D815761008D1CDB /* APDU.swift */; };
 		F77180021D82B61B008D1CDB /* APDUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180011D82B61B008D1CDB /* APDUTests.swift */; };
-		F77180031D82B689008D1CDB /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7717FEC1D815761008D1CDB /* APDU.swift */; };
-		F771800B1D8392DA008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180091D8392D1008D1CDB /* SHA256.swift */; };
 		F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771800D1D83932A008D1CDB /* SHA256Tests.swift */; };
-		F771800F1D839347008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180091D8392D1008D1CDB /* SHA256.swift */; };
 		F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180101D83B966008D1CDB /* BLEMessageTests.swift */; };
 		F77180131D83B9AB008D1CDB /* CoreExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180121D83B9AB008D1CDB /* CoreExtTests.swift */; };
 		F77180151D83D419008D1CDB /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180141D83D419008D1CDB /* Util.swift */; };
-		F77180171D83D752008D1CDB /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180161D83D752008D1CDB /* ClientData.swift */; };
-		F77180181D83D752008D1CDB /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180161D83D752008D1CDB /* ClientData.swift */; };
-		F771801C1D83DC3D008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771801B1D83DC3D008D1CDB /* RegisterRequest.swift */; };
-		F771801E1D840B62008D1CDB /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771801D1D840B62008D1CDB /* Registration.swift */; };
+		F771802F1D84108D008D1CDB /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180261D84108D008D1CDB /* APDU.swift */; };
+		F77180301D84108D008D1CDB /* BLEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180271D84108D008D1CDB /* BLEMessage.swift */; };
+		F77180311D84108D008D1CDB /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180281D84108D008D1CDB /* ClientData.swift */; };
+		F77180321D84108D008D1CDB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180291D84108D008D1CDB /* Constants.swift */; };
+		F77180331D84108D008D1CDB /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensions.swift */; };
+		F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802B1D84108D008D1CDB /* RegisterRequest.swift */; };
+		F77180351D84108D008D1CDB /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802C1D84108D008D1CDB /* Registration.swift */; };
+		F77180361D84108D008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802D1D84108D008D1CDB /* SHA256.swift */; };
+		F77180371D8410B7008D1CDB /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180261D84108D008D1CDB /* APDU.swift */; };
+		F77180381D8410B8008D1CDB /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180261D84108D008D1CDB /* APDU.swift */; };
+		F77180391D8410BB008D1CDB /* BLEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180271D84108D008D1CDB /* BLEMessage.swift */; };
+		F771803A1D8410BB008D1CDB /* BLEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180271D84108D008D1CDB /* BLEMessage.swift */; };
+		F771803B1D8410BF008D1CDB /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180281D84108D008D1CDB /* ClientData.swift */; };
+		F771803C1D8410BF008D1CDB /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180281D84108D008D1CDB /* ClientData.swift */; };
+		F771803D1D8410C2008D1CDB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180291D84108D008D1CDB /* Constants.swift */; };
+		F771803E1D8410C2008D1CDB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180291D84108D008D1CDB /* Constants.swift */; };
+		F771803F1D8410C5008D1CDB /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensions.swift */; };
+		F77180401D8410C6008D1CDB /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensions.swift */; };
+		F77180411D8410C8008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802B1D84108D008D1CDB /* RegisterRequest.swift */; };
+		F77180421D8410C9008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802B1D84108D008D1CDB /* RegisterRequest.swift */; };
+		F77180431D8410CB008D1CDB /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802C1D84108D008D1CDB /* Registration.swift */; };
+		F77180441D8410CC008D1CDB /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802C1D84108D008D1CDB /* Registration.swift */; };
+		F77180451D8410CE008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802D1D84108D008D1CDB /* SHA256.swift */; };
+		F77180461D8410CF008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802D1D84108D008D1CDB /* SHA256.swift */; };
 		F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F51D7FB08800D28CAC /* StateMachine.swift */; };
 		F77CC2F71D7FB09200D28CAC /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F51D7FB08800D28CAC /* StateMachine.swift */; };
 		F77CC2F91D801C4200D28CAC /* SecurityKeyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F81D801C4200D28CAC /* SecurityKeyClient.swift */; };
@@ -43,8 +49,6 @@
 		F78C5BEC1D78854B001BB080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F78C5BEB1D78854B001BB080 /* Assets.xcassets */; };
 		F78C5BEF1D78854B001BB080 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F78C5BED1D78854B001BB080 /* LaunchScreen.storyboard */; };
 		F78C5BF71D78862D001BB080 /* SecurityKeyServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78C5BF61D78862D001BB080 /* SecurityKeyServer.swift */; };
-		F7F1BC981D7D674C00A72BA6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C61D7D3F6B00FBB057 /* Constants.swift */; };
-		F7F1BC9B1D7E854C00A72BA6 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,31 +64,30 @@
 /* Begin PBXFileReference section */
 		F70373AA1D7BF78700FBB057 /* SecurityKeyBLETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecurityKeyBLETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70373AE1D7BF78700FBB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F70373C01D7D129400FBB057 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		F70373C31D7D3F2100FBB057 /* BLEMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEMessage.swift; sourceTree = "<group>"; };
-		F70373C61D7D3F6B00FBB057 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtensions.swift; sourceTree = "<group>"; };
 		F70373E01D7D64A900FBB057 /* SecurityKeyBLEClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyBLEClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70373E21D7D64A900FBB057 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F70373E41D7D64A900FBB057 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F70373E61D7D64A900FBB057 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F70373E91D7D64A900FBB057 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F70373EB1D7D64A900FBB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F7717FEC1D815761008D1CDB /* APDU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDU.swift; sourceTree = "<group>"; };
-		F7717FF81D823638008D1CDB /* u2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = u2f.h; path = inc/u2f.h; sourceTree = "<group>"; };
 		F7717FFA1D823678008D1CDB /* SecurityKeyBLEServer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityKeyBLEServer-Bridging-Header.h"; sourceTree = "<group>"; };
 		F7717FFB1D823678008D1CDB /* SecurityKeyBLEClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SecurityKeyBLEClient-Bridging-Header.h"; path = "../SecurityKeyBLE/SecurityKeyBLEClient-Bridging-Header.h"; sourceTree = "<group>"; };
-		F77180001D82AB0E008D1CDB /* apdu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = apdu.h; sourceTree = "<group>"; };
 		F77180011D82B61B008D1CDB /* APDUTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUTests.swift; sourceTree = "<group>"; };
 		F77180041D82B6C4008D1CDB /* SecurityKeyBLETests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityKeyBLETests-Bridging-Header.h"; sourceTree = "<group>"; };
-		F77180091D8392D1008D1CDB /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
 		F771800D1D83932A008D1CDB /* SHA256Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256Tests.swift; sourceTree = "<group>"; };
 		F77180101D83B966008D1CDB /* BLEMessageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEMessageTests.swift; sourceTree = "<group>"; };
 		F77180121D83B9AB008D1CDB /* CoreExtTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtTests.swift; sourceTree = "<group>"; };
 		F77180141D83D419008D1CDB /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		F77180161D83D752008D1CDB /* ClientData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientData.swift; sourceTree = "<group>"; };
-		F771801B1D83DC3D008D1CDB /* RegisterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRequest.swift; sourceTree = "<group>"; };
-		F771801D1D840B62008D1CDB /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
+		F77180251D84108D008D1CDB /* apdu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apdu.h; path = Common/apdu.h; sourceTree = "<group>"; };
+		F77180261D84108D008D1CDB /* APDU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDU.swift; path = Common/APDU.swift; sourceTree = "<group>"; };
+		F77180271D84108D008D1CDB /* BLEMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BLEMessage.swift; path = Common/BLEMessage.swift; sourceTree = "<group>"; };
+		F77180281D84108D008D1CDB /* ClientData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientData.swift; path = Common/ClientData.swift; sourceTree = "<group>"; };
+		F77180291D84108D008D1CDB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Common/Constants.swift; sourceTree = "<group>"; };
+		F771802A1D84108D008D1CDB /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensions.swift; path = Common/CoreExtensions.swift; sourceTree = "<group>"; };
+		F771802B1D84108D008D1CDB /* RegisterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterRequest.swift; path = Common/RegisterRequest.swift; sourceTree = "<group>"; };
+		F771802C1D84108D008D1CDB /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Registration.swift; path = Common/Registration.swift; sourceTree = "<group>"; };
+		F771802D1D84108D008D1CDB /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SHA256.swift; path = Common/SHA256.swift; sourceTree = "<group>"; };
+		F771802E1D84108D008D1CDB /* u2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = u2f.h; path = Common/u2f.h; sourceTree = "<group>"; };
 		F77CC2F51D7FB08800D28CAC /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StateMachine.swift; path = StateMachine/StateMachine/StateMachine.swift; sourceTree = "<group>"; };
 		F77CC2F81D801C4200D28CAC /* SecurityKeyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityKeyClient.swift; sourceTree = "<group>"; };
 		F78C5BE11D78854A001BB080 /* SecurityKeyBLEServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyBLEServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,11 +161,27 @@
 			name = StateMachine;
 			sourceTree = "<group>";
 		};
+		F77180221D840FAB008D1CDB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F77180251D84108D008D1CDB /* apdu.h */,
+				F77180261D84108D008D1CDB /* APDU.swift */,
+				F77180271D84108D008D1CDB /* BLEMessage.swift */,
+				F77180281D84108D008D1CDB /* ClientData.swift */,
+				F77180291D84108D008D1CDB /* Constants.swift */,
+				F771802A1D84108D008D1CDB /* CoreExtensions.swift */,
+				F771802B1D84108D008D1CDB /* RegisterRequest.swift */,
+				F771802C1D84108D008D1CDB /* Registration.swift */,
+				F771802D1D84108D008D1CDB /* SHA256.swift */,
+				F771802E1D84108D008D1CDB /* u2f.h */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		F78C5BD81D78854A001BB080 = {
 			isa = PBXGroup;
 			children = (
-				F7717FF81D823638008D1CDB /* u2f.h */,
-				F77180001D82AB0E008D1CDB /* apdu.h */,
+				F77180221D840FAB008D1CDB /* Common */,
 				F72E40311D81373D0059A0D7 /* StateMachine */,
 				F78C5BE31D78854A001BB080 /* SecurityKeyBLEServer */,
 				F70373AB1D7BF78700FBB057 /* SecurityKeyBLETests */,
@@ -191,16 +210,7 @@
 				F78C5BEB1D78854B001BB080 /* Assets.xcassets */,
 				F78C5BED1D78854B001BB080 /* LaunchScreen.storyboard */,
 				F78C5BF01D78854B001BB080 /* Info.plist */,
-				F70373C31D7D3F2100FBB057 /* BLEMessage.swift */,
-				F70373C01D7D129400FBB057 /* Errors.swift */,
-				F77180161D83D752008D1CDB /* ClientData.swift */,
-				F70373C61D7D3F6B00FBB057 /* Constants.swift */,
-				F70373C91D7D3FEC00FBB057 /* CoreExtensions.swift */,
-				F7717FEC1D815761008D1CDB /* APDU.swift */,
-				F771801B1D83DC3D008D1CDB /* RegisterRequest.swift */,
-				F771801D1D840B62008D1CDB /* Registration.swift */,
 				F7717FFA1D823678008D1CDB /* SecurityKeyBLEServer-Bridging-Header.h */,
-				F77180091D8392D1008D1CDB /* SHA256.swift */,
 			);
 			name = SecurityKeyBLEServer;
 			path = SecurityKeyBLE;
@@ -338,17 +348,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				F77180151D83D419008D1CDB /* Util.swift in Sources */,
+				F77180411D8410C8008D1CDB /* RegisterRequest.swift in Sources */,
+				F77180371D8410B7008D1CDB /* APDU.swift in Sources */,
 				F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */,
-				F70373C21D7D12BE00FBB057 /* Errors.swift in Sources */,
+				F77180431D8410CB008D1CDB /* Registration.swift in Sources */,
+				F77180391D8410BB008D1CDB /* BLEMessage.swift in Sources */,
+				F771803B1D8410BF008D1CDB /* ClientData.swift in Sources */,
 				F77180021D82B61B008D1CDB /* APDUTests.swift in Sources */,
-				F70373C51D7D3F3900FBB057 /* BLEMessage.swift in Sources */,
-				F77180031D82B689008D1CDB /* APDU.swift in Sources */,
-				F771800F1D839347008D1CDB /* SHA256.swift in Sources */,
 				F77180131D83B9AB008D1CDB /* CoreExtTests.swift in Sources */,
-				F77180181D83D752008D1CDB /* ClientData.swift in Sources */,
-				F70373C81D7D3F8200FBB057 /* Constants.swift in Sources */,
-				F70373CB1D7D467A00FBB057 /* CoreExtensions.swift in Sources */,
 				F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */,
+				F771803F1D8410C5008D1CDB /* CoreExtensions.swift in Sources */,
+				F771803D1D8410C2008D1CDB /* Constants.swift in Sources */,
+				F77180461D8410CF008D1CDB /* SHA256.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,13 +368,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F77CC2F91D801C4200D28CAC /* SecurityKeyClient.swift in Sources */,
+				F77180441D8410CC008D1CDB /* Registration.swift in Sources */,
 				F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */,
+				F77180421D8410C9008D1CDB /* RegisterRequest.swift in Sources */,
 				F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */,
-				F7F1BC9B1D7E854C00A72BA6 /* CoreExtensions.swift in Sources */,
-				F72E40301D805B070059A0D7 /* Errors.swift in Sources */,
+				F771803A1D8410BB008D1CDB /* BLEMessage.swift in Sources */,
+				F77180401D8410C6008D1CDB /* CoreExtensions.swift in Sources */,
+				F77180381D8410B8008D1CDB /* APDU.swift in Sources */,
+				F77180451D8410CE008D1CDB /* SHA256.swift in Sources */,
 				F77CC2F71D7FB09200D28CAC /* StateMachine.swift in Sources */,
-				F7F1BC981D7D674C00A72BA6 /* Constants.swift in Sources */,
-				F72E402F1D805A720059A0D7 /* BLEMessage.swift in Sources */,
+				F771803C1D8410BF008D1CDB /* ClientData.swift in Sources */,
+				F771803E1D8410C2008D1CDB /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,18 +387,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
+				F77180351D84108D008D1CDB /* Registration.swift in Sources */,
 				F78C5BF71D78862D001BB080 /* SecurityKeyServer.swift in Sources */,
-				F771801C1D83DC3D008D1CDB /* RegisterRequest.swift in Sources */,
-				F70373CA1D7D3FEC00FBB057 /* CoreExtensions.swift in Sources */,
+				F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */,
 				F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */,
-				F70373C41D7D3F2100FBB057 /* BLEMessage.swift in Sources */,
-				F771801E1D840B62008D1CDB /* Registration.swift in Sources */,
+				F77180301D84108D008D1CDB /* BLEMessage.swift in Sources */,
+				F77180331D84108D008D1CDB /* CoreExtensions.swift in Sources */,
+				F771802F1D84108D008D1CDB /* APDU.swift in Sources */,
+				F77180361D84108D008D1CDB /* SHA256.swift in Sources */,
 				F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */,
-				F771800B1D8392DA008D1CDB /* SHA256.swift in Sources */,
-				F7717FED1D815761008D1CDB /* APDU.swift in Sources */,
-				F77180171D83D752008D1CDB /* ClientData.swift in Sources */,
-				F70373C11D7D129400FBB057 /* Errors.swift in Sources */,
-				F70373C71D7D3F6B00FBB057 /* Constants.swift in Sources */,
+				F77180311D84108D008D1CDB /* ClientData.swift in Sources */,
+				F77180321D84108D008D1CDB /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,12 @@
 import Foundation
 
 class BLEMessage: CollectionType, SequenceType {
+    enum Error: ErrorType {
+        case InvalidSequence
+        case InvalidMessage
+        case MessageComplete
+    }
+
     // Possible statuses for Authenticator Response messages.
     enum Status: UInt8 {
         case KeepAlive = 0x82
@@ -66,7 +72,7 @@ class BLEMessage: CollectionType, SequenceType {
     func readFragment(frag: NSData) throws {
         if isComplete {
             // We've already got the whole message.
-            throw SecurityKeyError.MessageComplete
+            throw Error.MessageComplete
         }
 
         if isInitialFragment(frag) {
@@ -84,14 +90,14 @@ class BLEMessage: CollectionType, SequenceType {
             let hLen = frag.getByte(1),
             let lLen = frag.getByte(2)
         else {
-            throw SecurityKeyError.InvalidMessage
+            throw Error.InvalidMessage
         }
 
         totalLength = (Int(hLen) << 8) | Int(lLen)
         
         // Check that we don't exceed the total length.
         if frag.length > totalLength! + 3 {
-            throw SecurityKeyError.InvalidMessage
+            throw Error.InvalidMessage
         }
 
         let dataRange = NSRange(location: 3, length: frag.length - 3)
@@ -111,12 +117,12 @@ class BLEMessage: CollectionType, SequenceType {
     private func readContinuationFragment(frag: NSData) throws {
         // Should have been set to -1 (0xFF) in readInitialFragment.
         if lastSequence == nil {
-            throw SecurityKeyError.InvalidSequence
+            throw Error.InvalidSequence
         }
         
         // Check that we didn't miss a fragment.
         guard let seq = frag.getByte(0) else {
-            throw SecurityKeyError.InvalidMessage
+            throw Error.InvalidMessage
         }
         
         if lastSequence! == 0xFF && seq == 0 {
@@ -124,14 +130,14 @@ class BLEMessage: CollectionType, SequenceType {
         } else if seq == lastSequence! + 1 {
             // ok
         } else {
-            throw SecurityKeyError.InvalidSequence
+            throw Error.InvalidSequence
         }
 
         lastSequence = seq
         
         // Check that we don't exceed the expected message length
         if partialData!.length + frag.length - 1 > totalLength {
-            throw SecurityKeyError.InvalidMessage
+            throw Error.InvalidMessage
         }
         
         let dataRange = NSRange(location: 1, length: frag.length - 1)
