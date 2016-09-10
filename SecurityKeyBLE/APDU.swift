@@ -29,6 +29,10 @@ struct APDUCommand: RawDataProtocol {
         return r.length
     }
     
+    var registerRequest: U2F_REGISTER_REQ? {
+        return data as? U2F_REGISTER_REQ ?? nil
+    }
+    
     init() {}
     
     init(data d: APDUCommandDataProtocol) {

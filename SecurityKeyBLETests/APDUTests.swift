@@ -10,13 +10,14 @@ import XCTest
 
 class APDUTests: XCTestCase {
     func testU2FRegisterRequest() throws {
-        let challenge = try SHA256.tupleDigest("hello")
-        let appId = try SHA256.tupleDigest("world")
-        let req = U2F_REGISTER_REQ(chal: challenge, appId: appId)
+        let challenge = SHA256(data: "hello".dataUsingEncoding(NSUTF8StringEncoding)!)
+        let appId = SHA256(data: "world".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        let req = U2F_REGISTER_REQ(chal: challenge.tupleDigest, appId: appId.tupleDigest)
 
         var expected = NSMutableData()
-        expected.appendData(try SHA256.digest("hello"))
-        expected.appendData(try SHA256.digest("world"))
+        expected.appendData(challenge.digest)
+        expected.appendData(appId.digest)
         XCTAssertEqual(NSData(data: expected), req.raw)
         
         guard let header = req.apdu.header else {
@@ -50,8 +51,8 @@ class APDUTests: XCTestCase {
     }
     
     func testRoundTrip() throws {
-        let challenge = try SHA256.tupleDigest("hello")
-        let appId = try SHA256.tupleDigest("world")
+        let challenge = SHA256.tupleDigest("hello".dataUsingEncoding(NSUTF8StringEncoding)!)
+        let appId = SHA256.tupleDigest("world".dataUsingEncoding(NSUTF8StringEncoding)!)
         let expected = U2F_REGISTER_REQ(chal: challenge, appId: appId).apdu
         let actual = APDUCommand(raw: expected.raw!)
         

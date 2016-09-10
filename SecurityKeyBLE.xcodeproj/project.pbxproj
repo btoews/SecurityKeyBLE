@@ -29,6 +29,7 @@
 		F771800F1D839347008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180091D8392D1008D1CDB /* SHA256.swift */; };
 		F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180101D83B966008D1CDB /* BLEMessageTests.swift */; };
 		F77180131D83B9AB008D1CDB /* CoreExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180121D83B9AB008D1CDB /* CoreExtTests.swift */; };
+		F77180151D83D419008D1CDB /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180141D83D419008D1CDB /* Util.swift */; };
 		F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F51D7FB08800D28CAC /* StateMachine.swift */; };
 		F77CC2F71D7FB09200D28CAC /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F51D7FB08800D28CAC /* StateMachine.swift */; };
 		F77CC2F91D801C4200D28CAC /* SecurityKeyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F81D801C4200D28CAC /* SecurityKeyClient.swift */; };
@@ -76,6 +77,7 @@
 		F771800D1D83932A008D1CDB /* SHA256Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256Tests.swift; sourceTree = "<group>"; };
 		F77180101D83B966008D1CDB /* BLEMessageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEMessageTests.swift; sourceTree = "<group>"; };
 		F77180121D83B9AB008D1CDB /* CoreExtTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtTests.swift; sourceTree = "<group>"; };
+		F77180141D83D419008D1CDB /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F77CC2F51D7FB08800D28CAC /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StateMachine.swift; path = StateMachine/StateMachine/StateMachine.swift; sourceTree = "<group>"; };
 		F77CC2F81D801C4200D28CAC /* SecurityKeyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityKeyClient.swift; sourceTree = "<group>"; };
 		F78C5BE11D78854A001BB080 /* SecurityKeyBLEServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurityKeyBLEServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +120,7 @@
 			children = (
 				F77180121D83B9AB008D1CDB /* CoreExtTests.swift */,
 				F77180101D83B966008D1CDB /* BLEMessageTests.swift */,
+				F77180141D83D419008D1CDB /* Util.swift */,
 				F771800D1D83932A008D1CDB /* SHA256Tests.swift */,
 				F77180011D82B61B008D1CDB /* APDUTests.swift */,
 				F70373AE1D7BF78700FBB057 /* Info.plist */,
@@ -324,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F77180151D83D419008D1CDB /* Util.swift in Sources */,
 				F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */,
 				F70373C21D7D12BE00FBB057 /* Errors.swift in Sources */,
 				F77180021D82B61B008D1CDB /* APDUTests.swift in Sources */,
