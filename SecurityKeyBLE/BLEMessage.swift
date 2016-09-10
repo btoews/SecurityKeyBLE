@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Message: CollectionType, SequenceType {
+class BLEMessage: CollectionType, SequenceType {
     // Possible statuses for Authenticator Response messages.
     enum Status: UInt8 {
         case KeepAlive = 0x82

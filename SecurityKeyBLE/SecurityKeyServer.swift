@@ -19,7 +19,7 @@ class ServerContext: ContextProtocol {
     
     var activeCentral:    CBCentral?
     var activeBLERequest: CBATTRequest?
-    var activeU2FRequest: Message?
+    var activeU2FRequest: BLEMessage?
     
     required init() {}
 }
@@ -200,7 +200,7 @@ class ServerAdvertisingState: ServerState {
 
 class ServerRequestState: ServerState {
     override func enter() {
-        context.activeU2FRequest = Message()
+        context.activeU2FRequest = BLEMessage()
         handle(event: "writeRequestReceived", with: handleWriteRequestReceived)
     }
     
@@ -233,7 +233,7 @@ class ServerRequestState: ServerState {
 }
 
 class ServerResponseState: ServerState {
-    var fragments: IndexingGenerator<Message>?
+    var fragments: IndexingGenerator<BLEMessage>?
     var queuedFragment: NSData?
     
     override func enter() {
@@ -246,7 +246,7 @@ class ServerResponseState: ServerState {
             return fail("incomplete request")
         }
         
-        let u2fResp = Message(cmd: reqCmd, data: "We, therefore, the Representatives of the United States of America, in General Congress, Assembled, appealing to the Supreme Judge of the world for the rectitude of our intentions, do, in the Name, and by the Authority of the good People of these Colonies, solemnly publish and declare, That these United Colonies are, and of Right ought to be Free and Independent States; that they are Absolved from all Allegiance to the British Crown, and that all political connection between them and the State of Great Britain, is and ought to be totally dissolved; and that as Free and Independent States, they have full Power to levy War, conclude Peace, contract Alliances, establish Commerce, and to do all other Acts and Things which Independent States may of right do.  And for the support of this Declaration, with a firm reliance on the Protection of Divine Providence, we mutually pledge to each other our Lives, our Fortunes and our sacred Honor.".dataUsingEncoding(NSUTF8StringEncoding)!)
+        let u2fResp = BLEMessage(cmd: reqCmd, data: "We, therefore, the Representatives of the United States of America, in General Congress, Assembled, appealing to the Supreme Judge of the world for the rectitude of our intentions, do, in the Name, and by the Authority of the good People of these Colonies, solemnly publish and declare, That these United Colonies are, and of Right ought to be Free and Independent States; that they are Absolved from all Allegiance to the British Crown, and that all political connection between them and the State of Great Britain, is and ought to be totally dissolved; and that as Free and Independent States, they have full Power to levy War, conclude Peace, contract Alliances, establish Commerce, and to do all other Acts and Things which Independent States may of right do.  And for the support of this Declaration, with a firm reliance on the Protection of Divine Providence, we mutually pledge to each other our Lives, our Fortunes and our sacred Honor.".dataUsingEncoding(NSUTF8StringEncoding)!)
         
         fragments = u2fResp.generate()
 
