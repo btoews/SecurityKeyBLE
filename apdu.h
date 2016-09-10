@@ -25,4 +25,9 @@ typedef struct {
     uint8_t lc[3];
 } EXTENDED_APDU_COMMAND_HEADER;
 
+typedef struct {
+    uint8_t sw1;
+    uint8_t sw2;
+} APDU_RESPONSE_TRAILER;
+
 #endif /* apdu_h */

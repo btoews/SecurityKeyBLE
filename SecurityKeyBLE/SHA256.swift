@@ -34,7 +34,7 @@ class SHA256 {
     }
     
     var b64Digest: String {
-        return digest.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        return digest.base64EncodedStringWithOptions([])
     }
     
     init(data: NSData) {

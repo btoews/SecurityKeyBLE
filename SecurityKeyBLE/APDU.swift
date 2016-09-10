@@ -10,7 +10,7 @@ import Foundation
 
 struct APDUCommand: RawDataProtocol {
     var header: APDUCommandHeaderProtocol?
-    var data:   APDUCommandDataProtocol?
+    var data: APDUCommandDataProtocol?
     
     var raw: NSData? {
         guard
@@ -24,13 +24,12 @@ struct APDUCommand: RawDataProtocol {
         return NSData(data: r)
     }
     
-    var size: Int? {
-        guard let r = raw else { return nil }
-        return r.length
-    }
-    
     var registerRequest: U2F_REGISTER_REQ? {
         return data as? U2F_REGISTER_REQ ?? nil
+    }
+    
+    var valid: Bool {
+        return header != nil && data != nil
     }
     
     init() {}
@@ -38,9 +37,9 @@ struct APDUCommand: RawDataProtocol {
     init(data d: APDUCommandDataProtocol) {
         data = d
         
-        if APDU_COMMAND_HEADER.ValidLc.contains(d.size!) {
+        if APDU_COMMAND_HEADER.LengthRange.contains(d.size) {
             header = APDU_COMMAND_HEADER(data: d)
-        } else if EXTENDED_APDU_COMMAND_HEADER.ValidLc.contains(d.size!) {
+        } else if EXTENDED_APDU_COMMAND_HEADER.LengthRange.contains(d.size) {
             header = EXTENDED_APDU_COMMAND_HEADER(data: d)
         }
     }
@@ -53,20 +52,21 @@ struct APDUCommand: RawDataProtocol {
             h = EXTENDED_APDU_COMMAND_HEADER(raw: raw)
         }
         
-        if raw.length - h.size! != h.length {
+        if raw.length - h.size != h.length {
             // Length doesn't match data length.
             return
         }
         
-        let dataRange = NSRange(location: h.size!, length: raw.length - h.size!)
+        let dataRange = NSRange(location: h.size, length: raw.length - h.size)
         let dataRaw = raw.subdataWithRange(dataRange)
         
         switch h.ins {
         case UInt8(U2F_REGISTER):
             data = U2F_REGISTER_REQ(raw: dataRaw)
+        case UInt8(U2F_AUTHENTICATE):
+            data = U2F_AUTHENTICATE_REQ(raw: dataRaw)
         default:
-            // Unknown command code.
-            return
+            return // Unknown command code
         }
         
         header = h
@@ -91,8 +91,15 @@ extension U2F_REGISTER_REQ: APDUCommandDataProtocol {
     var cmdP2:    UInt8 { return 0x00 }
 }
 
+extension U2F_AUTHENTICATE_REQ: APDUCommandDataProtocol {
+    var cmdClass: UInt8 { return 0x00 }
+    var cmdCode:  UInt8 { return UInt8(U2F_AUTHENTICATE) }
+    var cmdP1:    UInt8 { return 0x00 }
+    var cmdP2:    UInt8 { return 0x00 }
+}
+
 protocol APDUCommandHeaderProtocol: RawData {
-    static var ValidLc: Range<Int> { get }
+    static var LengthRange: Range<Int> { get }
     
     var cla:    UInt8  { get set }
     var ins:    UInt8  { get set }
@@ -108,12 +115,12 @@ extension APDUCommandHeaderProtocol {
         ins = data.cmdCode
         p1 = data.cmdP1
         p2 = data.cmdP2
-        length = data.size!
+        length = data.size
     }
 }
 
 extension APDU_COMMAND_HEADER: APDUCommandHeaderProtocol {
-    static var ValidLc = 1...255
+    static var LengthRange = 1...255
 
     var length: Int {
         get {
@@ -127,7 +134,7 @@ extension APDU_COMMAND_HEADER: APDUCommandHeaderProtocol {
 }
 
 extension EXTENDED_APDU_COMMAND_HEADER: APDUCommandHeaderProtocol {
-    static var ValidLc = 1...65535
+    static var LengthRange = 1...65535
     
     var length: Int {
         get {
@@ -142,29 +149,95 @@ extension EXTENDED_APDU_COMMAND_HEADER: APDUCommandHeaderProtocol {
     }
 }
 
+struct APDUResponse: RawDataProtocol {
+    var data: APDUResponseDataProtocol?
+    var trailer: APDU_RESPONSE_TRAILER?
+    
+    var raw: NSData? {
+        guard
+            let d = data?.raw,
+            let t = trailer?.raw
+        else { return nil }
+        
+        let r = NSMutableData(data: d)
+        r.appendData(t)
+        
+        return NSData(data: r)
+    }
+    
+    var valid: Bool {
+        return data != nil && trailer != nil
+    }
+    
+    init() {}
+    
+    init(raw: NSData) {
+        if raw.length < APDU_RESPONSE_TRAILER.size { return }
+        
+        let tSize = APDU_RESPONSE_TRAILER.size
+        
+        let dRange = NSRange(location: 0, length: raw.length - tSize)
+        switch dRange.length {
+        case U2F_REGISTER_RESP.size:
+            data = U2F_REGISTER_RESP(raw: raw.subdataWithRange(dRange))
+        case U2F_AUTHENTICATE_RESP.size:
+            data = U2F_AUTHENTICATE_RESP(raw: raw.subdataWithRange(dRange))
+        default:
+            return // Unknown response type
+        }
+        
+        let tRange = NSRange(location: raw.length - tSize, length: tSize)
+        trailer = APDU_RESPONSE_TRAILER(raw: raw.subdataWithRange(tRange))
+    }
+}
+
+protocol APDUResponseDataProtocol: RawData {}
+extension U2F_REGISTER_RESP:     APDUResponseDataProtocol {}
+extension U2F_AUTHENTICATE_RESP: APDUResponseDataProtocol {}
+
+
+extension APDU_RESPONSE_TRAILER: RawData {
+    var status: Int {
+        get {
+            return (Int(sw1) << 8) & Int(sw2)
+        }
+        set(newValue) {
+            sw1 = UInt8((newValue >> 8) & 0xFF)
+            sw2 = UInt8(newValue & 0xFF)
+        }
+    }
+}
+
 // Protocol describing type that can be serialized to binary.
 protocol RawDataProtocol {
     var raw: NSData? { get }
-    var size: Int?   { get }
     
     init()
     init(raw: NSData)
 }
 
-// Helpers for converting C structs to/from raw data.
-protocol RawData: RawDataProtocol {}
+// Helpers for converting C structs to/from data.
+protocol RawData: RawDataProtocol {
+    static var size: Int { get }
+    var size: Int { get }
+}
+
 extension RawData {
-    var raw: NSData? {
-        var tmp = self
-        return NSData(bytes: &tmp, length: size!)
+    static var size:Int {
+        return sizeof(Self)
     }
     
-    var size: Int? {
+    var size: Int {
         return sizeof(Self)
+    }
+    
+    var raw: NSData? {
+        var tmp = self
+        return NSData(bytes: &tmp, length: size)
     }
     
     init(raw: NSData) {
         self.init()
-        raw.getBytes(&self, length: size!)
+        raw.getBytes(&self, length: size)
     }
 }
