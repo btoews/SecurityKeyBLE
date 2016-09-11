@@ -6,3 +6,5 @@
 
 #import "u2f.h"
 #import "apdu.h"
+#import "SelfSignedCertificate.h"
+#import "KeyInterface.h"
