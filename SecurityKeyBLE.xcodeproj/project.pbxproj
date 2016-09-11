@@ -183,14 +183,10 @@
 		F77180221D840FAB008D1CDB /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F7CCC6F11D859FF900D539DE /* SecurityKey */,
 				F72E40311D81373D0059A0D7 /* StateMachine */,
 				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
-				F7CCC6E41D85376A00D539DE /* KeyInterface.h */,
-				F7CCC6E51D85376A00D539DE /* KeyInterface.m */,
 				F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */,
-				F7CCC6E11D85374700D539DE /* openssl.framework */,
-				F7CCC6DC1D85371200D539DE /* SelfSignedCertificate.h */,
-				F7CCC6DD1D85371200D539DE /* SelfSignedCertificate.m */,
 				F77180251D84108D008D1CDB /* apdu.h */,
 				F77180261D84108D008D1CDB /* APDU.swift */,
 				F77180271D84108D008D1CDB /* BLEMessage.swift */,
@@ -239,6 +235,18 @@
 			);
 			name = SecurityKeyBLEServer;
 			path = SecurityKeyBLE;
+			sourceTree = "<group>";
+		};
+		F7CCC6F11D859FF900D539DE /* SecurityKey */ = {
+			isa = PBXGroup;
+			children = (
+				F7CCC6E41D85376A00D539DE /* KeyInterface.h */,
+				F7CCC6E51D85376A00D539DE /* KeyInterface.m */,
+				F7CCC6E11D85374700D539DE /* openssl.framework */,
+				F7CCC6DC1D85371200D539DE /* SelfSignedCertificate.h */,
+				F7CCC6DD1D85371200D539DE /* SelfSignedCertificate.m */,
+			);
+			name = SecurityKey;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
