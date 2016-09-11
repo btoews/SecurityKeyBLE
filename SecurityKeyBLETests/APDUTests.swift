@@ -30,8 +30,8 @@ class APDUTests: XCTestCase {
         
         // check apdu
         expected = NSMutableData()
-        expected.appendData(header.raw!)
-        expected.appendData(req.raw!)
+        expected.appendData(header.raw)
+        expected.appendData(req.raw)
         XCTAssertEqual(NSData(data: expected), req.apdu.raw)
     }
     
@@ -41,9 +41,12 @@ class APDUTests: XCTestCase {
         let expected = U2F_REGISTER_REQ(chal: challenge, appId: appId).apdu
         let actual = APDUCommand(raw: expected.raw!)
         
-        XCTAssertEqual(expected.raw, actual.raw)
-        XCTAssertEqual(expected.header!.raw, actual.header!.raw)
-        XCTAssertEqual(expected.data!.raw, actual.data!.raw)
+        let ar = actual.raw
+        let er = expected.raw
+        
+        XCTAssertEqual(er, ar)
+        XCTAssertEqual(expected.header?.raw, actual.header?.raw)
+        XCTAssertEqual(expected.data?.raw, actual.data?.raw)
     }
     
     func testU2FRegisterResponse() {}

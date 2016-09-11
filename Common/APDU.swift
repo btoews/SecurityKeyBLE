@@ -16,7 +16,9 @@ struct APDUCommand: APDUMessageProtocol {
         guard
             let h = header?.raw,
             let d = data?.raw
-        else { return nil }
+        else {
+            return nil
+        }
 
         let r = NSMutableData(data: h)
         r.appendData(d)
@@ -241,7 +243,7 @@ extension RawData {
             return NSData(bytes: &tmp, length: size)
         }
         set(newValue) {
-            raw.getBytes(&self, length: size)
+            newValue.getBytes(&self, length: size)
         }
     }
     

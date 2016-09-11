@@ -17,7 +17,9 @@ extension U2F_REGISTER_RESP {
         self.init()
 
         registerId = 0x05 // legacy reserved byte
-        pubKey = U2F_EC_POINT(raw: pk)
+        
+        pk.getBytes(&pubKey, length: sizeof(U2F_EC_POINT))
+
         keyHandleLen = UInt8(kh.length)
         
         let kcs = NSMutableData()
@@ -71,8 +73,3 @@ extension U2F_REGISTER_RESP {
         }
     }
 }
-
-extension U2F_EC_POINT: RawData {}
-
-
-

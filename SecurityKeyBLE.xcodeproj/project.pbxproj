@@ -22,7 +22,6 @@
 		F77180321D84108D008D1CDB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180291D84108D008D1CDB /* Constants.swift */; };
 		F77180331D84108D008D1CDB /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensions.swift */; };
 		F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802B1D84108D008D1CDB /* RegisterRequest.swift */; };
-		F77180351D84108D008D1CDB /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802C1D84108D008D1CDB /* Registration.swift */; };
 		F77180361D84108D008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802D1D84108D008D1CDB /* SHA256.swift */; };
 		F77180371D8410B7008D1CDB /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180261D84108D008D1CDB /* APDU.swift */; };
 		F77180381D8410B8008D1CDB /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180261D84108D008D1CDB /* APDU.swift */; };
@@ -36,8 +35,6 @@
 		F77180401D8410C6008D1CDB /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensions.swift */; };
 		F77180411D8410C8008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802B1D84108D008D1CDB /* RegisterRequest.swift */; };
 		F77180421D8410C9008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802B1D84108D008D1CDB /* RegisterRequest.swift */; };
-		F77180431D8410CB008D1CDB /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802C1D84108D008D1CDB /* Registration.swift */; };
-		F77180441D8410CC008D1CDB /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802C1D84108D008D1CDB /* Registration.swift */; };
 		F77180451D8410CE008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802D1D84108D008D1CDB /* SHA256.swift */; };
 		F77180461D8410CF008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802D1D84108D008D1CDB /* SHA256.swift */; };
 		F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77CC2F51D7FB08800D28CAC /* StateMachine.swift */; };
@@ -55,6 +52,8 @@
 		F7CCC6E31D85374C00D539DE /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CCC6E11D85374700D539DE /* openssl.framework */; };
 		F7CCC6E61D85376A00D539DE /* KeyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E51D85376A00D539DE /* KeyInterface.m */; };
 		F7CCC6E71D85378500D539DE /* KeyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E51D85376A00D539DE /* KeyInterface.m */; };
+		F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* Authenticator.swift */; };
+		F7CCC6EB1D858EA400D539DE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +90,6 @@
 		F77180291D84108D008D1CDB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Common/Constants.swift; sourceTree = "<group>"; };
 		F771802A1D84108D008D1CDB /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensions.swift; path = Common/CoreExtensions.swift; sourceTree = "<group>"; };
 		F771802B1D84108D008D1CDB /* RegisterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterRequest.swift; path = Common/RegisterRequest.swift; sourceTree = "<group>"; };
-		F771802C1D84108D008D1CDB /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Registration.swift; path = Common/Registration.swift; sourceTree = "<group>"; };
 		F771802D1D84108D008D1CDB /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SHA256.swift; path = Common/SHA256.swift; sourceTree = "<group>"; };
 		F771802E1D84108D008D1CDB /* u2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = u2f.h; path = Common/u2f.h; sourceTree = "<group>"; };
 		F77CC2F51D7FB08800D28CAC /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StateMachine.swift; path = StateMachine/StateMachine/StateMachine.swift; sourceTree = "<group>"; };
@@ -109,6 +107,8 @@
 		F7CCC6E11D85374700D539DE /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = SecurityKey/openssl.framework; sourceTree = "<group>"; };
 		F7CCC6E41D85376A00D539DE /* KeyInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyInterface.h; path = SecurityKey/Extension/KeyInterface/KeyInterface.h; sourceTree = "<group>"; };
 		F7CCC6E51D85376A00D539DE /* KeyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyInterface.m; path = SecurityKey/Extension/KeyInterface/KeyInterface.m; sourceTree = "<group>"; };
+		F7CCC6E81D858E6300D539DE /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authenticator.swift; path = Common/Authenticator.swift; sourceTree = "<group>"; };
+		F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterResponse.swift; path = Common/RegisterResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,8 +177,10 @@
 		F77180221D840FAB008D1CDB /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
 				F7CCC6E41D85376A00D539DE /* KeyInterface.h */,
 				F7CCC6E51D85376A00D539DE /* KeyInterface.m */,
+				F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */,
 				F7CCC6E11D85374700D539DE /* openssl.framework */,
 				F7CCC6DC1D85371200D539DE /* SelfSignedCertificate.h */,
 				F7CCC6DD1D85371200D539DE /* SelfSignedCertificate.m */,
@@ -189,7 +191,6 @@
 				F77180291D84108D008D1CDB /* Constants.swift */,
 				F771802A1D84108D008D1CDB /* CoreExtensions.swift */,
 				F771802B1D84108D008D1CDB /* RegisterRequest.swift */,
-				F771802C1D84108D008D1CDB /* Registration.swift */,
 				F771802D1D84108D008D1CDB /* SHA256.swift */,
 				F771802E1D84108D008D1CDB /* u2f.h */,
 			);
@@ -370,7 +371,6 @@
 				F7CCC6E71D85378500D539DE /* KeyInterface.m in Sources */,
 				F77180371D8410B7008D1CDB /* APDU.swift in Sources */,
 				F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */,
-				F77180431D8410CB008D1CDB /* Registration.swift in Sources */,
 				F77180391D8410BB008D1CDB /* BLEMessage.swift in Sources */,
 				F771803B1D8410BF008D1CDB /* ClientData.swift in Sources */,
 				F77180021D82B61B008D1CDB /* APDUTests.swift in Sources */,
@@ -388,7 +388,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F77CC2F91D801C4200D28CAC /* SecurityKeyClient.swift in Sources */,
-				F77180441D8410CC008D1CDB /* Registration.swift in Sources */,
 				F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */,
 				F77180421D8410C9008D1CDB /* RegisterRequest.swift in Sources */,
 				F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */,
@@ -407,8 +406,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
-				F77180351D84108D008D1CDB /* Registration.swift in Sources */,
+				F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */,
 				F78C5BF71D78862D001BB080 /* SecurityKeyServer.swift in Sources */,
+				F7CCC6EB1D858EA400D539DE /* RegisterResponse.swift in Sources */,
 				F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */,
 				F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */,
 				F7CCC6E61D85376A00D539DE /* KeyInterface.m in Sources */,
