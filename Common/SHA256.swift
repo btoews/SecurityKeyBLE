@@ -21,7 +21,7 @@ class SHA256 {
         return SHA256(data: data).tupleDigest
     }
 
-    static func b64Digest(data: NSData) -> String {
+    static func b64Digest(data: NSData) -> NSData {
         return SHA256(data: data).b64Digest
     }
     
@@ -33,8 +33,8 @@ class SHA256 {
         return td
     }
     
-    var b64Digest: String {
-        return digest.base64EncodedStringWithOptions([])
+    var b64Digest: NSData {
+        return digest.base64EncodedDataWithOptions([])
     }
     
     init(data: NSData) {

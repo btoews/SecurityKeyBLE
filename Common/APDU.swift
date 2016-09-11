@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct APDUCommand: RawDataProtocol {
+struct APDUCommand: APDUMessageProtocol {
     var header: APDUCommandHeaderProtocol?
     var data: APDUCommandDataProtocol?
     
@@ -149,7 +149,7 @@ extension EXTENDED_APDU_COMMAND_HEADER: APDUCommandHeaderProtocol {
     }
 }
 
-struct APDUResponse: RawDataProtocol {
+struct APDUResponse: APDUMessageProtocol {
     var data: APDUResponseDataProtocol?
     var trailer: APDU_RESPONSE_TRAILER?
     
@@ -209,7 +209,7 @@ extension APDU_RESPONSE_TRAILER: RawData {
 }
 
 // Protocol describing type that can be serialized to binary.
-protocol RawDataProtocol {
+protocol APDUMessageProtocol {
     var raw: NSData? { get }
     
     init()
@@ -217,9 +217,13 @@ protocol RawDataProtocol {
 }
 
 // Helpers for converting C structs to/from data.
-protocol RawData: RawDataProtocol {
+protocol RawData {
     static var size: Int { get }
     var size: Int { get }
+    var raw: NSData { get set }
+    
+    init()
+    init(raw: NSData)
 }
 
 extension RawData {
@@ -231,13 +235,18 @@ extension RawData {
         return sizeof(Self)
     }
     
-    var raw: NSData? {
-        var tmp = self
-        return NSData(bytes: &tmp, length: size)
+    var raw: NSData {
+        get {
+            var tmp = self
+            return NSData(bytes: &tmp, length: size)
+        }
+        set(newValue) {
+            raw.getBytes(&self, length: size)
+        }
     }
     
-    init(raw: NSData) {
+    init(raw r: NSData) {
         self.init()
-        raw.getBytes(&self, length: size)
+        raw = r
     }
 }
