@@ -1,3 +1,6 @@
 [submodule "StateMachine"]
 	path = StateMachine
 	url = https://github.com/mastahyeti/StateMachine
+[submodule "SecurityKey"]
+	path = SecurityKey
+	url = https://github.com/mastahyeti/security-key
