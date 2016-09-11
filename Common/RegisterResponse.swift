@@ -8,68 +8,68 @@
 
 import Foundation
 
-extension U2F_REGISTER_RESP {
-    enum Error: ErrorType {
-        case BadCert
-    }
+// Variable length fields make the C struct hard to use with swift.
+struct RegisterResponse {
+    var publicKey:   NSData
+    var keyHandle:   NSData
+    var certificate: NSData
+    var signature:   NSData
     
     init(publicKey pk: NSData, keyHandle kh: NSData, certificate cert: NSData, signature sig: NSData) {
-        self.init()
-
-        registerId = 0x05 // legacy reserved byte
-        
-        pk.getBytes(&pubKey, length: sizeof(U2F_EC_POINT))
-
-        keyHandleLen = UInt8(kh.length)
-        
-        let kcs = NSMutableData()
-        kcs.appendData(kh)
-        kcs.appendData(cert)
-        kcs.appendData(sig)
-        keyHandleCertSigData = kcs
+        publicKey = pk
+        keyHandle = kh
+        certificate = cert
+        signature = sig
     }
     
-    func getKeyHandle() -> NSData {
-        let khRange = NSRange(location: 0, length: Int(keyHandleLen))
-        return keyHandleCertSigData.subdataWithRange(khRange)
-    }
-    
-    func getCert() throws -> NSData {
-        let offset = Int(keyHandleLen)
-        let dataRange = NSRange(location: offset, length: keyHandleCertSigData.length - offset)
-        let data = keyHandleCertSigData.subdataWithRange(dataRange)
-        
-        let certLen = try certLength(fromData: data)
-        let certRange = NSRange(location: 0, length: certLen)
-        
-        return data.subdataWithRange(certRange)
-    }
+    init(raw: NSData) throws {
+        var offset = 0
 
-    func getSig() throws -> NSData {
-        let certLen = try getCert().length
-        let offset = Int(keyHandleLen) + certLen
-
-        let sigRange = NSRange(location: offset, length: keyHandleCertSigData.length - offset)
-        return keyHandleCertSigData.subdataWithRange(sigRange)
-    }
-    
-    private var keyHandleCertSigData: NSData {
-        get {
-            var tmp = keyHandleCertSig
-            return NSData(bytes: &tmp, length: sizeofValue(tmp))
-        }
+        let reservedRange = NSMakeRange(offset, 1)
+        // let reserved = raw.subdataWithRange(reservedRange)
+        offset += reservedRange.length
         
-        set(newValue) {
-            newValue.getBytes(&keyHandleCertSig, length: sizeofValue(keyHandleCertSig))
-        }
+        let pkRange = NSMakeRange(offset, sizeof(U2F_EC_POINT))
+        publicKey = raw.subdataWithRange(pkRange)
+        offset += pkRange.length
+        
+        let khLenRange = NSMakeRange(offset, 1)
+        var khLen: UInt8 = 0
+        raw.getBytes(&khLen, range: khLenRange)
+        offset += khLenRange.length
+        
+        let khRange = NSMakeRange(offset, Int(khLen))
+        keyHandle = raw.subdataWithRange(khRange)
+        offset += khRange.length
+
+        // peek at cert to figure out its length
+        let restRange = NSMakeRange(offset, raw.length - offset)
+        let rest = raw.subdataWithRange(restRange)
+        let certLen = try Util.certLength(fromData: rest)
+
+        let certRange = NSMakeRange(offset, certLen)
+        certificate = raw.subdataWithRange(certRange)
+        offset += certRange.length
+        
+        let sigRange = NSMakeRange(offset, raw.length - offset)
+        signature = raw.subdataWithRange(sigRange)
     }
     
-    private func certLength(fromData d: NSData) throws -> Int {
-        var size: Int = 0
-        if SelfSignedCertificate.parseX509(d, consumed: &size) == 1 {
-            return size
-        } else {
-            throw Error.BadCert
-        }
+    var raw: NSData {
+        let r = NSMutableData()
+        
+        var reserved: UInt8 = 0x05
+        r.appendBytes(&reserved, length: 1)
+        
+        r.appendData(publicKey)
+
+        var khLen = UInt8(keyHandle.length)
+        r.appendBytes(&khLen, length: 1)
+        
+        r.appendData(keyHandle)
+        r.appendData(certificate)
+        r.appendData(signature)
+        
+        return r
     }
 }

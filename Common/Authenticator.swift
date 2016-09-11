@@ -21,7 +21,7 @@ struct Authenticator {
     private var keyHandleBase = "iOS Security Key:".dataUsingEncoding(NSUTF8StringEncoding)!
     
     // register request -> register response
-    func register(request: U2F_REGISTER_REQ) throws -> U2F_REGISTER_RESP {
+    func register(request: U2F_REGISTER_REQ) throws -> RegisterResponse {
         let kh = keyHandle(request.appIdData)
         let k = try keyData(forKeyHandle: kh)
         
@@ -35,7 +35,7 @@ struct Authenticator {
         let s = signWithCert(toSign)
         let c = cert.toDer()
         
-        return U2F_REGISTER_RESP(publicKey: k, keyHandle: kh, certificate: c, signature: s)
+        return RegisterResponse(publicKey: k, keyHandle: kh, certificate: c, signature: s)
     }
     
     private func signWithCert(message: NSData) -> NSData {

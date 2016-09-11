@@ -9,14 +9,18 @@
 import XCTest
 
 class RegisterResponseTests: XCTestCase {
-    
-    func testCertLength() {
-        let crt = SelfSignedCertificate()
-        let crtData = NSMutableData(data: crt.toDer())
-        crtData.appendData("blah blah blah".dataUsingEncoding(NSUTF8StringEncoding)!)
+    func testRoundTrip() throws {
+        let pk = randData(length: sizeof(U2F_EC_POINT))
+        let kh = "asdf".dataUsingEncoding(NSUTF8StringEncoding)!
+        let crt = SelfSignedCertificate().toDer()
+        let sig = "qwer".dataUsingEncoding(NSUTF8StringEncoding)!
         
-        var size: Int = 0
-        XCTAssertEqual(1, SelfSignedCertificate.parseX509(crtData, consumed: &size))
-        XCTAssertEqual(crt.toDer().length, size)
+        let r1 = RegisterResponse(publicKey: pk, keyHandle: kh, certificate: crt, signature: sig)
+        let r2 = try RegisterResponse(raw: r1.raw)
+        
+        XCTAssertEqual(r1.publicKey, r2.publicKey)
+        XCTAssertEqual(r1.keyHandle, r2.keyHandle)
+        XCTAssertEqual(r1.certificate, r2.certificate)
+        XCTAssertEqual(r1.signature, r2.signature)
     }
 }

@@ -45,10 +45,18 @@ func tupleDigestEqual(a: SHA256.TupleDigest, _ b: SHA256.TupleDigest) -> Bool {
 }
 
 func randData(maxLen: Int = 4096) -> NSData {
-    let dLen = rand() % 4096
+    let dLen = Int(rand()) % maxLen
+    return randData(length: dLen)
+}
+
+func randData(length len: Int) -> NSData {
     let d = NSMutableData()
-    for _ in 1...dLen {
-        d.appendByte(UInt8(rand() % 256))
+    var tmp: UInt8
+
+    for _ in 1...len {
+        tmp = UInt8(rand() % 256)
+        d.appendBytes(&tmp, length: 1)
     }
-    return NSData(data: d)
+
+    return d
 }
