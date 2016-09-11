@@ -9,28 +9,29 @@
 import Foundation
 
 struct ClientData {
-    var typ: String
+    enum Type: String {
+        case Register = "navigator.id.finishEnrollment"
+        case Authenticate = "navigator.id.getAssertion"
+    }
+    
+    var typ: Type
     var challenge: String
     var origin: String
     
     var dict: [String:String] {
         return [
-            "typ":       typ,
+            "typ":       typ.rawValue,
             "challenge": challenge,
             "origin":    origin
         ]
     }
     
-    var json: NSData? {
-        do {
-            return try NSJSONSerialization.dataWithJSONObject(dict, options: [])
-        } catch {
-            return nil
-        }
+    func toJSON() throws -> NSData {
+        return try NSJSONSerialization.dataWithJSONObject(dict, options: [])
     }
     
-    var digest: SHA256.TupleDigest? {
-        guard let j = json else { return nil }
+    func digest() throws -> SHA256.TupleDigest {
+        let j = try toJSON()
         return SHA256.tupleDigest(j)
     }
 }

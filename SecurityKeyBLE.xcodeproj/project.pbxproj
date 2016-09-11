@@ -54,6 +54,8 @@
 		F7CCC6E71D85378500D539DE /* KeyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E51D85376A00D539DE /* KeyInterface.m */; };
 		F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* Authenticator.swift */; };
 		F7CCC6EB1D858EA400D539DE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */; };
+		F7CCC6ED1D85940400D539DE /* ClientDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */; };
+		F7CCC6EF1D85966600D539DE /* RegisterRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EE1D85966600D539DE /* RegisterRequestTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,8 @@
 		F7CCC6E51D85376A00D539DE /* KeyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyInterface.m; path = SecurityKey/Extension/KeyInterface/KeyInterface.m; sourceTree = "<group>"; };
 		F7CCC6E81D858E6300D539DE /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authenticator.swift; path = Common/Authenticator.swift; sourceTree = "<group>"; };
 		F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterResponse.swift; path = Common/RegisterResponse.swift; sourceTree = "<group>"; };
+		F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDataTests.swift; sourceTree = "<group>"; };
+		F7CCC6EE1D85966600D539DE /* RegisterRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRequestTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 		F70373AB1D7BF78700FBB057 /* SecurityKeyBLETests */ = {
 			isa = PBXGroup;
 			children = (
+				F7CCC6EE1D85966600D539DE /* RegisterRequestTests.swift */,
+				F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */,
 				F77180121D83B9AB008D1CDB /* CoreExtTests.swift */,
 				F77180101D83B966008D1CDB /* BLEMessageTests.swift */,
 				F77180141D83D419008D1CDB /* Util.swift */,
@@ -177,6 +183,7 @@
 		F77180221D840FAB008D1CDB /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F72E40311D81373D0059A0D7 /* StateMachine */,
 				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
 				F7CCC6E41D85376A00D539DE /* KeyInterface.h */,
 				F7CCC6E51D85376A00D539DE /* KeyInterface.m */,
@@ -201,7 +208,6 @@
 			isa = PBXGroup;
 			children = (
 				F77180221D840FAB008D1CDB /* Common */,
-				F72E40311D81373D0059A0D7 /* StateMachine */,
 				F78C5BE31D78854A001BB080 /* SecurityKeyBLEServer */,
 				F70373AB1D7BF78700FBB057 /* SecurityKeyBLETests */,
 				F70373E11D7D64A900FBB057 /* SecurityKeyBLEClient */,
@@ -372,10 +378,12 @@
 				F77180371D8410B7008D1CDB /* APDU.swift in Sources */,
 				F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */,
 				F77180391D8410BB008D1CDB /* BLEMessage.swift in Sources */,
+				F7CCC6EF1D85966600D539DE /* RegisterRequestTests.swift in Sources */,
 				F771803B1D8410BF008D1CDB /* ClientData.swift in Sources */,
 				F77180021D82B61B008D1CDB /* APDUTests.swift in Sources */,
 				F77180131D83B9AB008D1CDB /* CoreExtTests.swift in Sources */,
 				F7CCC6DF1D85372300D539DE /* SelfSignedCertificate.m in Sources */,
+				F7CCC6ED1D85940400D539DE /* ClientDataTests.swift in Sources */,
 				F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */,
 				F771803F1D8410C5008D1CDB /* CoreExtensions.swift in Sources */,
 				F771803D1D8410C2008D1CDB /* Constants.swift in Sources */,

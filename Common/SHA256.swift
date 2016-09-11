@@ -9,6 +9,10 @@
 import Foundation
 
 class SHA256 {
+    enum Error: ErrorType {
+        case BadEncoding
+    }
+    
     typealias TupleDigest = (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
     
     static var DigestLength = Int(CC_SHA256_DIGEST_LENGTH)
@@ -21,6 +25,11 @@ class SHA256 {
         return SHA256(data: data).tupleDigest
     }
 
+    static func tupleDigest(str: String) throws -> TupleDigest {
+        guard let data = str.dataUsingEncoding(NSUTF8StringEncoding) else { throw Error.BadEncoding }
+        return SHA256(data: data).tupleDigest
+    }
+    
     static func b64Digest(data: NSData) -> NSData {
         return SHA256(data: data).b64Digest
     }

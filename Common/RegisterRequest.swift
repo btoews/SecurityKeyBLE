@@ -9,12 +9,12 @@
 import Foundation
 
 extension U2F_REGISTER_REQ {
-    init(clientData: ClientData, apppId origin: NSData) {
+    init(challenge: String, origin: String) throws {
         self.init()
         
-        guard let challengeParam = clientData.digest else { return }
-        chal = challengeParam
-        appId = SHA256.tupleDigest(origin)
+        let cd = ClientData(typ: .Register, challenge: challenge, origin: origin)
+        chal = try cd.digest()
+        appId = try SHA256.tupleDigest(origin)
     }
     
     var appIdData: NSData {
