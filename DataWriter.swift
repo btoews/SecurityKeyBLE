@@ -16,7 +16,7 @@ protocol DataWriterProtocol {
 }
 
 class DataWriter: DataWriterProtocol {
-    var buffer = NSMutableData()
+    let buffer = NSMutableData()
     
     func write<T: EndianProtocol>(val:T, endian: Endian = .Big) {
         var eval: T
@@ -45,7 +45,7 @@ class CappedDataWriter: DataWriterProtocol {
     var buffer: NSMutableData { return writer.buffer }
     var isFinished: Bool { return buffer.length == max }
     
-    private var writer = DataWriter()
+    private let writer = DataWriter()
     
     init(max m:Int) {
         max = m

@@ -14,9 +14,9 @@ struct ClientData {
         case Authenticate = "navigator.id.getAssertion"
     }
     
-    var typ: Type
-    var challenge: String
-    var origin: String
+    let typ: Type
+    let challenge: String
+    let origin: String
     
     var dict: [String:String] {
         return [

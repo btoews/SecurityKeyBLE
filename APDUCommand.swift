@@ -13,8 +13,8 @@ let APDUCommandTypes = [
 ]
 
 struct APDUCommand {
-    var header: APDUHeader
-    var data: APDUCommandDataProtocol
+    let header: APDUHeader
+    let data: APDUCommandDataProtocol
     
     init(data d: APDUCommandDataProtocol) throws {
         header = try APDUHeader(cmdData: d)

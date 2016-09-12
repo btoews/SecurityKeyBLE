@@ -59,8 +59,8 @@ class BLEMessage {
         }
     }
     
-    var data: NSData
-    var commandOrStatus: CommandOrStatus
+    let data: NSData
+    let commandOrStatus: CommandOrStatus
     var fragments: BLEFragmentIterator { return BLEFragmentIterator(message: self) }
     
     // Create a new request or response.

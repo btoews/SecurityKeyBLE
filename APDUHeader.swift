@@ -21,15 +21,17 @@ struct APDUHeader {
         case AuthenticateBatch = 0x05
     }
     
-    var cla: CommandClass
-    var ins: CommandCode
-    var p1:  UInt8 = 0x00
-    var p2:  UInt8 = 0x00
-    var dataLength: Int
+    let cla: CommandClass
+    let ins: CommandCode
+    let p1:  UInt8
+    let p2:  UInt8
+    let dataLength: Int
     
     init(cmdData: APDUCommandDataProtocol) throws {
         cla = cmdData.dynamicType.cmdClass
         ins = cmdData.dynamicType.cmdCode
+        p1 = 0x00
+        p2 = 0x00
         dataLength = cmdData.raw.length
         if dataLength > 0xFFFF { throw APDUError.BadSize }
     }

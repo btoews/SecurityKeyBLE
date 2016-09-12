@@ -34,7 +34,7 @@ class SHA256 {
         return SHA256(data: data).b64Digest
     }
     
-    var digest: NSData
+    let digest: NSData
     
     var tupleDigest: TupleDigest {
         var td: TupleDigest = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)

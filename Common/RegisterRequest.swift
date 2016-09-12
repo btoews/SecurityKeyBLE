@@ -20,8 +20,8 @@ struct RegisterRequest: APDUCommandDataProtocol {
     static let cmdClass = APDUHeader.CommandClass.Reserved
     static let cmdCode  = APDUHeader.CommandCode.Register
 
-    var challengeParameter: NSData
-    var applicationParameter: NSData
+    let challengeParameter: NSData
+    let applicationParameter: NSData
     
     init(challengeParameter c: NSData, applicationParameter a: NSData) {
         challengeParameter = c

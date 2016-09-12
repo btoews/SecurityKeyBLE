@@ -21,7 +21,7 @@ class BLEFragmentReader {
     var isComplete: Bool { return message != nil }
     
     private var cmdOrStatus: BLEMessage.CommandOrStatus?
-    private var partialData = CappedDataWriter(max: 0)
+    private let partialData = CappedDataWriter(max: 0)
     private var lastSequence: UInt8 = 0xFF
     
     func readFragment(frag: NSData) throws {

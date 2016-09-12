@@ -18,10 +18,10 @@ struct RegisterResponse: APDUResponseDataProtocol {
         case BadSize
     }
     
-    var publicKey:   NSData
-    var keyHandle:   NSData
-    var certificate: NSData
-    var signature:   NSData
+    let publicKey:   NSData
+    let keyHandle:   NSData
+    let certificate: NSData
+    let signature:   NSData
     
     init(publicKey pk: NSData, keyHandle kh: NSData, certificate cert: NSData, signature sig: NSData) {
         publicKey = pk

@@ -14,7 +14,7 @@ class DataReader {
         case TypeError
     }
     
-    var data: NSData
+    let data: NSData
     var offset: Int
 
     // How many bytes are left
