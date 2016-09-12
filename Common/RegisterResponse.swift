@@ -31,43 +31,25 @@ struct RegisterResponse: APDUResponseDataProtocol {
     }
     
     init(raw: NSData) throws {
-        var offset = 0
-        var range: NSRange
-
-        range = NSMakeRange(offset, 1)
-        let reserved = raw.subdataWithRange(range)
-        if reserved.length != range.length { throw Error.BadSize }
-        offset += range.length
+        let reader = DataReader(data: raw)
         
-        range = NSMakeRange(offset, sizeof(U2F_EC_POINT))
-        publicKey = raw.subdataWithRange(range)
-        if publicKey.length != range.length { throw Error.BadSize }
-        offset += range.length
-        
-        range = NSMakeRange(offset, 1)
-        var khLen: UInt8 = 0
-        raw.getBytes(&khLen, range: range)
-        if khLen == 0 { throw Error.BadSize }
-        offset += range.length
-        
-        range = NSMakeRange(offset, Int(khLen))
-        keyHandle = raw.subdataWithRange(range)
-        if keyHandle.length != range.length { throw Error.BadSize }
-        offset += range.length
-
-        // peek at cert to figure out its length
-        range = NSMakeRange(offset, raw.length - offset)
-        let rest = raw.subdataWithRange(range)
-        let certLen = try Util.certLength(fromData: rest)
-
-        range = NSMakeRange(offset, certLen)
-        certificate = raw.subdataWithRange(range)
-        if certificate.length != range.length { throw Error.BadSize }
-        offset += range.length
-        
-        range = NSMakeRange(offset, raw.length - offset)
-        signature = raw.subdataWithRange(range)
-        if signature.length != range.length { throw Error.BadSize }
+        do {
+            // reserved byte
+            let _:UInt8 = try reader.read()
+            
+            publicKey = try reader.readData(sizeof(U2F_EC_POINT))
+            
+            let khLen:UInt8 = try reader.read()
+            keyHandle = try reader.readData(Int(khLen))
+            
+            // peek at cert to figure out its length
+            let certLen = try Util.certLength(fromData: reader.rest)
+            certificate = try reader.readData(certLen)
+            
+            signature = reader.rest
+        } catch DataReader.Error.End {
+            throw APDUError.BadSize
+        }
     }
     
     var raw: NSData {

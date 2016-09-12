@@ -33,19 +33,16 @@ struct RegisterRequest: APDUCommandDataProtocol {
     }
     
     init(raw: NSData) throws {
-        if raw.length != sizeof(U2F_REGISTER_REQ) {
-            throw Error.BadSize
+        let reader = DataReader(data: raw)
+        
+        do {
+            challengeParameter = try reader.readData(Int(U2F_CHAL_SIZE))
+            applicationParameter = try reader.readData(Int(U2F_APPID_SIZE))
+        } catch DataReader.Error.End {
+            throw APDUError.BadSize
         }
-        
-        var offset = 0
-        var range: NSRange
-        
-        range = NSMakeRange(offset, Int(U2F_CHAL_SIZE))
-        challengeParameter = raw.subdataWithRange(range)
-        offset += range.length
-        
-        range = NSMakeRange(offset, Int(U2F_APPID_SIZE))
-        applicationParameter = raw.subdataWithRange(range)
+
+        if reader.remaining > 0 { throw APDUError.BadSize }
     }
     
     var raw: NSData {

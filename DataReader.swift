@@ -24,6 +24,9 @@ class DataReader {
     // How many bytes are left
     var remaining: Int { return data.length - offset }
     
+    // The remaining data
+    var rest: NSData { return data.subdataWithRange(NSMakeRange(offset, data.length - offset)) }
+    
     init(data d: NSData, offset o: Int = 0) {
         data = d
         offset = o

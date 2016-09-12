@@ -35,59 +35,29 @@ struct APDUHeader {
     }
     
     init(raw: NSData) throws {
-        var offset = 0
-        var range: NSRange
-        var byte: UInt8 = 0
+        let reader = DataReader(data: raw)
         
-        var lc0: UInt8 = 0
-        var lc1: UInt8 = 0
-        var lc2: UInt8 = 0
-        
-        range = NSMakeRange(offset, 1)
-        if raw.length < range.location + range.length { throw APDUError.BadSize }
-        raw.getBytes(&byte, range: range)
-        guard let tmpCla = CommandClass(rawValue: byte) else { throw APDUError.BadClass }
-        cla = tmpCla
-        offset += range.length
-        
-        range = NSMakeRange(offset, 1)
-        if raw.length < range.location + range.length { throw APDUError.BadSize }
-        raw.getBytes(&byte, range: range)
-        guard let tmpIns = CommandCode(rawValue: byte) else { throw APDUError.BadCode }
-        ins = tmpIns
-        offset += range.length
-        
-        range = NSMakeRange(offset, 1)
-        if raw.length < range.location + range.length { throw APDUError.BadSize }
-        raw.getBytes(&byte, range: range)
-        p1 = byte
-        offset += range.length
-        
-        range = NSMakeRange(offset, 1)
-        if raw.length < range.location + range.length { throw APDUError.BadSize }
-        raw.getBytes(&byte, range: range)
-        p2 = byte
-        offset += range.length
-
-        range = NSMakeRange(offset, 1)
-        if raw.length < range.location + range.length { throw APDUError.BadSize }
-        raw.getBytes(&lc0, range: range)
-        offset += range.length
-        
-        if lc0 == 0 {
-            range = NSMakeRange(offset, 1)
-            if raw.length < range.location + range.length { throw APDUError.BadSize }
-            raw.getBytes(&lc1, range: range)
-            offset += range.length
+        do {
+            let claByte:UInt8 = try reader.read()
+            guard let tmpCla = CommandClass(rawValue: claByte) else { throw APDUError.BadClass }
+            cla = tmpCla
             
-            range = NSMakeRange(offset, 1)
-            if raw.length < range.location + range.length { throw APDUError.BadSize }
-            raw.getBytes(&lc2, range: range)
-            offset += range.length
+            let insByte:UInt8 = try reader.read()
+            guard let tmpIns = CommandCode(rawValue: insByte) else { throw APDUError.BadCode }
+            ins = tmpIns
             
-            dataLength = (Int(lc1) << 8) & Int(lc2)
-        } else {
-            dataLength = Int(lc0)
+            p1 = try reader.read()
+            p2 = try reader.read()
+            
+            let lc0:UInt8 = try reader.read()
+            if lc0 > 0x00 {
+                dataLength = Int(lc0)
+            } else {
+                let lc:UInt16 = try reader.read()
+                dataLength = Int(lc)
+            }
+        } catch DataReader.Error.End {
+            throw APDUError.BadSize
         }
     }
     
