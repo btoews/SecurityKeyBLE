@@ -43,6 +43,7 @@ class CappedDataWriter: DataWriterProtocol {
     
     var max: Int
     var buffer: NSMutableData { return writer.buffer }
+    var isFinished: Bool { return buffer.length == max }
     
     private var writer = DataWriter()
     

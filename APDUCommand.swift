@@ -40,6 +40,8 @@ struct APDUCommand {
         return writer.buffer
     }
     
+    var registerRequest: RegisterRequest? { return data as? RegisterRequest }
+    
     static func commandTypeForCode(code: APDUHeader.CommandCode) -> APDUCommandDataProtocol.Type? {
         return APDUCommandTypes.lazy.filter({ $0.cmdCode == code }).first
     }

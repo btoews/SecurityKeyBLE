@@ -47,4 +47,15 @@ struct RegisterRequest: APDUCommandDataProtocol {
         writer.writeData(applicationParameter)
         return writer.buffer
     }
+    
+    // Register request wrapped in an APDU packet.
+    func apduWrapped() throws -> APDUCommand {
+        return try APDUCommand(data: self)
+    }
+    
+    // Register request wrapped in BLE packets.
+    func bleWrapped() throws -> BLEMessage {
+        let apdu = try apduWrapped()
+        return BLEMessage(command: .Msg, data: apdu.raw)
+    }
 }

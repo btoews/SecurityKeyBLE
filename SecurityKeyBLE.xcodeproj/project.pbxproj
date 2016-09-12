@@ -86,9 +86,17 @@
 		F7CCC73E1D87294500D539DE /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC73C1D87294500D539DE /* CoreExtensions.swift */; };
 		F7CCC73F1D87294500D539DE /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC73C1D87294500D539DE /* CoreExtensions.swift */; };
 		F7CCC7411D872CE300D539DE /* CoreExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7401D872CE300D539DE /* CoreExtensionsTests.swift */; };
-		F7CCC7431D8736BA00D539DE /* BLEMessageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */; };
-		F7CCC7441D8736BA00D539DE /* BLEMessageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */; };
-		F7CCC7451D8736BA00D539DE /* BLEMessageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */; };
+		F7CCC7431D8736BA00D539DE /* BLEFragmentReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7421D8736BA00D539DE /* BLEFragmentReader.swift */; };
+		F7CCC7441D8736BA00D539DE /* BLEFragmentReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7421D8736BA00D539DE /* BLEFragmentReader.swift */; };
+		F7CCC7451D8736BA00D539DE /* BLEFragmentReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7421D8736BA00D539DE /* BLEFragmentReader.swift */; };
+		F7CCC7471D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7461D874DBB00D539DE /* BLEFragmentIterator.swift */; };
+		F7CCC7481D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7461D874DBB00D539DE /* BLEFragmentIterator.swift */; };
+		F7CCC7491D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7461D874DBB00D539DE /* BLEFragmentIterator.swift */; };
+		F7CCC74D1D8755DA00D539DE /* BLEFragmentReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC74C1D8755DA00D539DE /* BLEFragmentReaderTests.swift */; };
+		F7CCC7511D8760CE00D539DE /* BLEFragmentIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7501D8760CE00D539DE /* BLEFragmentIteratorTests.swift */; };
+		F7CCC7531D876A0D00D539DE /* APDUMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7521D876A0D00D539DE /* APDUMessage.swift */; };
+		F7CCC7541D876A0D00D539DE /* APDUMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7521D876A0D00D539DE /* APDUMessage.swift */; };
+		F7CCC7551D876A0D00D539DE /* APDUMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7521D876A0D00D539DE /* APDUMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,7 +165,11 @@
 		F7CCC73A1D8720EA00D539DE /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataWriterTests.swift; sourceTree = "<group>"; };
 		F7CCC73C1D87294500D539DE /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtensions.swift; sourceTree = "<group>"; };
 		F7CCC7401D872CE300D539DE /* CoreExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtensionsTests.swift; sourceTree = "<group>"; };
-		F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEMessageReader.swift; sourceTree = "<group>"; };
+		F7CCC7421D8736BA00D539DE /* BLEFragmentReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEFragmentReader.swift; sourceTree = "<group>"; };
+		F7CCC7461D874DBB00D539DE /* BLEFragmentIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEFragmentIterator.swift; sourceTree = "<group>"; };
+		F7CCC74C1D8755DA00D539DE /* BLEFragmentReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEFragmentReaderTests.swift; sourceTree = "<group>"; };
+		F7CCC7501D8760CE00D539DE /* BLEFragmentIteratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEFragmentIteratorTests.swift; sourceTree = "<group>"; };
+		F7CCC7521D876A0D00D539DE /* APDUMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,10 +203,10 @@
 			isa = PBXGroup;
 			children = (
 				F7CCC7151D862BD200D539DE /* APDU */,
+				F7CCC74B1D8755A800D539DE /* BLE */,
 				F7CCC7391D8720D500D539DE /* Data */,
 				F7CCC6F91D85A28800D539DE /* UtilTests.swift */,
 				F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */,
-				F77180101D83B966008D1CDB /* BLEMessageTests.swift */,
 				F77180141D83D419008D1CDB /* TestUtil.swift */,
 				F771800D1D83932A008D1CDB /* SHA256Tests.swift */,
 				F70373AE1D7BF78700FBB057 /* Info.plist */,
@@ -229,13 +241,12 @@
 			isa = PBXGroup;
 			children = (
 				F7CCC7141D862B7900D539DE /* APDU */,
+				F7CCC74A1D8754A700D539DE /* BLE */,
 				F7CCC7341D871EF400D539DE /* Data */,
 				F7CCC6F11D859FF900D539DE /* SecurityKey */,
 				F72E40311D81373D0059A0D7 /* StateMachine */,
 				F771802E1D84108D008D1CDB /* u2f.h */,
 				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
-				F77180271D84108D008D1CDB /* BLEMessage.swift */,
-				F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */,
 				F77180281D84108D008D1CDB /* ClientData.swift */,
 				F77180291D84108D008D1CDB /* Constants.swift */,
 				F771802A1D84108D008D1CDB /* CoreExtensionssss.swift */,
@@ -301,6 +312,7 @@
 				F771802B1D84108D008D1CDB /* RegisterRequest.swift */,
 				F7CCC7201D86326E00D539DE /* APDUCommand.swift */,
 				F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */,
+				F7CCC7521D876A0D00D539DE /* APDUMessage.swift */,
 				F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */,
 			);
 			name = APDU;
@@ -336,6 +348,26 @@
 				F7CCC72E1D8649A600D539DE /* DataReaderTests.swift */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		F7CCC74A1D8754A700D539DE /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				F77180271D84108D008D1CDB /* BLEMessage.swift */,
+				F7CCC7421D8736BA00D539DE /* BLEFragmentReader.swift */,
+				F7CCC7461D874DBB00D539DE /* BLEFragmentIterator.swift */,
+			);
+			name = BLE;
+			sourceTree = "<group>";
+		};
+		F7CCC74B1D8755A800D539DE /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				F7CCC7501D8760CE00D539DE /* BLEFragmentIteratorTests.swift */,
+				F77180101D83B966008D1CDB /* BLEMessageTests.swift */,
+				F7CCC74C1D8755DA00D539DE /* BLEFragmentReaderTests.swift */,
+			);
+			name = BLE;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,22 +501,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7CCC74D1D8755DA00D539DE /* BLEFragmentReaderTests.swift in Sources */,
 				F7CCC7411D872CE300D539DE /* CoreExtensionsTests.swift in Sources */,
 				F77180151D83D419008D1CDB /* TestUtil.swift in Sources */,
 				F7CCC73B1D8720EA00D539DE /* DataWriterTests.swift in Sources */,
 				F7CCC7321D871E8300D539DE /* DataWriter.swift in Sources */,
 				F7CCC6F71D85A12D00D539DE /* Util.swift in Sources */,
+				F7CCC7481D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */,
 				F7CCC72F1D8649A600D539DE /* DataReaderTests.swift in Sources */,
 				F7CCC7191D862F5F00D539DE /* RegisterResponseTests.swift in Sources */,
 				F77180411D8410C8008D1CDB /* RegisterRequest.swift in Sources */,
 				F7CCC6E71D85378500D539DE /* KeyInterface.m in Sources */,
-				F7CCC7441D8736BA00D539DE /* BLEMessageReader.swift in Sources */,
+				F7CCC7441D8736BA00D539DE /* BLEFragmentReader.swift in Sources */,
 				F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */,
 				F7CCC7121D86202C00D539DE /* APDUError.swift in Sources */,
 				F77180391D8410BB008D1CDB /* BLEMessage.swift in Sources */,
 				F771803B1D8410BF008D1CDB /* ClientData.swift in Sources */,
 				F7CCC6DF1D85372300D539DE /* SelfSignedCertificate.m in Sources */,
 				F7CCC7171D862BF600D539DE /* RegisterRequestTests.swift in Sources */,
+				F7CCC7541D876A0D00D539DE /* APDUMessage.swift in Sources */,
 				F7CCC71B1D86313D00D539DE /* APDUHeaderTests.swift in Sources */,
 				F7CCC7251D86361E00D539DE /* APDUCommandTests.swift in Sources */,
 				F7CCC7371D871F0800D539DE /* Endian.swift in Sources */,
@@ -496,6 +531,7 @@
 				F771803F1D8410C5008D1CDB /* CoreExtensionssss.swift in Sources */,
 				F7CCC73E1D87294500D539DE /* CoreExtensions.swift in Sources */,
 				F7CCC70E1D861E8C00D539DE /* APDUHeader.swift in Sources */,
+				F7CCC7511D8760CE00D539DE /* BLEFragmentIteratorTests.swift in Sources */,
 				F7CCC7281D86371500D539DE /* DataReader.swift in Sources */,
 				F771803D1D8410C2008D1CDB /* Constants.swift in Sources */,
 				F77180461D8410CF008D1CDB /* SHA256.swift in Sources */,
@@ -509,8 +545,9 @@
 			files = (
 				F77CC2F91D801C4200D28CAC /* SecurityKeyClient.swift in Sources */,
 				F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */,
+				F7CCC7551D876A0D00D539DE /* APDUMessage.swift in Sources */,
 				F77180421D8410C9008D1CDB /* RegisterRequest.swift in Sources */,
-				F7CCC7451D8736BA00D539DE /* BLEMessageReader.swift in Sources */,
+				F7CCC7451D8736BA00D539DE /* BLEFragmentReader.swift in Sources */,
 				F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */,
 				F771803A1D8410BB008D1CDB /* BLEMessage.swift in Sources */,
 				F7CCC7231D86326E00D539DE /* APDUCommand.swift in Sources */,
@@ -524,6 +561,7 @@
 				F77CC2F71D7FB09200D28CAC /* StateMachine.swift in Sources */,
 				F7CCC6FC1D85A6E500D539DE /* RegisterResponse.swift in Sources */,
 				F7CCC70B1D86148400D539DE /* Authenticator.swift in Sources */,
+				F7CCC7491D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */,
 				F771803C1D8410BF008D1CDB /* ClientData.swift in Sources */,
 				F7CCC7381D871F0800D539DE /* Endian.swift in Sources */,
 				F7CCC70F1D861E8C00D539DE /* APDUHeader.swift in Sources */,
@@ -536,7 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7CCC70D1D861E8C00D539DE /* APDUHeader.swift in Sources */,
-				F7CCC7431D8736BA00D539DE /* BLEMessageReader.swift in Sources */,
+				F7CCC7431D8736BA00D539DE /* BLEFragmentReader.swift in Sources */,
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
 				F7CCC7311D871E8300D539DE /* DataWriter.swift in Sources */,
 				F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */,
@@ -548,6 +586,7 @@
 				F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */,
 				F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */,
 				F7CCC73D1D87294500D539DE /* CoreExtensions.swift in Sources */,
+				F7CCC7531D876A0D00D539DE /* APDUMessage.swift in Sources */,
 				F7CCC6E61D85376A00D539DE /* KeyInterface.m in Sources */,
 				F77180301D84108D008D1CDB /* BLEMessage.swift in Sources */,
 				F7CCC6DE1D85371200D539DE /* SelfSignedCertificate.m in Sources */,
@@ -556,6 +595,7 @@
 				F7CCC7361D871F0800D539DE /* Endian.swift in Sources */,
 				F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */,
 				F77180311D84108D008D1CDB /* ClientData.swift in Sources */,
+				F7CCC7471D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */,
 				F77180321D84108D008D1CDB /* Constants.swift in Sources */,
 				F7CCC7211D86326E00D539DE /* APDUCommand.swift in Sources */,
 			);

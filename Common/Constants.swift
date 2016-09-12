@@ -14,10 +14,6 @@ import CoreBluetooth
 // at 101 bytes.
 let CharacteristicMaxSize = 100
 
-// FIDO U2F Bluetooth spec v1.0 Section 6.6
-let InitialFragmentMaxData = CharacteristicMaxSize - 3
-let ContinuationFragmentMaxData = CharacteristicMaxSize - 1
-
 // Bluetooth GATT UUIDs
 let u2fServiceUUID =                          CBUUID(string: "FFFD")
 let u2fControlPointCharacteristicUUID =       CBUUID(string: "F1D0FFF1-DEAA-ECEE-B42F-C9BA7ED623BB")

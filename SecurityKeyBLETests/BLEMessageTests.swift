@@ -9,58 +9,39 @@
 import XCTest
 
 class BLEMessageTests: XCTestCase {
-    func testMessageReadFragment() {
-        let frags: [NSData] = [
-            NSData(chars:[0x81, 0x00, 0x04, 0x41, 0x41, 0x41]),
-            NSData(chars:[0x00, 0x41])
-        ]
-        
-        let m = BLEMessage()
-        
-        for frag in frags {
-            do {
-                try m.readFragment(frag)
-            } catch {
-                XCTAssert(false, "expected readFragment not to throw an error")
-            }
-            
-        }
-        
-        XCTAssert(m.isComplete, "expected message to be complete")
-        XCTAssertEqual(NSData(chars:[0x41, 0x41, 0x41, 0x41]), m.data)
-        XCTAssertEqual(BLEMessage.Command.Ping, m.cmd)
-        XCTAssertEqual(nil, m.status)
-    }
+
     
-    func testMessageInitWithData() {
+    func testMessageInitWithStatus() {
         let d = randData()
         let m = BLEMessage(status: BLEMessage.Status.Error, data: d)
         
-        XCTAssert(m.isComplete, "expected message to be complete")
         XCTAssertEqual(d, m.data)
-        XCTAssertEqual(BLEMessage.Status.Error, m.status)
-        XCTAssertEqual(nil, m.cmd)
+        XCTAssertEqual(BLEMessage.Status.Error, m.commandOrStatus.status)
+        XCTAssertNil(m.commandOrStatus.command)
+    }
+
+    func testMessageInitWithCommand() {
+        let d = randData()
+        let m = BLEMessage(command: BLEMessage.Command.Msg, data: d)
+        
+        XCTAssertEqual(d, m.data)
+        XCTAssertNil(m.commandOrStatus.status)
+        XCTAssertEqual(BLEMessage.Command.Msg, m.commandOrStatus.command)
     }
     
-    func testMessageRoundTripData() {
-        for _ in 0...100 {
-            let d = randData()
-            let m1 = BLEMessage(cmd: BLEMessage.Command.Msg, data: d)
-            let m2 = BLEMessage()
-            
-            for fragment in m1 {
-                do {
-                    try m2.readFragment(fragment)
-                } catch {
-                    XCTAssert(false, "expected readFragment not to throw an exception")
-                }
-            }
-            
-            XCTAssert(m2.isComplete, "expected message to be comlete")
-            XCTAssertEqual(m1.data, m2.data)
-            XCTAssertEqual(m1.cmd, m2.cmd)
-            XCTAssertEqual(m1.status, m2.status)
+    func testMessageRoundTripData() throws {
+        let m1 = BLEMessage(command: BLEMessage.Command.Msg, data: randData())
+        let r = BLEFragmentReader()
+        
+        for fragment in m1.fragments {
+            try r.readFragment(fragment)
         }
+        
+        XCTAssertTrue(r.isComplete)
+        let m2 = r.message!
+
+        XCTAssertEqual(m1.commandOrStatus, m2.commandOrStatus)
+        XCTAssertEqual(m1.data, m2.data)
     }
     
 //    func testRoundTripWithAPDU() {

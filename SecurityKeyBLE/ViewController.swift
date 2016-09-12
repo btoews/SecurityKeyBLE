@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     var server: CBPeripheralManagerDelegate?
 
     override func viewDidLoad() {
-        server = Server()
+//        server = Server()
 
         super.viewDidLoad()
     }
