@@ -8,22 +8,45 @@
 
 import Foundation
 
-extension U2F_REGISTER_REQ {
-    init(challenge: String, origin: String) throws {
-        self.init()
+protocol APDUCommandDataProtocol {
+    var cmdClass: APDUCommandClass { get }
+    var cmdCode:  APDUCommandCode  { get }
+
+    init(raw: NSData) throws
+    var raw: NSData { get }
+}
+
+struct RegisterRequest: APDUCommandDataProtocol {
+    enum Error: ErrorType {
+        case BadSize
+    }
+    
+    var cmdClass = APDUCommandClass.Reserved
+    var cmdCode  = APDUCommandCode.Register
+
+    var challengeParameter: NSData
+    var applicationParameter: NSData
+    
+    init(raw: NSData) throws {
+        if raw.length != sizeof(U2F_REGISTER_REQ) {
+            throw Error.BadSize
+        }
         
-        let cd = ClientData(typ: .Register, challenge: challenge, origin: origin)
-        chal = try cd.digest()
-        appId = try SHA256.tupleDigest(origin)
+        var offset = 0
+        var range: NSRange
+        
+        range = NSMakeRange(offset, Int(U2F_CHAL_SIZE))
+        challengeParameter = raw.subdataWithRange(range)
+        offset += range.length
+        
+        range = NSMakeRange(offset, Int(U2F_APPID_SIZE))
+        applicationParameter = raw.subdataWithRange(range)
     }
     
-    var appIdData: NSData {
-        var tmp = appId
-        return NSData(bytes: &tmp, length: Int(U2F_APPID_SIZE))
-    }
-    
-    var challengeData: NSData {
-        var tmp = chal
-        return NSData(bytes: &tmp, length: Int(U2F_CHAL_SIZE))
+    var raw: NSData {
+        let m = NSMutableData()
+        m.appendData(challengeParameter)
+        m.appendData(applicationParameter)
+        return m
     }
 }

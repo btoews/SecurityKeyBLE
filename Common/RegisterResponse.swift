@@ -8,8 +8,16 @@
 
 import Foundation
 
-// Variable length fields make the C struct hard to use with swift.
-struct RegisterResponse {
+protocol APDUResponseDataProtocol {
+    init(raw: NSData) throws
+    var raw: NSData { get }
+}
+
+struct RegisterResponse: APDUResponseDataProtocol {
+    enum Error: ErrorType {
+        case BadSize
+    }
+    
     var publicKey:   NSData
     var keyHandle:   NSData
     var certificate: NSData
@@ -24,35 +32,42 @@ struct RegisterResponse {
     
     init(raw: NSData) throws {
         var offset = 0
+        var range: NSRange
 
-        let reservedRange = NSMakeRange(offset, 1)
-        // let reserved = raw.subdataWithRange(reservedRange)
-        offset += reservedRange.length
+        range = NSMakeRange(offset, 1)
+        let reserved = raw.subdataWithRange(range)
+        if reserved.length != range.length { throw Error.BadSize }
+        offset += range.length
         
-        let pkRange = NSMakeRange(offset, sizeof(U2F_EC_POINT))
-        publicKey = raw.subdataWithRange(pkRange)
-        offset += pkRange.length
+        range = NSMakeRange(offset, sizeof(U2F_EC_POINT))
+        publicKey = raw.subdataWithRange(range)
+        if publicKey.length != range.length { throw Error.BadSize }
+        offset += range.length
         
-        let khLenRange = NSMakeRange(offset, 1)
+        range = NSMakeRange(offset, 1)
         var khLen: UInt8 = 0
-        raw.getBytes(&khLen, range: khLenRange)
-        offset += khLenRange.length
+        raw.getBytes(&khLen, range: range)
+        if khLen == 0 { throw Error.BadSize }
+        offset += range.length
         
-        let khRange = NSMakeRange(offset, Int(khLen))
-        keyHandle = raw.subdataWithRange(khRange)
-        offset += khRange.length
+        range = NSMakeRange(offset, Int(khLen))
+        keyHandle = raw.subdataWithRange(range)
+        if keyHandle.length != range.length { throw Error.BadSize }
+        offset += range.length
 
         // peek at cert to figure out its length
-        let restRange = NSMakeRange(offset, raw.length - offset)
-        let rest = raw.subdataWithRange(restRange)
+        range = NSMakeRange(offset, raw.length - offset)
+        let rest = raw.subdataWithRange(range)
         let certLen = try Util.certLength(fromData: rest)
 
-        let certRange = NSMakeRange(offset, certLen)
-        certificate = raw.subdataWithRange(certRange)
-        offset += certRange.length
+        range = NSMakeRange(offset, certLen)
+        certificate = raw.subdataWithRange(range)
+        if certificate.length != range.length { throw Error.BadSize }
+        offset += range.length
         
-        let sigRange = NSMakeRange(offset, raw.length - offset)
-        signature = raw.subdataWithRange(sigRange)
+        range = NSMakeRange(offset, raw.length - offset)
+        signature = raw.subdataWithRange(range)
+        if signature.length != range.length { throw Error.BadSize }
     }
     
     var raw: NSData {
