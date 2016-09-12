@@ -11,9 +11,9 @@ import XCTest
 class RegisterResponseTests: XCTestCase {
     func testRoundTrip() throws {
         let pk = randData(length: sizeof(U2F_EC_POINT))
-        let kh = "asdf".dataUsingEncoding(NSUTF8StringEncoding)!
+        let kh = randData(length: 50)
         let crt = SelfSignedCertificate().toDer()
-        let sig = "qwer".dataUsingEncoding(NSUTF8StringEncoding)!
+        let sig = randData(length: 20)
         
         let r1 = RegisterResponse(publicKey: pk, keyHandle: kh, certificate: crt, signature: sig)
         let r2 = try RegisterResponse(raw: r1.raw)

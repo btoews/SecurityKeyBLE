@@ -63,28 +63,28 @@ class BLEMessageTests: XCTestCase {
         }
     }
     
-    func testRoundTripWithAPDU() {
-        let c1 = SHA256.tupleDigest("hello".dataUsingEncoding(NSUTF8StringEncoding)!)
-        let a1 = SHA256.tupleDigest("world".dataUsingEncoding(NSUTF8StringEncoding)!)
-        let r1 = U2F_REGISTER_REQ(chal: c1, appId: a1)
-        let m1 = BLEMessage(cmd: BLEMessage.Command.Msg, data: r1.apdu.raw!)
-        
-        let m2 = BLEMessage()
-        for fragment in m1 {
-            do {
-                try m2.readFragment(fragment)
-            } catch {
-                XCTAssert(false, "expected readFragment not to throw an exception")
-            }
-        }
-        
-        XCTAssert(m2.isComplete, "expected message to be comlete")
-        guard let r2 = APDUCommand(raw: m2.data!).registerRequest else {
-            return XCTAssert(false, "expected data to convert to register request")
-        }
-        
-        XCTAssert(tupleDigestEqual(r1.chal, r2.chal))
-        XCTAssert(tupleDigestEqual(r1.appId, r2.appId))
-        
-    }
+//    func testRoundTripWithAPDU() {
+//        let c1 = SHA256.tupleDigest("hello".dataUsingEncoding(NSUTF8StringEncoding)!)
+//        let a1 = SHA256.tupleDigest("world".dataUsingEncoding(NSUTF8StringEncoding)!)
+//        let r1 = U2F_REGISTER_REQ(chal: c1, appId: a1)
+//        let m1 = BLEMessage(cmd: BLEMessage.Command.Msg, data: r1.apdu.raw!)
+//        
+//        let m2 = BLEMessage()
+//        for fragment in m1 {
+//            do {
+//                try m2.readFragment(fragment)
+//            } catch {
+//                XCTAssert(false, "expected readFragment not to throw an exception")
+//            }
+//        }
+//        
+//        XCTAssert(m2.isComplete, "expected message to be comlete")
+//        guard let r2 = APDUCommand(raw: m2.data!).registerRequest else {
+//            return XCTAssert(false, "expected data to convert to register request")
+//        }
+//        
+//        XCTAssert(tupleDigestEqual(r1.chal, r2.chal))
+//        XCTAssert(tupleDigestEqual(r1.appId, r2.appId))
+//        
+//    }
 }

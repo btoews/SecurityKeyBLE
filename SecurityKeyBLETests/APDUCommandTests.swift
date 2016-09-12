@@ -1,5 +1,5 @@
 //
-//  RegisterRequestTests.swift
+//  APDUCommandTests.swift
 //  SecurityKeyBLE
 //
 //  Created by Benjamin P Toews on 9/11/16.
@@ -8,15 +8,16 @@
 
 import XCTest
 
-class RegisterRequestTests: XCTestCase {
+class APDUCommandTests: XCTestCase {
     func testRoundTrip() throws {
         let c = try SHA256.digest("world".dataUsingEncoding(NSUTF8StringEncoding)!)
         let a = try SHA256.digest("hello".dataUsingEncoding(NSUTF8StringEncoding)!)
+        let r = RegisterRequest(challengeParameter: c, applicationParameter: a)
         
-        let r1 = RegisterRequest(challengeParameter: c, applicationParameter: a)
-        let r2 = try RegisterRequest(raw: r1.raw)
+        let cmd1 = try APDUCommand(data: r)
+        let cmd2 = try APDUCommand(raw: cmd1.raw)
         
-        XCTAssertEqual(r1.challengeParameter, r2.challengeParameter)
-        XCTAssertEqual(r1.applicationParameter, r2.applicationParameter)
+        XCTAssertEqual(cmd1.header.raw, cmd2.header.raw)
+        XCTAssertEqual(cmd1.data.raw, cmd2.data.raw)
     }
 }

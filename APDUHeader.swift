@@ -37,6 +37,7 @@ struct APDUHeader {
     init(raw: NSData) throws {
         var offset = 0
         var range: NSRange
+        var byte: UInt8 = 0
         
         var lc0: UInt8 = 0
         var lc1: UInt8 = 0
@@ -44,22 +45,28 @@ struct APDUHeader {
         
         range = NSMakeRange(offset, 1)
         if raw.length < range.location + range.length { throw APDUError.BadSize }
-        raw.getBytes(&cla, range: range)
+        raw.getBytes(&byte, range: range)
+        guard let tmpCla = CommandClass(rawValue: byte) else { throw APDUError.BadClass }
+        cla = tmpCla
         offset += range.length
         
         range = NSMakeRange(offset, 1)
         if raw.length < range.location + range.length { throw APDUError.BadSize }
-        raw.getBytes(&ins, range: range)
+        raw.getBytes(&byte, range: range)
+        guard let tmpIns = CommandCode(rawValue: byte) else { throw APDUError.BadCode }
+        ins = tmpIns
         offset += range.length
         
         range = NSMakeRange(offset, 1)
         if raw.length < range.location + range.length { throw APDUError.BadSize }
-        raw.getBytes(&p1, range: range)
+        raw.getBytes(&byte, range: range)
+        p1 = byte
         offset += range.length
         
         range = NSMakeRange(offset, 1)
         if raw.length < range.location + range.length { throw APDUError.BadSize }
-        raw.getBytes(&p2, range: range)
+        raw.getBytes(&byte, range: range)
+        p2 = byte
         offset += range.length
 
         range = NSMakeRange(offset, 1)

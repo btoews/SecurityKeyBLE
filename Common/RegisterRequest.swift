@@ -9,8 +9,8 @@
 import Foundation
 
 protocol APDUCommandDataProtocol {
-    var cmdClass: APDUCommandClass { get }
-    var cmdCode:  APDUCommandCode  { get }
+    var cmdClass: APDUHeader.CommandClass { get }
+    var cmdCode:  APDUHeader.CommandCode  { get }
 
     init(raw: NSData) throws
     var raw: NSData { get }
@@ -21,11 +21,16 @@ struct RegisterRequest: APDUCommandDataProtocol {
         case BadSize
     }
     
-    var cmdClass = APDUCommandClass.Reserved
-    var cmdCode  = APDUCommandCode.Register
+    var cmdClass = APDUHeader.CommandClass.Reserved
+    var cmdCode  = APDUHeader.CommandCode.Register
 
     var challengeParameter: NSData
     var applicationParameter: NSData
+    
+    init(challengeParameter c: NSData, applicationParameter a: NSData) {
+        challengeParameter = c
+        applicationParameter = a
+    }
     
     init(raw: NSData) throws {
         if raw.length != sizeof(U2F_REGISTER_REQ) {

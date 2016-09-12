@@ -11,7 +11,6 @@
 		F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373E41D7D64A900FBB057 /* ViewController.swift */; };
 		F70373E71D7D64A900FBB057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F70373E61D7D64A900FBB057 /* Assets.xcassets */; };
 		F70373EA1D7D64A900FBB057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70373E81D7D64A900FBB057 /* Main.storyboard */; };
-		F77180021D82B61B008D1CDB /* APDUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180011D82B61B008D1CDB /* APDUTests.swift */; };
 		F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771800D1D83932A008D1CDB /* SHA256Tests.swift */; };
 		F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180101D83B966008D1CDB /* BLEMessageTests.swift */; };
 		F77180131D83B9AB008D1CDB /* CoreExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180121D83B9AB008D1CDB /* CoreExtTests.swift */; };
@@ -52,31 +51,27 @@
 		F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* Authenticator.swift */; };
 		F7CCC6EB1D858EA400D539DE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */; };
 		F7CCC6ED1D85940400D539DE /* ClientDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */; };
-		F7CCC6EF1D85966600D539DE /* RegisterRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EE1D85966600D539DE /* RegisterRequestTests.swift */; };
-		F7CCC6F31D85A07600D539DE /* RegisterResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6F21D85A07600D539DE /* RegisterResponseTests.swift */; };
 		F7CCC6F71D85A12D00D539DE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6F61D85A12D00D539DE /* Util.swift */; };
 		F7CCC6F81D85A20600D539DE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6F61D85A12D00D539DE /* Util.swift */; };
 		F7CCC6FA1D85A28800D539DE /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6F91D85A28800D539DE /* UtilTests.swift */; };
 		F7CCC6FB1D85A6E300D539DE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */; };
 		F7CCC6FC1D85A6E500D539DE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */; };
 		F7CCC6FD1D85A6F800D539DE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6F61D85A12D00D539DE /* Util.swift */; };
-		F7CCC6FF1D85E8E300D539DE /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6FE1D85E8E300D539DE /* AuthenticationRequest.swift */; };
-		F7CCC7001D85E97100D539DE /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6FE1D85E8E300D539DE /* AuthenticationRequest.swift */; };
-		F7CCC7011D85E97300D539DE /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6FE1D85E8E300D539DE /* AuthenticationRequest.swift */; };
-		F7CCC7031D86140D00D539DE /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7021D86140D00D539DE /* APDUCommand.swift */; };
-		F7CCC7051D86143000D539DE /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7041D86143000D539DE /* APDUResponse.swift */; };
-		F7CCC7061D86143000D539DE /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7041D86143000D539DE /* APDUResponse.swift */; };
-		F7CCC7071D86143000D539DE /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7041D86143000D539DE /* APDUResponse.swift */; };
-		F7CCC7081D86148000D539DE /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7021D86140D00D539DE /* APDUCommand.swift */; };
-		F7CCC7091D86148000D539DE /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7021D86140D00D539DE /* APDUCommand.swift */; };
 		F7CCC70A1D86148300D539DE /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* Authenticator.swift */; };
 		F7CCC70B1D86148400D539DE /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* Authenticator.swift */; };
-		F7CCC70D1D861E8C00D539DE /* APDUCommandHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC70C1D861E8C00D539DE /* APDUCommandHeader.swift */; };
-		F7CCC70E1D861E8C00D539DE /* APDUCommandHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC70C1D861E8C00D539DE /* APDUCommandHeader.swift */; };
-		F7CCC70F1D861E8C00D539DE /* APDUCommandHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC70C1D861E8C00D539DE /* APDUCommandHeader.swift */; };
+		F7CCC70D1D861E8C00D539DE /* APDUHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */; };
+		F7CCC70E1D861E8C00D539DE /* APDUHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */; };
+		F7CCC70F1D861E8C00D539DE /* APDUHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */; };
 		F7CCC7111D86202C00D539DE /* APDUError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7101D86202C00D539DE /* APDUError.swift */; };
 		F7CCC7121D86202C00D539DE /* APDUError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7101D86202C00D539DE /* APDUError.swift */; };
 		F7CCC7131D86202C00D539DE /* APDUError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7101D86202C00D539DE /* APDUError.swift */; };
+		F7CCC7171D862BF600D539DE /* RegisterRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7161D862BF600D539DE /* RegisterRequestTests.swift */; };
+		F7CCC7191D862F5F00D539DE /* RegisterResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7181D862F5F00D539DE /* RegisterResponseTests.swift */; };
+		F7CCC71B1D86313D00D539DE /* APDUHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC71A1D86313D00D539DE /* APDUHeaderTests.swift */; };
+		F7CCC7211D86326E00D539DE /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7201D86326E00D539DE /* APDUCommand.swift */; };
+		F7CCC7221D86326E00D539DE /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7201D86326E00D539DE /* APDUCommand.swift */; };
+		F7CCC7231D86326E00D539DE /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7201D86326E00D539DE /* APDUCommand.swift */; };
+		F7CCC7251D86361E00D539DE /* APDUCommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7241D86361E00D539DE /* APDUCommandTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,14 +95,11 @@
 		F70373EB1D7D64A900FBB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7717FFA1D823678008D1CDB /* SecurityKeyBLEServer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityKeyBLEServer-Bridging-Header.h"; sourceTree = "<group>"; };
 		F7717FFB1D823678008D1CDB /* SecurityKeyBLEClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SecurityKeyBLEClient-Bridging-Header.h"; path = "../SecurityKeyBLE/SecurityKeyBLEClient-Bridging-Header.h"; sourceTree = "<group>"; };
-		F77180011D82B61B008D1CDB /* APDUTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUTests.swift; sourceTree = "<group>"; };
 		F77180041D82B6C4008D1CDB /* SecurityKeyBLETests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityKeyBLETests-Bridging-Header.h"; sourceTree = "<group>"; };
 		F771800D1D83932A008D1CDB /* SHA256Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256Tests.swift; sourceTree = "<group>"; };
 		F77180101D83B966008D1CDB /* BLEMessageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEMessageTests.swift; sourceTree = "<group>"; };
 		F77180121D83B9AB008D1CDB /* CoreExtTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtTests.swift; sourceTree = "<group>"; };
 		F77180141D83D419008D1CDB /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
-		F77180251D84108D008D1CDB /* apdu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apdu.h; path = Common/apdu.h; sourceTree = "<group>"; };
-		F77180261D84108D008D1CDB /* APDU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDU.swift; path = Common/APDU.swift; sourceTree = "<group>"; };
 		F77180271D84108D008D1CDB /* BLEMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BLEMessage.swift; path = Common/BLEMessage.swift; sourceTree = "<group>"; };
 		F77180281D84108D008D1CDB /* ClientData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientData.swift; path = Common/ClientData.swift; sourceTree = "<group>"; };
 		F77180291D84108D008D1CDB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Common/Constants.swift; sourceTree = "<group>"; };
@@ -133,15 +125,15 @@
 		F7CCC6E81D858E6300D539DE /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authenticator.swift; path = Common/Authenticator.swift; sourceTree = "<group>"; };
 		F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterResponse.swift; path = Common/RegisterResponse.swift; sourceTree = "<group>"; };
 		F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDataTests.swift; sourceTree = "<group>"; };
-		F7CCC6EE1D85966600D539DE /* RegisterRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRequestTests.swift; sourceTree = "<group>"; };
-		F7CCC6F21D85A07600D539DE /* RegisterResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterResponseTests.swift; sourceTree = "<group>"; };
 		F7CCC6F61D85A12D00D539DE /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F7CCC6F91D85A28800D539DE /* UtilTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilTests.swift; sourceTree = "<group>"; };
-		F7CCC6FE1D85E8E300D539DE /* AuthenticationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationRequest.swift; sourceTree = "<group>"; };
-		F7CCC7021D86140D00D539DE /* APDUCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUCommand.swift; sourceTree = "<group>"; };
-		F7CCC7041D86143000D539DE /* APDUResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUResponse.swift; sourceTree = "<group>"; };
-		F7CCC70C1D861E8C00D539DE /* APDUCommandHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUCommandHeader.swift; sourceTree = "<group>"; };
+		F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUHeader.swift; sourceTree = "<group>"; };
 		F7CCC7101D86202C00D539DE /* APDUError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUError.swift; sourceTree = "<group>"; };
+		F7CCC7161D862BF600D539DE /* RegisterRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRequestTests.swift; sourceTree = "<group>"; };
+		F7CCC7181D862F5F00D539DE /* RegisterResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterResponseTests.swift; sourceTree = "<group>"; };
+		F7CCC71A1D86313D00D539DE /* APDUHeaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUHeaderTests.swift; sourceTree = "<group>"; };
+		F7CCC7201D86326E00D539DE /* APDUCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUCommand.swift; sourceTree = "<group>"; };
+		F7CCC7241D86361E00D539DE /* APDUCommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUCommandTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,14 +167,12 @@
 			isa = PBXGroup;
 			children = (
 				F7CCC6F91D85A28800D539DE /* UtilTests.swift */,
-				F7CCC6F21D85A07600D539DE /* RegisterResponseTests.swift */,
-				F7CCC6EE1D85966600D539DE /* RegisterRequestTests.swift */,
+				F7CCC7151D862BD200D539DE /* APDU */,
 				F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */,
 				F77180121D83B9AB008D1CDB /* CoreExtTests.swift */,
 				F77180101D83B966008D1CDB /* BLEMessageTests.swift */,
 				F77180141D83D419008D1CDB /* TestUtil.swift */,
 				F771800D1D83932A008D1CDB /* SHA256Tests.swift */,
-				F77180011D82B61B008D1CDB /* APDUTests.swift */,
 				F70373AE1D7BF78700FBB057 /* Info.plist */,
 				F77180041D82B6C4008D1CDB /* SecurityKeyBLETests-Bridging-Header.h */,
 			);
@@ -214,23 +204,15 @@
 		F77180221D840FAB008D1CDB /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F7CCC7141D862B7900D539DE /* APDU */,
 				F7CCC6F11D859FF900D539DE /* SecurityKey */,
 				F72E40311D81373D0059A0D7 /* StateMachine */,
 				F771802E1D84108D008D1CDB /* u2f.h */,
-				F77180251D84108D008D1CDB /* apdu.h */,
-				F77180261D84108D008D1CDB /* APDU.swift */,
-				F7CCC7041D86143000D539DE /* APDUResponse.swift */,
-				F7CCC7021D86140D00D539DE /* APDUCommand.swift */,
 				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
-				F7CCC6FE1D85E8E300D539DE /* AuthenticationRequest.swift */,
 				F77180271D84108D008D1CDB /* BLEMessage.swift */,
 				F77180281D84108D008D1CDB /* ClientData.swift */,
 				F77180291D84108D008D1CDB /* Constants.swift */,
 				F771802A1D84108D008D1CDB /* CoreExtensions.swift */,
-				F771802B1D84108D008D1CDB /* RegisterRequest.swift */,
-				F7CCC7101D86202C00D539DE /* APDUError.swift */,
-				F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */,
-				F7CCC70C1D861E8C00D539DE /* APDUCommandHeader.swift */,
 				F771802D1D84108D008D1CDB /* SHA256.swift */,
 				F7CCC6F61D85A12D00D539DE /* Util.swift */,
 			);
@@ -284,6 +266,29 @@
 				F7CCC6DD1D85371200D539DE /* SelfSignedCertificate.m */,
 			);
 			name = SecurityKey;
+			sourceTree = "<group>";
+		};
+		F7CCC7141D862B7900D539DE /* APDU */ = {
+			isa = PBXGroup;
+			children = (
+				F7CCC7101D86202C00D539DE /* APDUError.swift */,
+				F771802B1D84108D008D1CDB /* RegisterRequest.swift */,
+				F7CCC7201D86326E00D539DE /* APDUCommand.swift */,
+				F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */,
+				F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */,
+			);
+			name = APDU;
+			sourceTree = "<group>";
+		};
+		F7CCC7151D862BD200D539DE /* APDU */ = {
+			isa = PBXGroup;
+			children = (
+				F7CCC71A1D86313D00D539DE /* APDUHeaderTests.swift */,
+				F7CCC7241D86361E00D539DE /* APDUCommandTests.swift */,
+				F7CCC7161D862BF600D539DE /* RegisterRequestTests.swift */,
+				F7CCC7181D862F5F00D539DE /* RegisterResponseTests.swift */,
+			);
+			name = APDU;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,26 +424,25 @@
 			files = (
 				F77180151D83D419008D1CDB /* TestUtil.swift in Sources */,
 				F7CCC6F71D85A12D00D539DE /* Util.swift in Sources */,
+				F7CCC7191D862F5F00D539DE /* RegisterResponseTests.swift in Sources */,
 				F77180411D8410C8008D1CDB /* RegisterRequest.swift in Sources */,
 				F7CCC6E71D85378500D539DE /* KeyInterface.m in Sources */,
-				F7CCC7001D85E97100D539DE /* AuthenticationRequest.swift in Sources */,
 				F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */,
 				F7CCC7121D86202C00D539DE /* APDUError.swift in Sources */,
 				F77180391D8410BB008D1CDB /* BLEMessage.swift in Sources */,
-				F7CCC6EF1D85966600D539DE /* RegisterRequestTests.swift in Sources */,
 				F771803B1D8410BF008D1CDB /* ClientData.swift in Sources */,
-				F77180021D82B61B008D1CDB /* APDUTests.swift in Sources */,
 				F77180131D83B9AB008D1CDB /* CoreExtTests.swift in Sources */,
 				F7CCC6DF1D85372300D539DE /* SelfSignedCertificate.m in Sources */,
+				F7CCC7171D862BF600D539DE /* RegisterRequestTests.swift in Sources */,
+				F7CCC71B1D86313D00D539DE /* APDUHeaderTests.swift in Sources */,
+				F7CCC7251D86361E00D539DE /* APDUCommandTests.swift in Sources */,
 				F7CCC6ED1D85940400D539DE /* ClientDataTests.swift in Sources */,
-				F7CCC7081D86148000D539DE /* APDUCommand.swift in Sources */,
-				F7CCC7061D86143000D539DE /* APDUResponse.swift in Sources */,
+				F7CCC7221D86326E00D539DE /* APDUCommand.swift in Sources */,
 				F7CCC6FB1D85A6E300D539DE /* RegisterResponse.swift in Sources */,
 				F7CCC70A1D86148300D539DE /* Authenticator.swift in Sources */,
 				F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */,
 				F771803F1D8410C5008D1CDB /* CoreExtensions.swift in Sources */,
-				F7CCC6F31D85A07600D539DE /* RegisterResponseTests.swift in Sources */,
-				F7CCC70E1D861E8C00D539DE /* APDUCommandHeader.swift in Sources */,
+				F7CCC70E1D861E8C00D539DE /* APDUHeader.swift in Sources */,
 				F771803D1D8410C2008D1CDB /* Constants.swift in Sources */,
 				F77180461D8410CF008D1CDB /* SHA256.swift in Sources */,
 				F7CCC6FA1D85A28800D539DE /* UtilTests.swift in Sources */,
@@ -454,7 +458,7 @@
 				F77180421D8410C9008D1CDB /* RegisterRequest.swift in Sources */,
 				F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */,
 				F771803A1D8410BB008D1CDB /* BLEMessage.swift in Sources */,
-				F7CCC7091D86148000D539DE /* APDUCommand.swift in Sources */,
+				F7CCC7231D86326E00D539DE /* APDUCommand.swift in Sources */,
 				F7CCC7131D86202C00D539DE /* APDUError.swift in Sources */,
 				F77180401D8410C6008D1CDB /* CoreExtensions.swift in Sources */,
 				F7CCC6FD1D85A6F800D539DE /* Util.swift in Sources */,
@@ -462,10 +466,8 @@
 				F77CC2F71D7FB09200D28CAC /* StateMachine.swift in Sources */,
 				F7CCC6FC1D85A6E500D539DE /* RegisterResponse.swift in Sources */,
 				F7CCC70B1D86148400D539DE /* Authenticator.swift in Sources */,
-				F7CCC7011D85E97300D539DE /* AuthenticationRequest.swift in Sources */,
 				F771803C1D8410BF008D1CDB /* ClientData.swift in Sources */,
-				F7CCC70F1D861E8C00D539DE /* APDUCommandHeader.swift in Sources */,
-				F7CCC7071D86143000D539DE /* APDUResponse.swift in Sources */,
+				F7CCC70F1D861E8C00D539DE /* APDUHeader.swift in Sources */,
 				F771803E1D8410C2008D1CDB /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,18 +476,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7CCC70D1D861E8C00D539DE /* APDUCommandHeader.swift in Sources */,
+				F7CCC70D1D861E8C00D539DE /* APDUHeader.swift in Sources */,
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
 				F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */,
 				F78C5BF71D78862D001BB080 /* SecurityKeyServer.swift in Sources */,
-				F7CCC6FF1D85E8E300D539DE /* AuthenticationRequest.swift in Sources */,
 				F7CCC6F81D85A20600D539DE /* Util.swift in Sources */,
 				F7CCC7111D86202C00D539DE /* APDUError.swift in Sources */,
 				F7CCC6EB1D858EA400D539DE /* RegisterResponse.swift in Sources */,
 				F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */,
 				F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */,
 				F7CCC6E61D85376A00D539DE /* KeyInterface.m in Sources */,
-				F7CCC7051D86143000D539DE /* APDUResponse.swift in Sources */,
 				F77180301D84108D008D1CDB /* BLEMessage.swift in Sources */,
 				F7CCC6DE1D85371200D539DE /* SelfSignedCertificate.m in Sources */,
 				F77180331D84108D008D1CDB /* CoreExtensions.swift in Sources */,
@@ -493,7 +493,7 @@
 				F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */,
 				F77180311D84108D008D1CDB /* ClientData.swift in Sources */,
 				F77180321D84108D008D1CDB /* Constants.swift in Sources */,
-				F7CCC7031D86140D00D539DE /* APDUCommand.swift in Sources */,
+				F7CCC7211D86326E00D539DE /* APDUCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
