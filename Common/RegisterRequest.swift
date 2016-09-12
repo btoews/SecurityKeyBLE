@@ -9,20 +9,16 @@
 import Foundation
 
 protocol APDUCommandDataProtocol {
-    var cmdClass: APDUHeader.CommandClass { get }
-    var cmdCode:  APDUHeader.CommandCode  { get }
+    static var cmdClass: APDUHeader.CommandClass { get }
+    static var cmdCode:  APDUHeader.CommandCode  { get }
 
     init(raw: NSData) throws
     var raw: NSData { get }
 }
 
 struct RegisterRequest: APDUCommandDataProtocol {
-    enum Error: ErrorType {
-        case BadSize
-    }
-    
-    var cmdClass = APDUHeader.CommandClass.Reserved
-    var cmdCode  = APDUHeader.CommandCode.Register
+    static let cmdClass = APDUHeader.CommandClass.Reserved
+    static let cmdCode  = APDUHeader.CommandCode.Register
 
     var challengeParameter: NSData
     var applicationParameter: NSData

@@ -28,8 +28,8 @@ struct APDUHeader {
     var dataLength: Int
     
     init(cmdData: APDUCommandDataProtocol) throws {
-        cla = cmdData.cmdClass
-        ins = cmdData.cmdCode
+        cla = cmdData.dynamicType.cmdClass
+        ins = cmdData.dynamicType.cmdCode
         dataLength = cmdData.raw.length
         if dataLength > 0xFFFF { throw APDUError.BadSize }
     }

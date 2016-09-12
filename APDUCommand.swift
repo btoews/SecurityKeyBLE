@@ -8,8 +8,8 @@
 
 import Foundation
 
-var CommandTypeForCode:[APDUHeader.CommandCode:APDUCommandDataProtocol.Type] = [
-    .Register: RegisterRequest.self
+let APDUCommandTypes = [
+    RegisterRequest.self
 ]
 
 struct APDUCommand {
@@ -24,14 +24,12 @@ struct APDUCommand {
     init(raw: NSData) throws {
         header = try APDUHeader(raw: raw)
         
+        guard let cmdType = APDUCommand.commandTypeForCode(header.ins) else { throw APDUError.BadCode }
+        
         let dOffset = header.raw.length
         let dRange = NSMakeRange(dOffset, raw.length - dOffset)
         let dData = raw.subdataWithRange(dRange)
-        
-        guard let cmdType = CommandTypeForCode[header.ins] else {
-            throw APDUError.BadCode
-        }
-        
+
         data = try cmdType.init(raw: dData)
     }
     
@@ -40,5 +38,9 @@ struct APDUCommand {
         m.appendData(header.raw)
         m.appendData(data.raw)
         return m
+    }
+    
+    static func commandTypeForCode(code: APDUHeader.CommandCode) -> APDUCommandDataProtocol.Type? {
+        return APDUCommandTypes.lazy.filter({ $0.cmdCode == code }).first
     }
 }

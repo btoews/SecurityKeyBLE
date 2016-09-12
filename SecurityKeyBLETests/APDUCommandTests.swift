@@ -20,4 +20,12 @@ class APDUCommandTests: XCTestCase {
         XCTAssertEqual(cmd1.header.raw, cmd2.header.raw)
         XCTAssertEqual(cmd1.data.raw, cmd2.data.raw)
     }
+    
+    func testCommandTypeForCode() {
+        XCTAssert(APDUCommand.commandTypeForCode(.Register)          == RegisterRequest.self)
+        XCTAssert(APDUCommand.commandTypeForCode(.Authenticate)      == nil)
+        XCTAssert(APDUCommand.commandTypeForCode(.Version)           == nil)
+        XCTAssert(APDUCommand.commandTypeForCode(.CheckRegister)     == nil)
+        XCTAssert(APDUCommand.commandTypeForCode(.AuthenticateBatch) == nil)
+    }
 }
