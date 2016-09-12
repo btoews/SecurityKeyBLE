@@ -80,6 +80,23 @@ class DataReaderTests: XCTestCase {
         XCTAssertEqual(1, reader.remaining)
     }
     
+    func testReadOptionalUInt8() {
+        var raw:[UInt8] = [0x00]
+        let data = NSData(bytes: &raw, length: raw.count)
+        let reader = DataReader(data: data)
+        var ores:UInt8?
+        
+        XCTAssertEqual(1, reader.remaining)
+        ores = reader.read()
+        XCTAssertEqual(ores, 0x00)
+        
+        XCTAssertEqual(0, reader.remaining)
+        ores = reader.read()
+        XCTAssertEqual(ores, nil)
+        
+        XCTAssertEqual(0, reader.remaining)
+    }
+    
     func testReadBytes() throws {
         var raw:[UInt8] = [0x00, 0x01, 0x02, 0x03, 0x04]
         let data = NSData(bytes: &raw, length: raw.count)

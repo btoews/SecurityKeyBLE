@@ -8,7 +8,14 @@
 
 import Foundation
 
-class DataWriter {
+protocol DataWriterProtocol {
+    var buffer: NSMutableData { get }
+
+    func write<T: EndianProtocol>(val:T, endian: Endian) throws
+    func writeData(d: NSData) throws
+}
+
+class DataWriter: DataWriterProtocol {
     var buffer = NSMutableData()
     
     func write<T: EndianProtocol>(val:T, endian: Endian = .Big) {
@@ -26,5 +33,36 @@ class DataWriter {
     
     func writeData(d: NSData) {
         buffer.appendData(d)
+    }
+}
+
+class CappedDataWriter: DataWriterProtocol {
+    enum Error: ErrorType {
+        case MaxExceeded
+    }
+    
+    var max: Int
+    var buffer: NSMutableData { return writer.buffer }
+    
+    private var writer = DataWriter()
+    
+    init(max m:Int) {
+        max = m
+    }
+    
+    func write<T: EndianProtocol>(val:T, endian: Endian = .Big) throws {
+        if buffer.length + sizeof(T) > max {
+            throw Error.MaxExceeded
+        }
+        
+        writer.write(val, endian: endian)
+    }
+    
+    func writeData(d: NSData) throws {
+        if buffer.length + d.length > max {
+            throw Error.MaxExceeded
+        }
+        
+        writer.writeData(d)
     }
 }

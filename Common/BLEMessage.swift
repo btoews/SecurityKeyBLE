@@ -206,17 +206,17 @@ class BLEMessage: CollectionType, SequenceType {
         
         let dRange = NSRange(location: dLoc, length: dLen)
         let fData = data!.subdataWithRange(dRange)
-        let frag = NSMutableData()
+        let frag = DataWriter()
         
         if first {
-            frag.appendByte(cmdOrStatus!)
-            frag.appendInt(data!.length, size: 2)
+            frag.write(UInt8(cmdOrStatus!))
+            frag.write(UInt16(data!.length))
         } else {
-            frag.appendInt(i - 1, size: 1)
+            frag.write(UInt8(i - 1))
         }
         
-        frag.appendData(fData)
+        frag.writeData(fData)
         
-        return NSData(data: frag)
+        return NSData(data: frag.buffer)
     }
 }

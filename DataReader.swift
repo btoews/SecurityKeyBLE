@@ -33,6 +33,16 @@ class DataReader {
         offset += sizeof(T)
         return val
     }
+
+    // Read a number from the data, advancing our offset into the data.
+    func read<T:EndianProtocol>(endian endian: Endian = .Big) -> T? {
+        do {
+            let val:T = try read()
+            return val
+        } catch {
+            return nil
+        }
+    }
     
     // Read a number from the data, without advancing our offset into the data.
     func peek<T:EndianProtocol>(endian endian: Endian = .Big) -> T? {

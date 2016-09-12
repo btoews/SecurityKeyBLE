@@ -60,3 +60,10 @@ func randData(length len: Int) -> NSData {
 
     return d
 }
+
+extension NSData {
+    convenience init(chars: [UInt8]) {
+        var vChars = chars
+        self.init(bytes: &vChars, length: vChars.count)
+    }
+}

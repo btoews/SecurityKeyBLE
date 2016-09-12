@@ -13,12 +13,11 @@
 		F70373EA1D7D64A900FBB057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70373E81D7D64A900FBB057 /* Main.storyboard */; };
 		F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771800D1D83932A008D1CDB /* SHA256Tests.swift */; };
 		F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180101D83B966008D1CDB /* BLEMessageTests.swift */; };
-		F77180131D83B9AB008D1CDB /* CoreExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180121D83B9AB008D1CDB /* CoreExtTests.swift */; };
 		F77180151D83D419008D1CDB /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180141D83D419008D1CDB /* TestUtil.swift */; };
 		F77180301D84108D008D1CDB /* BLEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180271D84108D008D1CDB /* BLEMessage.swift */; };
 		F77180311D84108D008D1CDB /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180281D84108D008D1CDB /* ClientData.swift */; };
 		F77180321D84108D008D1CDB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180291D84108D008D1CDB /* Constants.swift */; };
-		F77180331D84108D008D1CDB /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensions.swift */; };
+		F77180331D84108D008D1CDB /* CoreExtensionssss.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensionssss.swift */; };
 		F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802B1D84108D008D1CDB /* RegisterRequest.swift */; };
 		F77180361D84108D008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802D1D84108D008D1CDB /* SHA256.swift */; };
 		F77180391D8410BB008D1CDB /* BLEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180271D84108D008D1CDB /* BLEMessage.swift */; };
@@ -27,8 +26,8 @@
 		F771803C1D8410BF008D1CDB /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180281D84108D008D1CDB /* ClientData.swift */; };
 		F771803D1D8410C2008D1CDB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180291D84108D008D1CDB /* Constants.swift */; };
 		F771803E1D8410C2008D1CDB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180291D84108D008D1CDB /* Constants.swift */; };
-		F771803F1D8410C5008D1CDB /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensions.swift */; };
-		F77180401D8410C6008D1CDB /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensions.swift */; };
+		F771803F1D8410C5008D1CDB /* CoreExtensionssss.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensionssss.swift */; };
+		F77180401D8410C6008D1CDB /* CoreExtensionssss.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802A1D84108D008D1CDB /* CoreExtensionssss.swift */; };
 		F77180411D8410C8008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802B1D84108D008D1CDB /* RegisterRequest.swift */; };
 		F77180421D8410C9008D1CDB /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802B1D84108D008D1CDB /* RegisterRequest.swift */; };
 		F77180451D8410CE008D1CDB /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771802D1D84108D008D1CDB /* SHA256.swift */; };
@@ -83,6 +82,10 @@
 		F7CCC7371D871F0800D539DE /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7351D871F0800D539DE /* Endian.swift */; };
 		F7CCC7381D871F0800D539DE /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7351D871F0800D539DE /* Endian.swift */; };
 		F7CCC73B1D8720EA00D539DE /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC73A1D8720EA00D539DE /* DataWriterTests.swift */; };
+		F7CCC73D1D87294500D539DE /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC73C1D87294500D539DE /* CoreExtensions.swift */; };
+		F7CCC73E1D87294500D539DE /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC73C1D87294500D539DE /* CoreExtensions.swift */; };
+		F7CCC73F1D87294500D539DE /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC73C1D87294500D539DE /* CoreExtensions.swift */; };
+		F7CCC7411D872CE300D539DE /* CoreExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7401D872CE300D539DE /* CoreExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,12 +112,11 @@
 		F77180041D82B6C4008D1CDB /* SecurityKeyBLETests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityKeyBLETests-Bridging-Header.h"; sourceTree = "<group>"; };
 		F771800D1D83932A008D1CDB /* SHA256Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256Tests.swift; sourceTree = "<group>"; };
 		F77180101D83B966008D1CDB /* BLEMessageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEMessageTests.swift; sourceTree = "<group>"; };
-		F77180121D83B9AB008D1CDB /* CoreExtTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtTests.swift; sourceTree = "<group>"; };
 		F77180141D83D419008D1CDB /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		F77180271D84108D008D1CDB /* BLEMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BLEMessage.swift; path = Common/BLEMessage.swift; sourceTree = "<group>"; };
 		F77180281D84108D008D1CDB /* ClientData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientData.swift; path = Common/ClientData.swift; sourceTree = "<group>"; };
 		F77180291D84108D008D1CDB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Common/Constants.swift; sourceTree = "<group>"; };
-		F771802A1D84108D008D1CDB /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensions.swift; path = Common/CoreExtensions.swift; sourceTree = "<group>"; };
+		F771802A1D84108D008D1CDB /* CoreExtensionssss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensionssss.swift; path = Common/CoreExtensionssss.swift; sourceTree = "<group>"; };
 		F771802B1D84108D008D1CDB /* RegisterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterRequest.swift; path = Common/RegisterRequest.swift; sourceTree = "<group>"; };
 		F771802D1D84108D008D1CDB /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SHA256.swift; path = Common/SHA256.swift; sourceTree = "<group>"; };
 		F771802E1D84108D008D1CDB /* u2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = u2f.h; path = Common/u2f.h; sourceTree = "<group>"; };
@@ -150,6 +152,8 @@
 		F7CCC7301D871E8300D539DE /* DataWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataWriter.swift; sourceTree = "<group>"; };
 		F7CCC7351D871F0800D539DE /* Endian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endian.swift; sourceTree = "<group>"; };
 		F7CCC73A1D8720EA00D539DE /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataWriterTests.swift; sourceTree = "<group>"; };
+		F7CCC73C1D87294500D539DE /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtensions.swift; sourceTree = "<group>"; };
+		F7CCC7401D872CE300D539DE /* CoreExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,7 +190,6 @@
 				F7CCC7391D8720D500D539DE /* Data */,
 				F7CCC6F91D85A28800D539DE /* UtilTests.swift */,
 				F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */,
-				F77180121D83B9AB008D1CDB /* CoreExtTests.swift */,
 				F77180101D83B966008D1CDB /* BLEMessageTests.swift */,
 				F77180141D83D419008D1CDB /* TestUtil.swift */,
 				F771800D1D83932A008D1CDB /* SHA256Tests.swift */,
@@ -230,7 +233,7 @@
 				F77180271D84108D008D1CDB /* BLEMessage.swift */,
 				F77180281D84108D008D1CDB /* ClientData.swift */,
 				F77180291D84108D008D1CDB /* Constants.swift */,
-				F771802A1D84108D008D1CDB /* CoreExtensions.swift */,
+				F771802A1D84108D008D1CDB /* CoreExtensionssss.swift */,
 				F771802D1D84108D008D1CDB /* SHA256.swift */,
 				F7CCC6F61D85A12D00D539DE /* Util.swift */,
 			);
@@ -314,6 +317,7 @@
 			children = (
 				F7CCC7261D86371500D539DE /* DataReader.swift */,
 				F7CCC7301D871E8300D539DE /* DataWriter.swift */,
+				F7CCC73C1D87294500D539DE /* CoreExtensions.swift */,
 				F7CCC7351D871F0800D539DE /* Endian.swift */,
 			);
 			name = Data;
@@ -322,6 +326,7 @@
 		F7CCC7391D8720D500D539DE /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				F7CCC7401D872CE300D539DE /* CoreExtensionsTests.swift */,
 				F7CCC73A1D8720EA00D539DE /* DataWriterTests.swift */,
 				F7CCC72E1D8649A600D539DE /* DataReaderTests.swift */,
 			);
@@ -459,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7CCC7411D872CE300D539DE /* CoreExtensionsTests.swift in Sources */,
 				F77180151D83D419008D1CDB /* TestUtil.swift in Sources */,
 				F7CCC73B1D8720EA00D539DE /* DataWriterTests.swift in Sources */,
 				F7CCC7321D871E8300D539DE /* DataWriter.swift in Sources */,
@@ -471,7 +477,6 @@
 				F7CCC7121D86202C00D539DE /* APDUError.swift in Sources */,
 				F77180391D8410BB008D1CDB /* BLEMessage.swift in Sources */,
 				F771803B1D8410BF008D1CDB /* ClientData.swift in Sources */,
-				F77180131D83B9AB008D1CDB /* CoreExtTests.swift in Sources */,
 				F7CCC6DF1D85372300D539DE /* SelfSignedCertificate.m in Sources */,
 				F7CCC7171D862BF600D539DE /* RegisterRequestTests.swift in Sources */,
 				F7CCC71B1D86313D00D539DE /* APDUHeaderTests.swift in Sources */,
@@ -482,7 +487,8 @@
 				F7CCC6FB1D85A6E300D539DE /* RegisterResponse.swift in Sources */,
 				F7CCC70A1D86148300D539DE /* Authenticator.swift in Sources */,
 				F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */,
-				F771803F1D8410C5008D1CDB /* CoreExtensions.swift in Sources */,
+				F771803F1D8410C5008D1CDB /* CoreExtensionssss.swift in Sources */,
+				F7CCC73E1D87294500D539DE /* CoreExtensions.swift in Sources */,
 				F7CCC70E1D861E8C00D539DE /* APDUHeader.swift in Sources */,
 				F7CCC7281D86371500D539DE /* DataReader.swift in Sources */,
 				F771803D1D8410C2008D1CDB /* Constants.swift in Sources */,
@@ -502,7 +508,8 @@
 				F771803A1D8410BB008D1CDB /* BLEMessage.swift in Sources */,
 				F7CCC7231D86326E00D539DE /* APDUCommand.swift in Sources */,
 				F7CCC7131D86202C00D539DE /* APDUError.swift in Sources */,
-				F77180401D8410C6008D1CDB /* CoreExtensions.swift in Sources */,
+				F7CCC73F1D87294500D539DE /* CoreExtensions.swift in Sources */,
+				F77180401D8410C6008D1CDB /* CoreExtensionssss.swift in Sources */,
 				F7CCC7291D86371500D539DE /* DataReader.swift in Sources */,
 				F7CCC6FD1D85A6F800D539DE /* Util.swift in Sources */,
 				F7CCC7331D871E8300D539DE /* DataWriter.swift in Sources */,
@@ -532,10 +539,11 @@
 				F7CCC6EB1D858EA400D539DE /* RegisterResponse.swift in Sources */,
 				F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */,
 				F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */,
+				F7CCC73D1D87294500D539DE /* CoreExtensions.swift in Sources */,
 				F7CCC6E61D85376A00D539DE /* KeyInterface.m in Sources */,
 				F77180301D84108D008D1CDB /* BLEMessage.swift in Sources */,
 				F7CCC6DE1D85371200D539DE /* SelfSignedCertificate.m in Sources */,
-				F77180331D84108D008D1CDB /* CoreExtensions.swift in Sources */,
+				F77180331D84108D008D1CDB /* CoreExtensionssss.swift in Sources */,
 				F77180361D84108D008D1CDB /* SHA256.swift in Sources */,
 				F7CCC7361D871F0800D539DE /* Endian.swift in Sources */,
 				F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */,

@@ -108,7 +108,7 @@ class ServerInitState: ServerState {
             type: u2fControlPointLengthCharacteristicUUID,
             properties: .Read,
             // Max BLE characteristic size for ctrl pt len.
-            value: NSData(int: CharacteristicMaxSize, size: 2),
+            value: NSData(int: UInt16(CharacteristicMaxSize)),
             permissions: CBAttributePermissions(rawValue: CBAttributePermissions.Readable.rawValue | CBAttributePermissions.ReadEncryptionRequired.rawValue)
         )
         
