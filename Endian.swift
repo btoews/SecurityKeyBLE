@@ -37,3 +37,7 @@ extension UInt8: EndianProtocol {
     var bigEndian:    UInt8 { return self }
     var littleEndian: UInt8 { return self }
 }
+
+protocol EndianEnumProtocol: RawRepresentable {
+    associatedtype RawValue: EndianProtocol
+}

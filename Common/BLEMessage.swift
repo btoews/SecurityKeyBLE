@@ -18,13 +18,21 @@ class BLEMessage: CollectionType, SequenceType {
     // Possible statuses for Authenticator Response messages.
     enum Status: UInt8 {
         case KeepAlive = 0x82
-        case Error = 0xBF
+        case Error     = 0xBF
     }
     
     // Possible commands for Client Request messages.
     enum Command: UInt8 {
         case Ping = 0x81
-        case Msg = 0x83
+        case Msg  = 0x83
+    }
+    
+    // Union of commands and statuses
+    enum CommandOrStatus: UInt8 {
+        case KeepAlive = 0x82
+        case Error     = 0xBF
+        case Ping      = 0x81
+        case Msg       = 0x83
     }
     
     var data: NSData?

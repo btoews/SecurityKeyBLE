@@ -11,6 +11,7 @@ import Foundation
 class DataReader {
     enum Error: ErrorType {
         case End
+        case TypeError
     }
     
     var data: NSData
@@ -34,8 +35,26 @@ class DataReader {
         return val
     }
 
-    // Read a number from the data, advancing our offset into the data.
+    // Read an optional number from the data, advancing our offset into the data.
     func read<T:EndianProtocol>(endian endian: Endian = .Big) -> T? {
+        do {
+            let val:T = try read()
+            return val
+        } catch {
+            return nil
+        }
+    }
+
+    // Read an enum from the data, advancing our offset into the data.
+    func read<T:EndianEnumProtocol>(endian endian: Endian = .Big) throws -> T {
+        guard let raw:T.RawValue = peek()       else { throw Error.End }
+        offset += sizeof(T.RawValue.self)
+        guard let val:T = T.init(rawValue: raw) else { throw Error.TypeError }
+        return val
+    }
+
+    // Read an optional enum from the data, advancing our offset into the data.
+    func read<T:EndianEnumProtocol>(endian endian: Endian = .Big) -> T? {
         do {
             let val:T = try read()
             return val
@@ -57,6 +76,12 @@ class DataReader {
         case .Little:
             return T(littleEndian: tmp)
         }
+    }
+    
+    // Read an enum from the data, without advancing our offset into the data.
+    func peek<T:EndianEnumProtocol>(endian endian: Endian = .Big) -> T? {
+        guard let raw:T.RawValue = peek() else { return nil }
+        return T.init(rawValue: raw)
     }
     
     // Read n bytes from the data, advancing our offset into the data.

@@ -126,4 +126,83 @@ class DataReaderTests: XCTestCase {
         
         XCTAssertEqual(3, reader.remaining)
     }
+    
+    enum Place: UInt8, EndianEnumProtocol {
+        typealias RawValue = UInt8
+        
+        case first  = 0x01
+        case second = 0x02
+        case third  = 0x03
+    }
+    
+    func testReadEnum() throws {
+        let reader = DataReader(data: NSData(int: UInt32(0x01020304)))
+        var p:Place
+        var op:Place?
+        
+        XCTAssertEqual(4, reader.remaining)
+        op = reader.peek()
+        XCTAssertEqual(Place.first, op)
+        XCTAssertEqual(4, reader.remaining)
+        p = try reader.read()
+        XCTAssertEqual(Place.first, p)
+
+        XCTAssertEqual(3, reader.remaining)
+        p = try reader.read()
+        XCTAssertEqual(Place.second, p)
+        
+        XCTAssertEqual(2, reader.remaining)
+        p = try reader.read()
+        XCTAssertEqual(Place.third, p)
+        
+        XCTAssertEqual(1, reader.remaining)
+        op = reader.peek()
+        XCTAssertEqual(nil, op)
+        
+        do {
+            p = try reader.read()
+            XCTFail("expected an exception")
+        } catch DataReader.Error.TypeError {
+            // pass.
+        }
+        
+        XCTAssertEqual(0, reader.remaining)
+        op = reader.peek()
+        XCTAssertEqual(nil, op)
+        
+        do {
+            p = try reader.read()
+            XCTFail("expected an exception")
+        } catch DataReader.Error.End {
+            // pass
+        }
+    }
+
+    func testReadOptionalEnum() {
+        let reader = DataReader(data: NSData(int: UInt32(0x01020304)))
+        var op:Place?
+
+        XCTAssertEqual(4, reader.remaining)
+        op = reader.peek()
+        XCTAssertEqual(Place.first, op)
+        XCTAssertEqual(4, reader.remaining)
+        op = reader.read()
+        XCTAssertEqual(Place.first, op)
+        
+        XCTAssertEqual(3, reader.remaining)
+        op = reader.read()
+        XCTAssertEqual(Place.second, op)
+        
+        XCTAssertEqual(2, reader.remaining)
+        op = reader.read()
+        XCTAssertEqual(Place.third, op)
+        
+        XCTAssertEqual(1, reader.remaining)
+        op = reader.read()
+        XCTAssertEqual(nil, op)
+        
+        XCTAssertEqual(0, reader.remaining)
+        op = reader.read()
+        XCTAssertEqual(nil, op)
+    }
 }

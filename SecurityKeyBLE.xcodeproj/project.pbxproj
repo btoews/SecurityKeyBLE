@@ -86,6 +86,9 @@
 		F7CCC73E1D87294500D539DE /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC73C1D87294500D539DE /* CoreExtensions.swift */; };
 		F7CCC73F1D87294500D539DE /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC73C1D87294500D539DE /* CoreExtensions.swift */; };
 		F7CCC7411D872CE300D539DE /* CoreExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7401D872CE300D539DE /* CoreExtensionsTests.swift */; };
+		F7CCC7431D8736BA00D539DE /* BLEMessageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */; };
+		F7CCC7441D8736BA00D539DE /* BLEMessageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */; };
+		F7CCC7451D8736BA00D539DE /* BLEMessageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +157,7 @@
 		F7CCC73A1D8720EA00D539DE /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataWriterTests.swift; sourceTree = "<group>"; };
 		F7CCC73C1D87294500D539DE /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtensions.swift; sourceTree = "<group>"; };
 		F7CCC7401D872CE300D539DE /* CoreExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExtensionsTests.swift; sourceTree = "<group>"; };
+		F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEMessageReader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +235,7 @@
 				F771802E1D84108D008D1CDB /* u2f.h */,
 				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
 				F77180271D84108D008D1CDB /* BLEMessage.swift */,
+				F7CCC7421D8736BA00D539DE /* BLEMessageReader.swift */,
 				F77180281D84108D008D1CDB /* ClientData.swift */,
 				F77180291D84108D008D1CDB /* Constants.swift */,
 				F771802A1D84108D008D1CDB /* CoreExtensionssss.swift */,
@@ -473,6 +478,7 @@
 				F7CCC7191D862F5F00D539DE /* RegisterResponseTests.swift in Sources */,
 				F77180411D8410C8008D1CDB /* RegisterRequest.swift in Sources */,
 				F7CCC6E71D85378500D539DE /* KeyInterface.m in Sources */,
+				F7CCC7441D8736BA00D539DE /* BLEMessageReader.swift in Sources */,
 				F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */,
 				F7CCC7121D86202C00D539DE /* APDUError.swift in Sources */,
 				F77180391D8410BB008D1CDB /* BLEMessage.swift in Sources */,
@@ -504,6 +510,7 @@
 				F77CC2F91D801C4200D28CAC /* SecurityKeyClient.swift in Sources */,
 				F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */,
 				F77180421D8410C9008D1CDB /* RegisterRequest.swift in Sources */,
+				F7CCC7451D8736BA00D539DE /* BLEMessageReader.swift in Sources */,
 				F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */,
 				F771803A1D8410BB008D1CDB /* BLEMessage.swift in Sources */,
 				F7CCC7231D86326E00D539DE /* APDUCommand.swift in Sources */,
@@ -529,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7CCC70D1D861E8C00D539DE /* APDUHeader.swift in Sources */,
+				F7CCC7431D8736BA00D539DE /* BLEMessageReader.swift in Sources */,
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
 				F7CCC7311D871E8300D539DE /* DataWriter.swift in Sources */,
 				F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */,
