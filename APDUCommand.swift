@@ -34,10 +34,10 @@ struct APDUCommand {
     }
     
     var raw: NSData {
-        let m = NSMutableData()
-        m.appendData(header.raw)
-        m.appendData(data.raw)
-        return m
+        let writer = DataWriter()
+        writer.writeData(header.raw)
+        writer.writeData(data.raw)
+        return writer.buffer
     }
     
     static func commandTypeForCode(code: APDUHeader.CommandCode) -> APDUCommandDataProtocol.Type? {

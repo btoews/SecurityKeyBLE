@@ -62,19 +62,20 @@ struct APDUHeader {
     }
     
     var raw: NSData {
-        let m = NSMutableData()
-        m.appendByte(cla.rawValue)
-        m.appendByte(ins.rawValue)
-        m.appendByte(p1)
-        m.appendByte(p2)
+        let writer = DataWriter()
+        
+        writer.write(cla.rawValue)
+        writer.write(ins.rawValue)
+        writer.write(p1)
+        writer.write(p2)
         
         if dataLength <= 0xFF {
-            m.appendByte(UInt8(dataLength))
+            writer.write(UInt8(dataLength))
         } else {
-            m.appendByte(0x00)
-            m.appendInt(dataLength, size: 2)
+            writer.write(UInt8(0x00))
+            writer.write(UInt16(dataLength))
         }
         
-        return m
+        return writer.buffer
     }
 }

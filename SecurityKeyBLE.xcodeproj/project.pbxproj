@@ -76,6 +76,13 @@
 		F7CCC7281D86371500D539DE /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7261D86371500D539DE /* DataReader.swift */; };
 		F7CCC7291D86371500D539DE /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7261D86371500D539DE /* DataReader.swift */; };
 		F7CCC72F1D8649A600D539DE /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC72E1D8649A600D539DE /* DataReaderTests.swift */; };
+		F7CCC7311D871E8300D539DE /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7301D871E8300D539DE /* DataWriter.swift */; };
+		F7CCC7321D871E8300D539DE /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7301D871E8300D539DE /* DataWriter.swift */; };
+		F7CCC7331D871E8300D539DE /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7301D871E8300D539DE /* DataWriter.swift */; };
+		F7CCC7361D871F0800D539DE /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7351D871F0800D539DE /* Endian.swift */; };
+		F7CCC7371D871F0800D539DE /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7351D871F0800D539DE /* Endian.swift */; };
+		F7CCC7381D871F0800D539DE /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7351D871F0800D539DE /* Endian.swift */; };
+		F7CCC73B1D8720EA00D539DE /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC73A1D8720EA00D539DE /* DataWriterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +147,9 @@
 		F7CCC7241D86361E00D539DE /* APDUCommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUCommandTests.swift; sourceTree = "<group>"; };
 		F7CCC7261D86371500D539DE /* DataReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataReader.swift; sourceTree = "<group>"; };
 		F7CCC72E1D8649A600D539DE /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataReaderTests.swift; sourceTree = "<group>"; };
+		F7CCC7301D871E8300D539DE /* DataWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataWriter.swift; sourceTree = "<group>"; };
+		F7CCC7351D871F0800D539DE /* Endian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endian.swift; sourceTree = "<group>"; };
+		F7CCC73A1D8720EA00D539DE /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataWriterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				F7CCC7151D862BD200D539DE /* APDU */,
-				F7CCC72E1D8649A600D539DE /* DataReaderTests.swift */,
+				F7CCC7391D8720D500D539DE /* Data */,
 				F7CCC6F91D85A28800D539DE /* UtilTests.swift */,
 				F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */,
 				F77180121D83B9AB008D1CDB /* CoreExtTests.swift */,
@@ -212,13 +222,13 @@
 			isa = PBXGroup;
 			children = (
 				F7CCC7141D862B7900D539DE /* APDU */,
+				F7CCC7341D871EF400D539DE /* Data */,
 				F7CCC6F11D859FF900D539DE /* SecurityKey */,
 				F72E40311D81373D0059A0D7 /* StateMachine */,
 				F771802E1D84108D008D1CDB /* u2f.h */,
 				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
 				F77180271D84108D008D1CDB /* BLEMessage.swift */,
 				F77180281D84108D008D1CDB /* ClientData.swift */,
-				F7CCC7261D86371500D539DE /* DataReader.swift */,
 				F77180291D84108D008D1CDB /* Constants.swift */,
 				F771802A1D84108D008D1CDB /* CoreExtensions.swift */,
 				F771802D1D84108D008D1CDB /* SHA256.swift */,
@@ -297,6 +307,25 @@
 				F7CCC7181D862F5F00D539DE /* RegisterResponseTests.swift */,
 			);
 			name = APDU;
+			sourceTree = "<group>";
+		};
+		F7CCC7341D871EF400D539DE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F7CCC7261D86371500D539DE /* DataReader.swift */,
+				F7CCC7301D871E8300D539DE /* DataWriter.swift */,
+				F7CCC7351D871F0800D539DE /* Endian.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		F7CCC7391D8720D500D539DE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F7CCC73A1D8720EA00D539DE /* DataWriterTests.swift */,
+				F7CCC72E1D8649A600D539DE /* DataReaderTests.swift */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -431,6 +460,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F77180151D83D419008D1CDB /* TestUtil.swift in Sources */,
+				F7CCC73B1D8720EA00D539DE /* DataWriterTests.swift in Sources */,
+				F7CCC7321D871E8300D539DE /* DataWriter.swift in Sources */,
 				F7CCC6F71D85A12D00D539DE /* Util.swift in Sources */,
 				F7CCC72F1D8649A600D539DE /* DataReaderTests.swift in Sources */,
 				F7CCC7191D862F5F00D539DE /* RegisterResponseTests.swift in Sources */,
@@ -445,6 +476,7 @@
 				F7CCC7171D862BF600D539DE /* RegisterRequestTests.swift in Sources */,
 				F7CCC71B1D86313D00D539DE /* APDUHeaderTests.swift in Sources */,
 				F7CCC7251D86361E00D539DE /* APDUCommandTests.swift in Sources */,
+				F7CCC7371D871F0800D539DE /* Endian.swift in Sources */,
 				F7CCC6ED1D85940400D539DE /* ClientDataTests.swift in Sources */,
 				F7CCC7221D86326E00D539DE /* APDUCommand.swift in Sources */,
 				F7CCC6FB1D85A6E300D539DE /* RegisterResponse.swift in Sources */,
@@ -473,11 +505,13 @@
 				F77180401D8410C6008D1CDB /* CoreExtensions.swift in Sources */,
 				F7CCC7291D86371500D539DE /* DataReader.swift in Sources */,
 				F7CCC6FD1D85A6F800D539DE /* Util.swift in Sources */,
+				F7CCC7331D871E8300D539DE /* DataWriter.swift in Sources */,
 				F77180451D8410CE008D1CDB /* SHA256.swift in Sources */,
 				F77CC2F71D7FB09200D28CAC /* StateMachine.swift in Sources */,
 				F7CCC6FC1D85A6E500D539DE /* RegisterResponse.swift in Sources */,
 				F7CCC70B1D86148400D539DE /* Authenticator.swift in Sources */,
 				F771803C1D8410BF008D1CDB /* ClientData.swift in Sources */,
+				F7CCC7381D871F0800D539DE /* Endian.swift in Sources */,
 				F7CCC70F1D861E8C00D539DE /* APDUHeader.swift in Sources */,
 				F771803E1D8410C2008D1CDB /* Constants.swift in Sources */,
 			);
@@ -489,6 +523,7 @@
 			files = (
 				F7CCC70D1D861E8C00D539DE /* APDUHeader.swift in Sources */,
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
+				F7CCC7311D871E8300D539DE /* DataWriter.swift in Sources */,
 				F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */,
 				F78C5BF71D78862D001BB080 /* SecurityKeyServer.swift in Sources */,
 				F7CCC7271D86371500D539DE /* DataReader.swift in Sources */,
@@ -502,6 +537,7 @@
 				F7CCC6DE1D85371200D539DE /* SelfSignedCertificate.m in Sources */,
 				F77180331D84108D008D1CDB /* CoreExtensions.swift in Sources */,
 				F77180361D84108D008D1CDB /* SHA256.swift in Sources */,
+				F7CCC7361D871F0800D539DE /* Endian.swift in Sources */,
 				F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */,
 				F77180311D84108D008D1CDB /* ClientData.swift in Sources */,
 				F77180321D84108D008D1CDB /* Constants.swift in Sources */,

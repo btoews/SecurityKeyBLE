@@ -53,20 +53,15 @@ struct RegisterResponse: APDUResponseDataProtocol {
     }
     
     var raw: NSData {
-        let r = NSMutableData()
+        let writer = DataWriter()
         
-        var reserved: UInt8 = 0x05
-        r.appendBytes(&reserved, length: 1)
+        writer.write(UInt8(0x05))
+        writer.writeData(publicKey)
+        writer.write(UInt8(keyHandle.length))
+        writer.writeData(keyHandle)
+        writer.writeData(certificate)
+        writer.writeData(signature)
         
-        r.appendData(publicKey)
-
-        var khLen = UInt8(keyHandle.length)
-        r.appendBytes(&khLen, length: 1)
-        
-        r.appendData(keyHandle)
-        r.appendData(certificate)
-        r.appendData(signature)
-        
-        return r
+        return writer.buffer
     }
 }

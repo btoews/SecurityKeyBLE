@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum Endian {
-    case Big
-    case Little
-}
-
 extension NSMutableData {
     func appendInt(int: Int, size: Int, endian: Endian = .Big) {
         appendData(NSData(int: int, size: size, endian: endian))

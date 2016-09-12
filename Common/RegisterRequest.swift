@@ -42,9 +42,9 @@ struct RegisterRequest: APDUCommandDataProtocol {
     }
     
     var raw: NSData {
-        let m = NSMutableData()
-        m.appendData(challengeParameter)
-        m.appendData(applicationParameter)
-        return m
+        let writer = DataWriter()
+        writer.writeData(challengeParameter)
+        writer.writeData(applicationParameter)
+        return writer.buffer
     }
 }

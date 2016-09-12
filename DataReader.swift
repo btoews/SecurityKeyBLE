@@ -13,11 +13,6 @@ class DataReader {
         case End
     }
     
-    enum Endian {
-        case Big
-        case Little
-    }
-    
     var data: NSData
     var offset: Int
 
@@ -65,24 +60,5 @@ class DataReader {
     func peekData(n: Int) -> NSData? {
         if remaining < n { return nil }
         return data.subdataWithRange(NSMakeRange(offset, n))
-    }
-}
-
-protocol EndianProtocol {
-    init()
-    init(littleEndian value: Self)
-    init(bigEndian value: Self)
-}
-
-extension UInt64: EndianProtocol {}
-extension UInt32: EndianProtocol {}
-extension UInt16: EndianProtocol {}
-extension UInt8: EndianProtocol {
-    init(littleEndian value: UInt8) {
-        self = value
-    }
-
-    init(bigEndian value: UInt8) {
-        self = value
     }
 }
