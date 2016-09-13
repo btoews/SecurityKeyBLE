@@ -19,9 +19,8 @@ class ClientContext: ContextProtocol {
     var controlPointLengthCharacteristic: CBCharacteristic?
     var serviceRevisionCharacteristic:    CBCharacteristic?
     
-    var activeClientData: ClientData?
-    var activeRegisterRequest: RegisterRequest?
-    var activeBLEMessage: BLEMessage?
+    var activeRequest: BLEMessage?
+    var responseCallback: ((response: BLEMessage ) -> Void)?
     
     required init() {}
 }
@@ -35,19 +34,10 @@ class Client: StateMachine<ClientContext>, CBCentralManagerDelegate, CBPeriphera
         failure = ClientInitialState.self
     }
     
-    func register(appId: String) throws {
-        if let appIdData = appId.dataUsingEncoding(NSUTF8StringEncoding) {
-            let cd = ClientData(typ: .Register, origin: appId)
-            let chal = try cd.digest()
-            let app = try SHA256.digest(appIdData)
-            let rr = RegisterRequest(challengeParameter: chal, applicationParameter: app)
-            
-            context.activeClientData = cd
-            context.activeRegisterRequest = rr
-            context.activeBLEMessage = try rr.bleWrapped()
-            
-            proceed(ClientInitialState)
-        }
+    func request(message: BLEMessage, cb: ((response: BLEMessage ) -> Void)) {
+        context.activeRequest = message
+        context.responseCallback = cb
+        proceed(ClientInitialState)
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager) {
@@ -114,8 +104,6 @@ class ClientInitialState: ClientState {
         context.statusCharacteristic = nil
         context.controlPointLengthCharacteristic = nil
         context.serviceRevisionCharacteristic = nil
-        context.activeRegisterRequest = nil
-        context.activeClientData = nil
         
         if manager.state == .PoweredOn {
             return proceed(ClientScanState)
@@ -358,7 +346,8 @@ class ClientRequestState: ClientState {
     var nextFragment: NSData?
 
     override func enter() {
-        guard let msg = context.activeBLEMessage
+        guard
+            let msg = context.activeRequest
         else { return fail("bad context") }
     
         fragments = msg.fragments.generate()
@@ -413,10 +402,14 @@ class ClientResponseState: ClientState {
         
         if reader.isComplete {
             guard
+                let cb = context.responseCallback
+            else { return fail("bad context") }
+            
+            guard
                 let msg = reader.message
             else { return fail("error receiving message") }
-
-            print("received response: \(msg.commandOrStatus)")
+            
+            cb(response: msg)
             
             proceed(ClientFinishedState)
         }

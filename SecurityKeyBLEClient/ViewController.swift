@@ -9,16 +9,39 @@
 import Cocoa
 
 class ViewController: NSViewController {
-    var u2fClient: Client?
+    var client = Client()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        u2fClient = Client()
         
+        guard let msg = bleRegisterRequest() else {
+            print("couldn't generate register request")
+            return
+        }
+
+        client.request(msg) { response in
+            do {
+                let apdu:APDUResponse<RegisterResponse> = try response.unwrapAPDU()
+                let regResp = apdu.data
+                let kh = String(data: regResp.keyHandle, encoding: NSUTF8StringEncoding)
+                print("key handle: \(kh)")
+            } catch {
+                print("something else blew up")
+            }
+        }
+    }
+    
+    func bleRegisterRequest() -> BLEMessage? {
         do {
-            try u2fClient?.register("hello world")
+            let origin = "https://github.com"
+            let cd = ClientData(typ: .Register, origin: origin)
+            let chal = try cd.digest()
+            let app = try SHA256.digest(origin.dataUsingEncoding(NSUTF8StringEncoding)!)
+            let req = RegisterRequest(challengeParameter: chal, applicationParameter: app)
+            return try req.bleWrapped()
         } catch {
-            print("shit")
+            print("something blew up")
+            return nil
         }
     }
 
@@ -27,7 +50,5 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
-
 }
 

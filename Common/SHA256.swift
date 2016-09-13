@@ -46,6 +46,10 @@ class SHA256 {
         return digest.base64EncodedDataWithOptions([])
     }
     
+    var webSafeB64Digest: String {
+        return WebSafeBase64.encodeData(digest)
+    }
+    
     init(data: NSData) {
         var bytes = [UInt8](count: SHA256.DigestLength, repeatedValue: 0x00)
         CC_SHA256(data.bytes, CC_LONG(data.length), &bytes)
