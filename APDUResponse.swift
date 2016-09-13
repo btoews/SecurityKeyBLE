@@ -31,4 +31,9 @@ struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol 
         data = try ResponseType(raw: dData)
         trailer = try APDUTrailer(raw: reader.rest)
     }
+    
+    func unwrapData<DataType:APDUMessageDataProtocol>() throws -> DataType {
+        guard let d = data as? DataType else { throw APDUError.BadCode }
+        return d
+    }
 }

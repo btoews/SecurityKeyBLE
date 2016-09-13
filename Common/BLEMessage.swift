@@ -82,14 +82,8 @@ class BLEMessage {
     }
     
     // Unwrap the BLE layer to get the APDU packet.
-    func apduCommand() throws -> APDUCommand {
+    func unwrapAPDU<APDUType:APDUMessageProtocol>() throws -> APDUType {
         if commandOrStatus.command != .Msg { throw Error.NotMessage }
-        return try APDUCommand(raw: data)
-    }
-    
-    // Unwrap the BLE layer to get the register response APDU packet.
-    func registerResponse() throws -> RegisterResponse {
-        if commandOrStatus.command != .Msg { throw Error.NotMessage }
-        return try RegisterResponse(raw: data)
+        return try APDUType(raw: data)
     }
 }

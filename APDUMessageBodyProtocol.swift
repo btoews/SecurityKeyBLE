@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol APDUMessageBodyProtocol {
+protocol APDUMessageDataProtocol {
     var raw: NSData { get }
     init(raw: NSData) throws
     
@@ -16,7 +16,7 @@ protocol APDUMessageBodyProtocol {
     func bleWrapped()  throws -> BLEMessage
 }
 
-protocol APDUCommandDataProtocol: APDUMessageBodyProtocol {
+protocol APDUCommandDataProtocol: APDUMessageDataProtocol {
     static var cmdClass: APDUHeader.CommandClass { get }
     static var cmdCode:  APDUHeader.CommandCode  { get }
 }
@@ -34,7 +34,7 @@ extension APDUCommandDataProtocol {
     }
 }
 
-protocol APDUResponseDataProtocol: APDUMessageBodyProtocol {
+protocol APDUResponseDataProtocol: APDUMessageDataProtocol {
     static var status: APDUTrailer.Status { get }
 }
 

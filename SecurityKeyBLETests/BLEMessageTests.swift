@@ -44,28 +44,27 @@ class BLEMessageTests: XCTestCase {
         XCTAssertEqual(m1.data, m2.data)
     }
     
-//    func testRoundTripWithAPDU() {
-//        let c1 = SHA256.tupleDigest("hello".dataUsingEncoding(NSUTF8StringEncoding)!)
-//        let a1 = SHA256.tupleDigest("world".dataUsingEncoding(NSUTF8StringEncoding)!)
-//        let r1 = U2F_REGISTER_REQ(chal: c1, appId: a1)
-//        let m1 = BLEMessage(cmd: BLEMessage.Command.Msg, data: r1.apdu.raw!)
-//        
-//        let m2 = BLEMessage()
-//        for fragment in m1 {
-//            do {
-//                try m2.readFragment(fragment)
-//            } catch {
-//                XCTAssert(false, "expected readFragment not to throw an exception")
-//            }
-//        }
-//        
-//        XCTAssert(m2.isComplete, "expected message to be comlete")
-//        guard let r2 = APDUCommand(raw: m2.data!).registerRequest else {
-//            return XCTAssert(false, "expected data to convert to register request")
-//        }
-//        
-//        XCTAssert(tupleDigestEqual(r1.chal, r2.chal))
-//        XCTAssert(tupleDigestEqual(r1.appId, r2.appId))
-//        
-//    }
+    func testRoundTripWithRequest() throws {
+        let c1 = try SHA256.digest("hello".dataUsingEncoding(NSUTF8StringEncoding)!)
+        let a1 = try SHA256.digest("world".dataUsingEncoding(NSUTF8StringEncoding)!)
+        let r1 = RegisterRequest(challengeParameter: c1, applicationParameter: a1)
+        
+        let m1 = try r1.bleWrapped()
+        let reader = BLEFragmentReader()
+        for frag in m1.fragments { try reader.readFragment(frag) }
+        
+        XCTAssertTrue(reader.isComplete)
+        guard let m2 = reader.message else {
+            return XCTFail("expected m2 to have a message")
+        }
+        
+        XCTAssertEqual(m2.commandOrStatus.command, .Msg)
+        let apdu:APDUCommand = try m2.unwrapAPDU()
+        
+        XCTAssert(apdu.commandType == RegisterRequest.self, "expected command type to be register request")
+        let r2:RegisterRequest = try apdu.unwrapData()
+        
+        XCTAssertEqual(r1.applicationParameter, r2.applicationParameter)
+        XCTAssertEqual(r1.challengeParameter, r2.challengeParameter)
+    }
 }
