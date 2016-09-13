@@ -8,14 +8,6 @@
 
 import Foundation
 
-protocol APDUCommandDataProtocol {
-    static var cmdClass: APDUHeader.CommandClass { get }
-    static var cmdCode:  APDUHeader.CommandCode  { get }
-
-    init(raw: NSData) throws
-    var raw: NSData { get }
-}
-
 struct RegisterRequest: APDUCommandDataProtocol {
     static let cmdClass = APDUHeader.CommandClass.Reserved
     static let cmdCode  = APDUHeader.CommandCode.Register
@@ -46,16 +38,5 @@ struct RegisterRequest: APDUCommandDataProtocol {
         writer.writeData(challengeParameter)
         writer.writeData(applicationParameter)
         return writer.buffer
-    }
-    
-    // Register request wrapped in an APDU packet.
-    func apduWrapped() throws -> APDUCommand {
-        return try APDUCommand(data: self)
-    }
-    
-    // Register request wrapped in BLE packets.
-    func bleWrapped() throws -> BLEMessage {
-        let apdu = try apduWrapped()
-        return BLEMessage(command: .Msg, data: apdu.raw)
     }
 }

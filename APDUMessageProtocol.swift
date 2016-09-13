@@ -8,5 +8,7 @@
 
 import Foundation
 
-protocol APDUMessage {
+protocol APDUMessageProtocol {
+    var raw: NSData { get }
+    init(raw: NSData) throws
 }

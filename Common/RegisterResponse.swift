@@ -8,15 +8,12 @@
 
 import Foundation
 
-protocol APDUResponseDataProtocol {
-    init(raw: NSData) throws
-    var raw: NSData { get }
-}
-
 struct RegisterResponse: APDUResponseDataProtocol {
     enum Error: ErrorType {
         case BadSize
     }
+    
+    static let status = APDUTrailer.Status.NoError
     
     let publicKey:   NSData
     let keyHandle:   NSData

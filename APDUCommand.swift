@@ -12,7 +12,7 @@ let APDUCommandTypes = [
     RegisterRequest.self
 ]
 
-struct APDUCommand {
+struct APDUCommand: APDUMessageProtocol {
     let header: APDUHeader
     let data: APDUCommandDataProtocol
     

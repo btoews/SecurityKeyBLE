@@ -94,12 +94,19 @@
 		F7CCC7491D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7461D874DBB00D539DE /* BLEFragmentIterator.swift */; };
 		F7CCC74D1D8755DA00D539DE /* BLEFragmentReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC74C1D8755DA00D539DE /* BLEFragmentReaderTests.swift */; };
 		F7CCC7511D8760CE00D539DE /* BLEFragmentIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7501D8760CE00D539DE /* BLEFragmentIteratorTests.swift */; };
-		F7CCC7531D876A0D00D539DE /* APDUMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7521D876A0D00D539DE /* APDUMessage.swift */; };
-		F7CCC7541D876A0D00D539DE /* APDUMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7521D876A0D00D539DE /* APDUMessage.swift */; };
-		F7CCC7551D876A0D00D539DE /* APDUMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7521D876A0D00D539DE /* APDUMessage.swift */; };
+		F7CCC7531D876A0D00D539DE /* APDUMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7521D876A0D00D539DE /* APDUMessageProtocol.swift */; };
+		F7CCC7541D876A0D00D539DE /* APDUMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7521D876A0D00D539DE /* APDUMessageProtocol.swift */; };
+		F7CCC7551D876A0D00D539DE /* APDUMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7521D876A0D00D539DE /* APDUMessageProtocol.swift */; };
 		F7CCC7571D876ADA00D539DE /* APDUTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7561D876ADA00D539DE /* APDUTrailer.swift */; };
 		F7CCC7581D876ADA00D539DE /* APDUTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7561D876ADA00D539DE /* APDUTrailer.swift */; };
 		F7CCC7591D876ADA00D539DE /* APDUTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7561D876ADA00D539DE /* APDUTrailer.swift */; };
+		F7CCC75B1D876D6D00D539DE /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */; };
+		F7CCC75C1D876D6D00D539DE /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */; };
+		F7CCC75D1D876D6D00D539DE /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */; };
+		F7CCC75F1D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */; };
+		F7CCC7601D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */; };
+		F7CCC7611D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */; };
+		F7CCC7631D87782600D539DE /* APDUResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7621D87782600D539DE /* APDUResponseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,8 +179,11 @@
 		F7CCC7461D874DBB00D539DE /* BLEFragmentIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEFragmentIterator.swift; sourceTree = "<group>"; };
 		F7CCC74C1D8755DA00D539DE /* BLEFragmentReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEFragmentReaderTests.swift; sourceTree = "<group>"; };
 		F7CCC7501D8760CE00D539DE /* BLEFragmentIteratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEFragmentIteratorTests.swift; sourceTree = "<group>"; };
-		F7CCC7521D876A0D00D539DE /* APDUMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUMessage.swift; sourceTree = "<group>"; };
+		F7CCC7521D876A0D00D539DE /* APDUMessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUMessageProtocol.swift; sourceTree = "<group>"; };
 		F7CCC7561D876ADA00D539DE /* APDUTrailer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUTrailer.swift; sourceTree = "<group>"; };
+		F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUResponse.swift; sourceTree = "<group>"; };
+		F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUMessageBodyProtocol.swift; sourceTree = "<group>"; };
+		F7CCC7621D87782600D539DE /* APDUResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUResponseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,7 +327,9 @@
 				F7CCC7201D86326E00D539DE /* APDUCommand.swift */,
 				F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */,
 				F7CCC7561D876ADA00D539DE /* APDUTrailer.swift */,
-				F7CCC7521D876A0D00D539DE /* APDUMessage.swift */,
+				F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */,
+				F7CCC7521D876A0D00D539DE /* APDUMessageProtocol.swift */,
+				F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */,
 				F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */,
 			);
 			name = APDU;
@@ -326,6 +338,7 @@
 		F7CCC7151D862BD200D539DE /* APDU */ = {
 			isa = PBXGroup;
 			children = (
+				F7CCC7621D87782600D539DE /* APDUResponseTests.swift */,
 				F7CCC71A1D86313D00D539DE /* APDUHeaderTests.swift */,
 				F7CCC7241D86361E00D539DE /* APDUCommandTests.swift */,
 				F7CCC7161D862BF600D539DE /* RegisterRequestTests.swift */,
@@ -516,6 +529,7 @@
 				F7CCC72F1D8649A600D539DE /* DataReaderTests.swift in Sources */,
 				F7CCC7191D862F5F00D539DE /* RegisterResponseTests.swift in Sources */,
 				F77180411D8410C8008D1CDB /* RegisterRequest.swift in Sources */,
+				F7CCC75C1D876D6D00D539DE /* APDUResponse.swift in Sources */,
 				F7CCC6E71D85378500D539DE /* KeyInterface.m in Sources */,
 				F7CCC7441D8736BA00D539DE /* BLEFragmentReader.swift in Sources */,
 				F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */,
@@ -524,7 +538,7 @@
 				F771803B1D8410BF008D1CDB /* ClientData.swift in Sources */,
 				F7CCC6DF1D85372300D539DE /* SelfSignedCertificate.m in Sources */,
 				F7CCC7171D862BF600D539DE /* RegisterRequestTests.swift in Sources */,
-				F7CCC7541D876A0D00D539DE /* APDUMessage.swift in Sources */,
+				F7CCC7541D876A0D00D539DE /* APDUMessageProtocol.swift in Sources */,
 				F7CCC71B1D86313D00D539DE /* APDUHeaderTests.swift in Sources */,
 				F7CCC7251D86361E00D539DE /* APDUCommandTests.swift in Sources */,
 				F7CCC7581D876ADA00D539DE /* APDUTrailer.swift in Sources */,
@@ -532,6 +546,8 @@
 				F7CCC6ED1D85940400D539DE /* ClientDataTests.swift in Sources */,
 				F7CCC7221D86326E00D539DE /* APDUCommand.swift in Sources */,
 				F7CCC6FB1D85A6E300D539DE /* RegisterResponse.swift in Sources */,
+				F7CCC7631D87782600D539DE /* APDUResponseTests.swift in Sources */,
+				F7CCC7601D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */,
 				F7CCC70A1D86148300D539DE /* Authenticator.swift in Sources */,
 				F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */,
 				F771803F1D8410C5008D1CDB /* CoreExtensionssss.swift in Sources */,
@@ -551,7 +567,7 @@
 			files = (
 				F77CC2F91D801C4200D28CAC /* SecurityKeyClient.swift in Sources */,
 				F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */,
-				F7CCC7551D876A0D00D539DE /* APDUMessage.swift in Sources */,
+				F7CCC7551D876A0D00D539DE /* APDUMessageProtocol.swift in Sources */,
 				F77180421D8410C9008D1CDB /* RegisterRequest.swift in Sources */,
 				F7CCC7451D8736BA00D539DE /* BLEFragmentReader.swift in Sources */,
 				F70373E31D7D64A900FBB057 /* AppDelegate.swift in Sources */,
@@ -560,6 +576,7 @@
 				F7CCC7131D86202C00D539DE /* APDUError.swift in Sources */,
 				F7CCC7591D876ADA00D539DE /* APDUTrailer.swift in Sources */,
 				F7CCC73F1D87294500D539DE /* CoreExtensions.swift in Sources */,
+				F7CCC7611D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */,
 				F77180401D8410C6008D1CDB /* CoreExtensionssss.swift in Sources */,
 				F7CCC7291D86371500D539DE /* DataReader.swift in Sources */,
 				F7CCC6FD1D85A6F800D539DE /* Util.swift in Sources */,
@@ -572,6 +589,7 @@
 				F771803C1D8410BF008D1CDB /* ClientData.swift in Sources */,
 				F7CCC7381D871F0800D539DE /* Endian.swift in Sources */,
 				F7CCC70F1D861E8C00D539DE /* APDUHeader.swift in Sources */,
+				F7CCC75D1D876D6D00D539DE /* APDUResponse.swift in Sources */,
 				F771803E1D8410C2008D1CDB /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,6 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7CCC70D1D861E8C00D539DE /* APDUHeader.swift in Sources */,
+				F7CCC75B1D876D6D00D539DE /* APDUResponse.swift in Sources */,
 				F7CCC7431D8736BA00D539DE /* BLEFragmentReader.swift in Sources */,
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
 				F7CCC7571D876ADA00D539DE /* APDUTrailer.swift in Sources */,
@@ -594,12 +613,13 @@
 				F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */,
 				F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */,
 				F7CCC73D1D87294500D539DE /* CoreExtensions.swift in Sources */,
-				F7CCC7531D876A0D00D539DE /* APDUMessage.swift in Sources */,
+				F7CCC7531D876A0D00D539DE /* APDUMessageProtocol.swift in Sources */,
 				F7CCC6E61D85376A00D539DE /* KeyInterface.m in Sources */,
 				F77180301D84108D008D1CDB /* BLEMessage.swift in Sources */,
 				F7CCC6DE1D85371200D539DE /* SelfSignedCertificate.m in Sources */,
 				F77180331D84108D008D1CDB /* CoreExtensionssss.swift in Sources */,
 				F77180361D84108D008D1CDB /* SHA256.swift in Sources */,
+				F7CCC75F1D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */,
 				F7CCC7361D871F0800D539DE /* Endian.swift in Sources */,
 				F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */,
 				F77180311D84108D008D1CDB /* ClientData.swift in Sources */,
