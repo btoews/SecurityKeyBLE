@@ -59,6 +59,20 @@ class BLEMessage {
         }
     }
     
+    enum ErrorCode: UInt16 {
+        // Error in BLE packet.
+        case BLEError = 0x0001
+        
+        // Error in the APDU packet.
+        case APDUError = 0x0002
+        
+        // Error in the U2F message.
+        case U2FError = 0x0003
+        
+        // ¯\_(ツ)_/¯
+        case Unknown = 0xFFFF
+    }
+    
     let data: NSData
     let commandOrStatus: CommandOrStatus
     var fragments: BLEFragmentIterator { return BLEFragmentIterator(message: self) }

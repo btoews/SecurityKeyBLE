@@ -103,9 +103,9 @@
 		F7CCC75B1D876D6D00D539DE /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */; };
 		F7CCC75C1D876D6D00D539DE /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */; };
 		F7CCC75D1D876D6D00D539DE /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */; };
-		F7CCC75F1D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */; };
-		F7CCC7601D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */; };
-		F7CCC7611D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */; };
+		F7CCC75F1D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageDataProtocol.swift */; };
+		F7CCC7601D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageDataProtocol.swift */; };
+		F7CCC7611D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageDataProtocol.swift */; };
 		F7CCC7631D87782600D539DE /* APDUResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7621D87782600D539DE /* APDUResponseTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -156,7 +156,7 @@
 		F7CCC6E11D85374700D539DE /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = SecurityKey/openssl.framework; sourceTree = "<group>"; };
 		F7CCC6E41D85376A00D539DE /* KeyInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyInterface.h; path = SecurityKey/Extension/KeyInterface/KeyInterface.h; sourceTree = "<group>"; };
 		F7CCC6E51D85376A00D539DE /* KeyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyInterface.m; path = SecurityKey/Extension/KeyInterface/KeyInterface.m; sourceTree = "<group>"; };
-		F7CCC6E81D858E6300D539DE /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authenticator.swift; path = Common/Authenticator.swift; sourceTree = "<group>"; };
+		F7CCC6E81D858E6300D539DE /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authenticator.swift; path = ../Common/Authenticator.swift; sourceTree = "<group>"; };
 		F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterResponse.swift; path = Common/RegisterResponse.swift; sourceTree = "<group>"; };
 		F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDataTests.swift; sourceTree = "<group>"; };
 		F7CCC6F61D85A12D00D539DE /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 		F7CCC7521D876A0D00D539DE /* APDUMessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUMessageProtocol.swift; sourceTree = "<group>"; };
 		F7CCC7561D876ADA00D539DE /* APDUTrailer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUTrailer.swift; sourceTree = "<group>"; };
 		F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUResponse.swift; sourceTree = "<group>"; };
-		F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUMessageBodyProtocol.swift; sourceTree = "<group>"; };
+		F7CCC75E1D876F8300D539DE /* APDUMessageDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUMessageDataProtocol.swift; sourceTree = "<group>"; };
 		F7CCC7621D87782600D539DE /* APDUResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUResponseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -260,7 +260,6 @@
 				F7CCC6F11D859FF900D539DE /* SecurityKey */,
 				F72E40311D81373D0059A0D7 /* StateMachine */,
 				F771802E1D84108D008D1CDB /* u2f.h */,
-				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
 				F77180281D84108D008D1CDB /* ClientData.swift */,
 				F77180291D84108D008D1CDB /* Constants.swift */,
 				F771802A1D84108D008D1CDB /* CoreExtensionssss.swift */,
@@ -296,6 +295,7 @@
 			children = (
 				F78C5BE41D78854B001BB080 /* AppDelegate.swift */,
 				F78C5BF61D78862D001BB080 /* SecurityKeyServer.swift */,
+				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
 				F78C5BE61D78854B001BB080 /* ViewController.swift */,
 				F78C5BE81D78854B001BB080 /* Main.storyboard */,
 				F78C5BEB1D78854B001BB080 /* Assets.xcassets */,
@@ -329,7 +329,7 @@
 				F7CCC7561D876ADA00D539DE /* APDUTrailer.swift */,
 				F7CCC75A1D876D6D00D539DE /* APDUResponse.swift */,
 				F7CCC7521D876A0D00D539DE /* APDUMessageProtocol.swift */,
-				F7CCC75E1D876F8300D539DE /* APDUMessageBodyProtocol.swift */,
+				F7CCC75E1D876F8300D539DE /* APDUMessageDataProtocol.swift */,
 				F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */,
 			);
 			name = APDU;
@@ -547,7 +547,7 @@
 				F7CCC7221D86326E00D539DE /* APDUCommand.swift in Sources */,
 				F7CCC6FB1D85A6E300D539DE /* RegisterResponse.swift in Sources */,
 				F7CCC7631D87782600D539DE /* APDUResponseTests.swift in Sources */,
-				F7CCC7601D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */,
+				F7CCC7601D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */,
 				F7CCC70A1D86148300D539DE /* Authenticator.swift in Sources */,
 				F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */,
 				F771803F1D8410C5008D1CDB /* CoreExtensionssss.swift in Sources */,
@@ -576,7 +576,7 @@
 				F7CCC7131D86202C00D539DE /* APDUError.swift in Sources */,
 				F7CCC7591D876ADA00D539DE /* APDUTrailer.swift in Sources */,
 				F7CCC73F1D87294500D539DE /* CoreExtensions.swift in Sources */,
-				F7CCC7611D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */,
+				F7CCC7611D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */,
 				F77180401D8410C6008D1CDB /* CoreExtensionssss.swift in Sources */,
 				F7CCC7291D86371500D539DE /* DataReader.swift in Sources */,
 				F7CCC6FD1D85A6F800D539DE /* Util.swift in Sources */,
@@ -619,7 +619,7 @@
 				F7CCC6DE1D85371200D539DE /* SelfSignedCertificate.m in Sources */,
 				F77180331D84108D008D1CDB /* CoreExtensionssss.swift in Sources */,
 				F77180361D84108D008D1CDB /* SHA256.swift in Sources */,
-				F7CCC75F1D876F8300D539DE /* APDUMessageBodyProtocol.swift in Sources */,
+				F7CCC75F1D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */,
 				F7CCC7361D871F0800D539DE /* Endian.swift in Sources */,
 				F78C5BE51D78854B001BB080 /* AppDelegate.swift in Sources */,
 				F77180311D84108D008D1CDB /* ClientData.swift in Sources */,
