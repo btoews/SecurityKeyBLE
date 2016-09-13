@@ -8,7 +8,9 @@
 
 import Foundation
 
-struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol {    
+struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol {
+    typealias DataType = APDUResponseDataProtocol
+    
     let data: ResponseType
     let trailer: APDUTrailer
     

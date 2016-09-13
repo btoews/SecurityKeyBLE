@@ -8,11 +8,13 @@
 
 import Foundation
 
-let APDUCommandTypes = [
+let APDUCommandTypes:[APDUCommandDataProtocol.Type] = [
     RegisterRequest.self
 ]
 
 struct APDUCommand: APDUMessageProtocol {
+    typealias DataType = APDUCommandDataProtocol
+    
     let header: APDUHeader
     let data: APDUCommandDataProtocol
     
