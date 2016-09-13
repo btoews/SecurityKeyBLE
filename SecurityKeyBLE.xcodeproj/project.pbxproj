@@ -21,8 +21,6 @@
 		F7178FAB1D88B99600F40667 /* WebSafeBase64Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7178FAA1D88B99600F40667 /* WebSafeBase64Tests.swift */; };
 		F7178FAC1D88BA0000F40667 /* WebSafeBase64.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7178FA81D88B40600F40667 /* WebSafeBase64.swift */; };
 		F7178FAD1D88BA0000F40667 /* WebSafeBase64.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7178FA81D88B40600F40667 /* WebSafeBase64.swift */; };
-		F7178FAF1D88BF0E00F40667 /* KeyHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7178FAE1D88BF0E00F40667 /* KeyHandle.swift */; };
-		F7178FB01D88BF0E00F40667 /* KeyHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7178FAE1D88BF0E00F40667 /* KeyHandle.swift */; };
 		F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771800D1D83932A008D1CDB /* SHA256Tests.swift */; };
 		F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180101D83B966008D1CDB /* BLEMessageTests.swift */; };
 		F77180151D83D419008D1CDB /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180141D83D419008D1CDB /* TestUtil.swift */; };
@@ -144,7 +142,6 @@
 		F7178F9E1D88A1E300F40667 /* libssl.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.0.0.dylib; path = /usr/local/Cellar/openssl/1.0.2h_1/lib/libssl.1.0.0.dylib; sourceTree = "<absolute>"; };
 		F7178FA81D88B40600F40667 /* WebSafeBase64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSafeBase64.swift; sourceTree = "<group>"; };
 		F7178FAA1D88B99600F40667 /* WebSafeBase64Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSafeBase64Tests.swift; sourceTree = "<group>"; };
-		F7178FAE1D88BF0E00F40667 /* KeyHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandle.swift; sourceTree = "<group>"; };
 		F7717FFA1D823678008D1CDB /* SecurityKeyBLEServer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityKeyBLEServer-Bridging-Header.h"; sourceTree = "<group>"; };
 		F7717FFB1D823678008D1CDB /* SecurityKeyBLEClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SecurityKeyBLEClient-Bridging-Header.h"; path = "../SecurityKeyBLE/SecurityKeyBLEClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		F77180041D82B6C4008D1CDB /* SecurityKeyBLETests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityKeyBLETests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -332,7 +329,6 @@
 				F78C5BE41D78854B001BB080 /* AppDelegate.swift */,
 				F78C5BF61D78862D001BB080 /* SecurityKeyServer.swift */,
 				F7CCC6E81D858E6300D539DE /* ServerAuthenticator.swift */,
-				F7178FAE1D88BF0E00F40667 /* KeyHandle.swift */,
 				F78C5BE61D78854B001BB080 /* ViewController.swift */,
 				F78C5BE81D78854B001BB080 /* Main.storyboard */,
 				F78C5BEB1D78854B001BB080 /* Assets.xcassets */,
@@ -563,7 +559,6 @@
 				F77180151D83D419008D1CDB /* TestUtil.swift in Sources */,
 				F7CCC73B1D8720EA00D539DE /* DataWriterTests.swift in Sources */,
 				F7CCC7321D871E8300D539DE /* DataWriter.swift in Sources */,
-				F7178FB01D88BF0E00F40667 /* KeyHandle.swift in Sources */,
 				F7CCC7481D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */,
 				F7CCC72F1D8649A600D539DE /* DataReaderTests.swift in Sources */,
 				F7CCC7191D862F5F00D539DE /* RegisterResponseTests.swift in Sources */,
@@ -650,7 +645,6 @@
 				F7CCC6EB1D858EA400D539DE /* RegisterResponse.swift in Sources */,
 				F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */,
 				F77CC2F61D7FB08800D28CAC /* StateMachine.swift in Sources */,
-				F7178FAF1D88BF0E00F40667 /* KeyHandle.swift in Sources */,
 				F7CCC73D1D87294500D539DE /* CoreExtensions.swift in Sources */,
 				F7CCC7531D876A0D00D539DE /* APDUMessageProtocol.swift in Sources */,
 				F7CCC6E61D85376A00D539DE /* KeyInterface.m in Sources */,

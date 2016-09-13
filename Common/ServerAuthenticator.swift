@@ -10,15 +10,14 @@ import Foundation
 
 struct ServerAuthenticator {
     enum Error: ErrorType {
+        case DuplicateKeyHandle
+        case NoSuchKey
         case KeyGenerationFailure
         case SigningError
     }
     
     // TODO: Store this somewhere and reuse it?
     private var cert = SelfSignedCertificate()
-    
-    // TODO: use something unique to the device.
-    private var keyHandleBase = "iOS Security Key:".dataUsingEncoding(NSUTF8StringEncoding)!
 
     // Get a BLE level response for a BLE level message.
     func bleResponse(msg: BLEMessage) -> BLEMessage {
@@ -62,8 +61,8 @@ struct ServerAuthenticator {
 
     // register request -> register response
     func register(request: RegisterRequest) throws -> RegisterResponse {
-        let kh = keyHandle(request.applicationParameter)
-        let k = try keyData(forKeyHandle: kh)
+        let kh = newKeyHandle()
+        let k = try generateKey(kh)
         
         let toSign = NSMutableData()
         toSign.appendByte(0x00) // reserved
@@ -84,8 +83,11 @@ struct ServerAuthenticator {
     }
     
     // Sign a message with the appropriate key.
-    private func signWithKey(applicationParameter: NSData, message: NSData) throws -> NSData {
-        let kh = keyHandle(applicationParameter)
+    private func signWithKey(kh: NSData, message: NSData) throws -> NSData {
+        if !KeyInterface.publicKeyExists(kh) {
+            throw Error.NoSuchKey
+        }
+    
         let res = KeyInterface.generateSignatureForData(message, withKeyName: kh)
 
         if res.error != nil {
@@ -95,19 +97,22 @@ struct ServerAuthenticator {
         }
     }
     
-    // Get the appropriate key for the given key handle.
-    private func keyData(forKeyHandle kh: NSData) throws -> NSData {
-        if !KeyInterface.publicKeyExists(kh) && !KeyInterface.generateTouchIDKeyPair(kh){
+    // Generate a key with the given key handle.
+    private func generateKey(kh: NSData) throws -> NSData {
+        if KeyInterface.publicKeyExists(kh) {
+            throw Error.DuplicateKeyHandle
+        }
+        
+        if !KeyInterface.generateTouchIDKeyPair(kh) {
             throw Error.KeyGenerationFailure
         }
         
         return KeyInterface.publicKeyBits(kh)
     }
-    
-    // Get the appropriate key handle for a given application parameter.
-    private func keyHandle(applicationParameter: NSData) -> NSData {
-        let data = NSMutableData(data: keyHandleBase)
-        data.appendData(applicationParameter)
-        return SHA256.b64Digest(data)
+
+    private func newKeyHandle() -> NSData {
+        var bytes = [UInt8](count: 32, repeatedValue: 0x00)
+        SecRandomCopyBytes(kSecRandomDefault, 32, &bytes)
+        return NSData(bytes: &bytes, length: 32)
     }
 }

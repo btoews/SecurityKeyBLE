@@ -23,8 +23,7 @@ class ViewController: NSViewController {
             do {
                 let apdu:APDUResponse<RegisterResponse> = try response.unwrapAPDU()
                 let regResp = apdu.data
-                let kh = String(data: regResp.keyHandle, encoding: NSUTF8StringEncoding)
-                print("key handle: \(kh)")
+                print("key handle: \(regResp.keyHandle)")
             } catch {
                 print("something else blew up")
             }

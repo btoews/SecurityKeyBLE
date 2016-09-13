@@ -38,4 +38,11 @@ class WebSafeBase64 {
         
         return NSData(base64EncodedString: b64, options: [])
     }
+    
+    static func random(size:Int = 32) -> String {
+        var bytes = [UInt8](count: size, repeatedValue: 0x00)
+        SecRandomCopyBytes(kSecRandomDefault, size, &bytes)
+        let data = NSData(bytes: &bytes, length: size)
+        return encodeData(data)
+    }
 }

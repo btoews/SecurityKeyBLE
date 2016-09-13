@@ -34,6 +34,10 @@ class SHA256 {
         return SHA256(data: data).b64Digest
     }
     
+    static func webSafeB64Digest(data: NSData) -> String {
+        return SHA256(data: data).webSafeB64Digest
+    }
+    
     let digest: NSData
     
     var tupleDigest: TupleDigest {
