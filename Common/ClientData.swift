@@ -26,12 +26,18 @@ struct ClientData {
         ]
     }
     
+    init(typ t: Type, origin o: String) {
+        typ = t
+        origin = o
+        challenge = "foo"
+    }
+    
     func toJSON() throws -> NSData {
         return try NSJSONSerialization.dataWithJSONObject(dict, options: [])
     }
     
-    func digest() throws -> SHA256.TupleDigest {
+    func digest() throws -> NSData {
         let j = try toJSON()
-        return SHA256.tupleDigest(j)
+        return try SHA256.digest(j)
     }
 }

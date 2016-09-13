@@ -11,6 +11,7 @@ import Foundation
 struct RegisterResponse: APDUResponseDataProtocol {
     enum Error: ErrorType {
         case BadSize
+        case BadCert
     }
     
     static let status = APDUTrailer.Status.NoError
@@ -40,7 +41,7 @@ struct RegisterResponse: APDUResponseDataProtocol {
             keyHandle = try reader.readData(Int(khLen))
             
             // peek at cert to figure out its length
-            let certLen = try Util.certLength(fromData: reader.rest)
+            let certLen = try RegisterResponse.certLength(fromData: reader.rest)
             certificate = try reader.readData(certLen)
             
             signature = reader.rest
@@ -60,5 +61,15 @@ struct RegisterResponse: APDUResponseDataProtocol {
         writer.writeData(signature)
         
         return writer.buffer
+    }
+    
+    // Parse a DER formatted X509 certificate from the beginning of a datum and return its length.
+    static func certLength(fromData d: NSData) throws -> Int {
+        var size: Int = 0
+        if SelfSignedCertificate.parseX509(d, consumed: &size) == 1 {
+            return size
+        } else {
+            throw Error.BadCert
+        }
     }
 }

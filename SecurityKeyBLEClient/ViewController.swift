@@ -14,6 +14,12 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         u2fClient = Client()
+        
+        do {
+            try u2fClient?.register("hello world")
+        } catch {
+            print("shit")
+        }
     }
 
     override var representedObject: AnyObject? {

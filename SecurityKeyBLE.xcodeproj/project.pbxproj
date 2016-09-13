@@ -11,6 +11,12 @@
 		F70373E51D7D64A900FBB057 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70373E41D7D64A900FBB057 /* ViewController.swift */; };
 		F70373E71D7D64A900FBB057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F70373E61D7D64A900FBB057 /* Assets.xcassets */; };
 		F70373EA1D7D64A900FBB057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70373E81D7D64A900FBB057 /* Main.storyboard */; };
+		F7178F9F1D88A1E300F40667 /* libcrypto.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7178F991D88A1E300F40667 /* libcrypto.1.0.0.dylib */; };
+		F7178FA01D88A1E300F40667 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7178F9A1D88A1E300F40667 /* libcrypto.a */; };
+		F7178FA11D88A1E300F40667 /* libcrypto.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7178F9B1D88A1E300F40667 /* libcrypto.1.0.0.dylib */; };
+		F7178FA21D88A1E300F40667 /* libssl.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7178F9C1D88A1E300F40667 /* libssl.1.0.0.dylib */; };
+		F7178FA31D88A1E300F40667 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7178F9D1D88A1E300F40667 /* libssl.a */; };
+		F7178FA41D88A1E300F40667 /* libssl.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7178F9E1D88A1E300F40667 /* libssl.1.0.0.dylib */; };
 		F771800E1D83932A008D1CDB /* SHA256Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771800D1D83932A008D1CDB /* SHA256Tests.swift */; };
 		F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180101D83B966008D1CDB /* BLEMessageTests.swift */; };
 		F77180151D83D419008D1CDB /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77180141D83D419008D1CDB /* TestUtil.swift */; };
@@ -47,17 +53,12 @@
 		F7CCC6E31D85374C00D539DE /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CCC6E11D85374700D539DE /* openssl.framework */; };
 		F7CCC6E61D85376A00D539DE /* KeyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E51D85376A00D539DE /* KeyInterface.m */; };
 		F7CCC6E71D85378500D539DE /* KeyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E51D85376A00D539DE /* KeyInterface.m */; };
-		F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* Authenticator.swift */; };
+		F7CCC6E91D858E6300D539DE /* ServerAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* ServerAuthenticator.swift */; };
 		F7CCC6EB1D858EA400D539DE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */; };
 		F7CCC6ED1D85940400D539DE /* ClientDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */; };
-		F7CCC6F71D85A12D00D539DE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6F61D85A12D00D539DE /* Util.swift */; };
-		F7CCC6F81D85A20600D539DE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6F61D85A12D00D539DE /* Util.swift */; };
-		F7CCC6FA1D85A28800D539DE /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6F91D85A28800D539DE /* UtilTests.swift */; };
 		F7CCC6FB1D85A6E300D539DE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */; };
 		F7CCC6FC1D85A6E500D539DE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */; };
-		F7CCC6FD1D85A6F800D539DE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6F61D85A12D00D539DE /* Util.swift */; };
-		F7CCC70A1D86148300D539DE /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* Authenticator.swift */; };
-		F7CCC70B1D86148400D539DE /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* Authenticator.swift */; };
+		F7CCC70A1D86148300D539DE /* ServerAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6E81D858E6300D539DE /* ServerAuthenticator.swift */; };
 		F7CCC70D1D861E8C00D539DE /* APDUHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */; };
 		F7CCC70E1D861E8C00D539DE /* APDUHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */; };
 		F7CCC70F1D861E8C00D539DE /* APDUHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */; };
@@ -107,6 +108,7 @@
 		F7CCC7601D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageDataProtocol.swift */; };
 		F7CCC7611D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC75E1D876F8300D539DE /* APDUMessageDataProtocol.swift */; };
 		F7CCC7631D87782600D539DE /* APDUResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC7621D87782600D539DE /* APDUResponseTests.swift */; };
+		F7CCC7711D889E5000D539DE /* SelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC6DD1D85371200D539DE /* SelfSignedCertificate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,12 @@
 		F70373E61D7D64A900FBB057 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F70373E91D7D64A900FBB057 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F70373EB1D7D64A900FBB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7178F991D88A1E300F40667 /* libcrypto.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.0.0.dylib; path = /usr/local/Cellar/openssl/1.0.2h_1/lib/libcrypto.1.0.0.dylib; sourceTree = "<absolute>"; };
+		F7178F9A1D88A1E300F40667 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = /usr/local/Cellar/openssl/1.0.2h_1/lib/libcrypto.a; sourceTree = "<absolute>"; };
+		F7178F9B1D88A1E300F40667 /* libcrypto.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.0.0.dylib; path = /usr/local/Cellar/openssl/1.0.2h_1/lib/libcrypto.1.0.0.dylib; sourceTree = "<absolute>"; };
+		F7178F9C1D88A1E300F40667 /* libssl.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.0.0.dylib; path = /usr/local/Cellar/openssl/1.0.2h_1/lib/libssl.1.0.0.dylib; sourceTree = "<absolute>"; };
+		F7178F9D1D88A1E300F40667 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = /usr/local/Cellar/openssl/1.0.2h_1/lib/libssl.a; sourceTree = "<absolute>"; };
+		F7178F9E1D88A1E300F40667 /* libssl.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.0.0.dylib; path = /usr/local/Cellar/openssl/1.0.2h_1/lib/libssl.1.0.0.dylib; sourceTree = "<absolute>"; };
 		F7717FFA1D823678008D1CDB /* SecurityKeyBLEServer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityKeyBLEServer-Bridging-Header.h"; sourceTree = "<group>"; };
 		F7717FFB1D823678008D1CDB /* SecurityKeyBLEClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SecurityKeyBLEClient-Bridging-Header.h"; path = "../SecurityKeyBLE/SecurityKeyBLEClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		F77180041D82B6C4008D1CDB /* SecurityKeyBLETests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityKeyBLETests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -153,14 +161,12 @@
 		F78C5BF61D78862D001BB080 /* SecurityKeyServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityKeyServer.swift; sourceTree = "<group>"; };
 		F7CCC6DC1D85371200D539DE /* SelfSignedCertificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfSignedCertificate.h; path = SecurityKey/Extension/SelfSignedCertificate.h; sourceTree = "<group>"; };
 		F7CCC6DD1D85371200D539DE /* SelfSignedCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfSignedCertificate.m; path = SecurityKey/Extension/SelfSignedCertificate.m; sourceTree = "<group>"; };
-		F7CCC6E11D85374700D539DE /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = SecurityKey/openssl.framework; sourceTree = "<group>"; };
+		F7CCC6E11D85374700D539DE /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = ../SecurityKey/openssl.framework; sourceTree = "<group>"; };
 		F7CCC6E41D85376A00D539DE /* KeyInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyInterface.h; path = SecurityKey/Extension/KeyInterface/KeyInterface.h; sourceTree = "<group>"; };
 		F7CCC6E51D85376A00D539DE /* KeyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyInterface.m; path = SecurityKey/Extension/KeyInterface/KeyInterface.m; sourceTree = "<group>"; };
-		F7CCC6E81D858E6300D539DE /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authenticator.swift; path = ../Common/Authenticator.swift; sourceTree = "<group>"; };
+		F7CCC6E81D858E6300D539DE /* ServerAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerAuthenticator.swift; path = ../Common/ServerAuthenticator.swift; sourceTree = "<group>"; };
 		F7CCC6EA1D858EA400D539DE /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterResponse.swift; path = Common/RegisterResponse.swift; sourceTree = "<group>"; };
 		F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDataTests.swift; sourceTree = "<group>"; };
-		F7CCC6F61D85A12D00D539DE /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		F7CCC6F91D85A28800D539DE /* UtilTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilTests.swift; sourceTree = "<group>"; };
 		F7CCC70C1D861E8C00D539DE /* APDUHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUHeader.swift; sourceTree = "<group>"; };
 		F7CCC7101D86202C00D539DE /* APDUError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUError.swift; sourceTree = "<group>"; };
 		F7CCC7161D862BF600D539DE /* RegisterRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRequestTests.swift; sourceTree = "<group>"; };
@@ -199,6 +205,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7178F9F1D88A1E300F40667 /* libcrypto.1.0.0.dylib in Frameworks */,
+				F7178FA01D88A1E300F40667 /* libcrypto.a in Frameworks */,
+				F7178FA11D88A1E300F40667 /* libcrypto.1.0.0.dylib in Frameworks */,
+				F7178FA21D88A1E300F40667 /* libssl.1.0.0.dylib in Frameworks */,
+				F7178FA31D88A1E300F40667 /* libssl.a in Frameworks */,
+				F7178FA41D88A1E300F40667 /* libssl.1.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +231,6 @@
 				F7CCC7151D862BD200D539DE /* APDU */,
 				F7CCC74B1D8755A800D539DE /* BLE */,
 				F7CCC7391D8720D500D539DE /* Data */,
-				F7CCC6F91D85A28800D539DE /* UtilTests.swift */,
 				F7CCC6EC1D85940400D539DE /* ClientDataTests.swift */,
 				F77180141D83D419008D1CDB /* TestUtil.swift */,
 				F771800D1D83932A008D1CDB /* SHA256Tests.swift */,
@@ -232,6 +243,7 @@
 		F70373E11D7D64A900FBB057 /* SecurityKeyBLEClient */ = {
 			isa = PBXGroup;
 			children = (
+				F7178FA51D88A22100F40667 /* openssl */,
 				F7717FFB1D823678008D1CDB /* SecurityKeyBLEClient-Bridging-Header.h */,
 				F70373E21D7D64A900FBB057 /* AppDelegate.swift */,
 				F70373E41D7D64A900FBB057 /* ViewController.swift */,
@@ -241,6 +253,20 @@
 				F70373EB1D7D64A900FBB057 /* Info.plist */,
 			);
 			path = SecurityKeyBLEClient;
+			sourceTree = "<group>";
+		};
+		F7178FA51D88A22100F40667 /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+				F7178F991D88A1E300F40667 /* libcrypto.1.0.0.dylib */,
+				F7178F9A1D88A1E300F40667 /* libcrypto.a */,
+				F7178F9B1D88A1E300F40667 /* libcrypto.1.0.0.dylib */,
+				F7178F9C1D88A1E300F40667 /* libssl.1.0.0.dylib */,
+				F7178F9D1D88A1E300F40667 /* libssl.a */,
+				F7178F9E1D88A1E300F40667 /* libssl.1.0.0.dylib */,
+			);
+			name = openssl;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F72E40311D81373D0059A0D7 /* StateMachine */ = {
@@ -264,7 +290,6 @@
 				F77180291D84108D008D1CDB /* Constants.swift */,
 				F771802A1D84108D008D1CDB /* CoreExtensionssss.swift */,
 				F771802D1D84108D008D1CDB /* SHA256.swift */,
-				F7CCC6F61D85A12D00D539DE /* Util.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -293,9 +318,10 @@
 		F78C5BE31D78854A001BB080 /* SecurityKeyBLEServer */ = {
 			isa = PBXGroup;
 			children = (
+				F7CCC6E11D85374700D539DE /* openssl.framework */,
 				F78C5BE41D78854B001BB080 /* AppDelegate.swift */,
 				F78C5BF61D78862D001BB080 /* SecurityKeyServer.swift */,
-				F7CCC6E81D858E6300D539DE /* Authenticator.swift */,
+				F7CCC6E81D858E6300D539DE /* ServerAuthenticator.swift */,
 				F78C5BE61D78854B001BB080 /* ViewController.swift */,
 				F78C5BE81D78854B001BB080 /* Main.storyboard */,
 				F78C5BEB1D78854B001BB080 /* Assets.xcassets */,
@@ -312,7 +338,6 @@
 			children = (
 				F7CCC6E41D85376A00D539DE /* KeyInterface.h */,
 				F7CCC6E51D85376A00D539DE /* KeyInterface.m */,
-				F7CCC6E11D85374700D539DE /* openssl.framework */,
 				F7CCC6DC1D85371200D539DE /* SelfSignedCertificate.h */,
 				F7CCC6DD1D85371200D539DE /* SelfSignedCertificate.m */,
 			);
@@ -524,7 +549,6 @@
 				F77180151D83D419008D1CDB /* TestUtil.swift in Sources */,
 				F7CCC73B1D8720EA00D539DE /* DataWriterTests.swift in Sources */,
 				F7CCC7321D871E8300D539DE /* DataWriter.swift in Sources */,
-				F7CCC6F71D85A12D00D539DE /* Util.swift in Sources */,
 				F7CCC7481D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */,
 				F7CCC72F1D8649A600D539DE /* DataReaderTests.swift in Sources */,
 				F7CCC7191D862F5F00D539DE /* RegisterResponseTests.swift in Sources */,
@@ -548,7 +572,7 @@
 				F7CCC6FB1D85A6E300D539DE /* RegisterResponse.swift in Sources */,
 				F7CCC7631D87782600D539DE /* APDUResponseTests.swift in Sources */,
 				F7CCC7601D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */,
-				F7CCC70A1D86148300D539DE /* Authenticator.swift in Sources */,
+				F7CCC70A1D86148300D539DE /* ServerAuthenticator.swift in Sources */,
 				F77180111D83B966008D1CDB /* BLEMessageTests.swift in Sources */,
 				F771803F1D8410C5008D1CDB /* CoreExtensionssss.swift in Sources */,
 				F7CCC73E1D87294500D539DE /* CoreExtensions.swift in Sources */,
@@ -557,7 +581,6 @@
 				F7CCC7281D86371500D539DE /* DataReader.swift in Sources */,
 				F771803D1D8410C2008D1CDB /* Constants.swift in Sources */,
 				F77180461D8410CF008D1CDB /* SHA256.swift in Sources */,
-				F7CCC6FA1D85A28800D539DE /* UtilTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,12 +602,11 @@
 				F7CCC7611D876F8300D539DE /* APDUMessageDataProtocol.swift in Sources */,
 				F77180401D8410C6008D1CDB /* CoreExtensionssss.swift in Sources */,
 				F7CCC7291D86371500D539DE /* DataReader.swift in Sources */,
-				F7CCC6FD1D85A6F800D539DE /* Util.swift in Sources */,
 				F7CCC7331D871E8300D539DE /* DataWriter.swift in Sources */,
 				F77180451D8410CE008D1CDB /* SHA256.swift in Sources */,
 				F77CC2F71D7FB09200D28CAC /* StateMachine.swift in Sources */,
 				F7CCC6FC1D85A6E500D539DE /* RegisterResponse.swift in Sources */,
-				F7CCC70B1D86148400D539DE /* Authenticator.swift in Sources */,
+				F7CCC7711D889E5000D539DE /* SelfSignedCertificate.m in Sources */,
 				F7CCC7491D874DBB00D539DE /* BLEFragmentIterator.swift in Sources */,
 				F771803C1D8410BF008D1CDB /* ClientData.swift in Sources */,
 				F7CCC7381D871F0800D539DE /* Endian.swift in Sources */,
@@ -604,10 +626,9 @@
 				F78C5BE71D78854B001BB080 /* ViewController.swift in Sources */,
 				F7CCC7571D876ADA00D539DE /* APDUTrailer.swift in Sources */,
 				F7CCC7311D871E8300D539DE /* DataWriter.swift in Sources */,
-				F7CCC6E91D858E6300D539DE /* Authenticator.swift in Sources */,
+				F7CCC6E91D858E6300D539DE /* ServerAuthenticator.swift in Sources */,
 				F78C5BF71D78862D001BB080 /* SecurityKeyServer.swift in Sources */,
 				F7CCC7271D86371500D539DE /* DataReader.swift in Sources */,
-				F7CCC6F81D85A20600D539DE /* Util.swift in Sources */,
 				F7CCC7111D86202C00D539DE /* APDUError.swift in Sources */,
 				F7CCC6EB1D858EA400D539DE /* RegisterResponse.swift in Sources */,
 				F77180341D84108D008D1CDB /* RegisterRequest.swift in Sources */,
@@ -711,8 +732,16 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SecurityKey",
+				);
 				INFOPLIST_FILE = SecurityKeyBLEClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/openssl/1.0.2h_1/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLEClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -729,8 +758,16 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SecurityKey",
+				);
 				INFOPLIST_FILE = SecurityKeyBLEClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/openssl/1.0.2h_1/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SecurityKeyBLEClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";

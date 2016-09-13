@@ -10,9 +10,9 @@ import XCTest
 
 class ClientDataTests: XCTestCase {
     func testSerialize() throws {
-        let cd = ClientData(typ: .Register, challenge: "qwer", origin: "zxcv")
+        let cd = ClientData(typ: .Register, origin: "zxcv")
         
-        let expectedJSON = "{\"challenge\":\"qwer\",\"typ\":\"navigator.id.finishEnrollment\",\"origin\":\"zxcv\"}".dataUsingEncoding(NSUTF8StringEncoding)
+        let expectedJSON = "{\"challenge\":\"foo\",\"typ\":\"navigator.id.finishEnrollment\",\"origin\":\"zxcv\"}".dataUsingEncoding(NSUTF8StringEncoding)
         let actualJSON = try cd.toJSON()
         XCTAssertEqual(expectedJSON, actualJSON)
     }

@@ -10,7 +10,7 @@ import Foundation
 import CoreBluetooth
 
 class ServerContext: ContextProtocol {
-    let authenticator = Authenticator()
+    let authenticator = ServerAuthenticator()
 
     var peripheralManager:                   CBPeripheralManager?
     var u2fService:                          CBMutableService?
@@ -91,6 +91,10 @@ class ServerState: State<ServerContext> {
 class ServerInitState: ServerState {
     override func enter() {
         machine.reset()
+        
+        context.activeCentral     = nil
+        context.activeBLERequest  = nil
+        context.activeBLEResponse = nil
         
         context.u2fControlPointCharacteristic = CBMutableCharacteristic(
             type: u2fControlPointCharacteristicUUID,

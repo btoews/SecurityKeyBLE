@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Authenticator {
+struct ServerAuthenticator {
     enum Error: ErrorType {
         case KeyGenerationFailure
         case SigningError

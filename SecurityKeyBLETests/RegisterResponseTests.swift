@@ -23,4 +23,14 @@ class RegisterResponseTests: XCTestCase {
         XCTAssertEqual(r1.certificate, r2.certificate)
         XCTAssertEqual(r1.signature, r2.signature)
     }
+    
+    func testCertLength() throws {
+        let crt = SelfSignedCertificate()
+        let crtData = NSMutableData(data: crt.toDer())
+        crtData.appendData("blah blah blah".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        let expected = crt.toDer().length
+        let actual = try RegisterResponse.certLength(fromData: crtData)
+        XCTAssertEqual(expected, actual)
+    }
 }
