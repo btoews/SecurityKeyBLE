@@ -43,11 +43,6 @@ struct APDUCommand: APDUMessageProtocol {
     var commandType: APDUCommandDataProtocol.Type? {
         return APDUCommand.commandTypeForCode(header.ins)
     }
-
-    func unwrapData<DataType:APDUMessageDataProtocol>() throws -> DataType {
-        guard let d = data as? DataType else { throw APDUError.BadCode }
-        return d
-    }
     
     static func commandTypeForCode(code: APDUHeader.CommandCode) -> APDUCommandDataProtocol.Type? {
         return APDUCommandTypes.lazy.filter({ $0.cmdCode == code }).first

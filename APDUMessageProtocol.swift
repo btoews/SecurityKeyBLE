@@ -11,6 +11,4 @@ import Foundation
 protocol APDUMessageProtocol {
     var raw: NSData { get }
     init(raw: NSData) throws
-    
-    func unwrapData<DataType:APDUMessageDataProtocol>() throws -> DataType
 }

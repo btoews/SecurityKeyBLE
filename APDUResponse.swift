@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol {
+struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol {    
     let data: ResponseType
     let trailer: APDUTrailer
     
@@ -30,10 +30,5 @@ struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol 
         let dData = try reader.readData(reader.remaining - 2)
         data = try ResponseType(raw: dData)
         trailer = try APDUTrailer(raw: reader.rest)
-    }
-    
-    func unwrapData<DataType:APDUMessageDataProtocol>() throws -> DataType {
-        guard let d = data as? DataType else { throw APDUError.BadCode }
-        return d
     }
 }
