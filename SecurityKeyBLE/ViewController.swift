@@ -9,11 +9,13 @@
 import UIKit
 import CoreBluetooth
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, LoggerProtocol {
+    @IBOutlet weak var statusLabel: UILabel!
+
     var server: CBPeripheralManagerDelegate?
 
     override func viewDidLoad() {
-        server = Server()
+        server = Server(logger: self)
 
         super.viewDidLoad()
     }
@@ -22,7 +24,11 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    func log(msg:String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.statusLabel.text = msg
+        }
+    }
 }
 

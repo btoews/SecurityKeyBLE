@@ -10,6 +10,7 @@ import Foundation
 import CoreBluetooth
 
 class ServerContext: ContextProtocol {
+    var logger: LoggerProtocol?
     let authenticator = ServerAuthenticator()
 
     var peripheralManager:                   CBPeripheralManager?
@@ -27,9 +28,8 @@ class ServerContext: ContextProtocol {
 }
 
 class Server: StateMachine<ServerContext>, CBPeripheralManagerDelegate {
-    override init() {
-        super.init()
-        
+    override init(logger:LoggerProtocol? = nil) {
+        super.init(logger: logger)
         failure = ServerInitState.self
         proceed(ServerInitState.self)
     }
@@ -90,6 +90,8 @@ class ServerState: State<ServerContext> {
 
 class ServerInitState: ServerState {
     override func enter() {
+        context.log("Initializing…")
+        
         machine.reset()
         
         context.activeCentral     = nil
@@ -144,7 +146,7 @@ class ServerInitState: ServerState {
     
     func handlePeripheralStateUpdate() {
         if context.peripheralManager?.state == .PoweredOn {
-            print("peripheralManager powered on")
+            context.debug("peripheralManager powered on")
             proceed(ServerAddServiceState)
         } else {
             fail("peripheralManager not powered on")
@@ -171,6 +173,8 @@ class ServerAddServiceState: ServerState {
 
 class ServerStartAdvertisingState: ServerState {
     override func enter() {
+        context.log("Advertising U2F service…")
+
         guard
             let manager = context.peripheralManager,
             let service = context.u2fService
@@ -208,6 +212,8 @@ class ServerRequestState: ServerState {
     let bleReader = BLEFragmentReader()
     
     override func enter() {
+        context.log("Receiving request…")
+
         handle(event: "writeRequestReceived", with: handleWriteRequestReceived)
     }
     
@@ -246,6 +252,8 @@ class ServerResponseState: ServerState {
     var queuedFragment: NSData?
     
     override func enter() {
+        context.log("Sending response…")
+        
         guard
             let resp = context.activeBLEResponse
         else { return fail("bad context") }
@@ -285,4 +293,7 @@ class ServerResponseState: ServerState {
 }
 
 class ServerFinishedState: ServerState {
+    override func enter() {
+        context.log("Finished")
+    }
 }

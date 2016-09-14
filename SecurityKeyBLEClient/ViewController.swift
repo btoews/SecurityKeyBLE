@@ -8,11 +8,13 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
-    var client = Client()
+class ViewController: NSViewController, LoggerProtocol {
+    @IBOutlet weak var statusLabel: NSTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let client = Client(logger: self)
         
         guard let msg = bleRegisterRequest() else {
             print("couldn't generate register request")
@@ -47,6 +49,12 @@ class ViewController: NSViewController {
     override var representedObject: AnyObject? {
         didSet {
         // Update the view, if already loaded.
+        }
+    }
+    
+    func log(msg:String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.statusLabel.stringValue = msg
         }
     }
 }
