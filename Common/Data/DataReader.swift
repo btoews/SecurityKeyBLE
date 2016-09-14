@@ -85,15 +85,17 @@ class DataReader {
     }
     
     // Read n bytes from the data, advancing our offset into the data.
-    func readData(n: Int) throws -> NSData {
-        guard let d = peekData(n) else { throw Error.End }
-        offset += n
+    func readData<I:IntegerType>(n: I) throws -> NSData {
+        let intN = Int(n.toIntMax())
+        guard let d = peekData(intN) else { throw Error.End }
+        offset += intN
         return d
     }
     
     // Read n bytes from the data, without advancing our offset into the data.
-    func peekData(n: Int) -> NSData? {
-        if remaining < n { return nil }
-        return data.subdataWithRange(NSMakeRange(offset, n))
+    func peekData<I:IntegerType>(n: I) -> NSData? {
+        let intN = Int(n.toIntMax())
+        if remaining < intN { return nil }
+        return data.subdataWithRange(NSMakeRange(offset, intN))
     }
 }

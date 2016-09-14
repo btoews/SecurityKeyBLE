@@ -15,9 +15,10 @@ struct ServerAuthenticator {
         case KeyGenerationFailure
         case SigningError
     }
-    
-    // TODO: Store this somewhere and reuse it?
-    private var cert = SelfSignedCertificate()
+
+    private let cert        = SelfSignedCertificate()
+    private let UserPresent = UInt8(U2F_AUTH_FLAG_TUP)
+    private let Counter     = UInt32(0x00000000)
 
     // Get a BLE level response for a BLE level message.
     func bleResponse(msg: BLEMessage) -> BLEMessage {
@@ -35,22 +36,17 @@ struct ServerAuthenticator {
 
     // Get a BLE level response for a BLE level command.
     func bleCommandResponse(cmd: APDUCommand) -> BLEMessage {
-        if let req = cmd.data as? RegisterRequest {
-            return bleRegisterResponse(req)
-        } else {
-            return bleErrorResponse(.U2FError)
-        }
-    }
-    
-    // Get a BLE level response for a U2F level register request.
-    func bleRegisterResponse(req: RegisterRequest) -> BLEMessage {
         do {
-            let resp = try(register(req))
-            let msg = try resp.bleWrapped()
-            return msg
-        } catch {
-            return bleErrorResponse(.U2FError)
-        }
+            if let req = cmd.registerRequest {
+                return try register(req).bleWrapped()
+            }
+            
+            if let req = cmd.authenticationRequest {
+                return try authenticate(req).bleWrapped()
+            }
+        } catch {}
+        
+        return bleErrorResponse(.APDUError)
     }
     
     // Get a BLE level error response with the given code.
@@ -64,17 +60,30 @@ struct ServerAuthenticator {
         let kh = newKeyHandle()
         let k = try generateKey(kh)
         
-        let toSign = NSMutableData()
-        toSign.appendByte(0x00) // reserved
-        toSign.appendData(request.applicationParameter)
-        toSign.appendData(request.challengeParameter)
-        toSign.appendData(kh)
-        toSign.appendData(k)
+        let toSign = DataWriter()
+        toSign.write(UInt8(0x00)) // reserved
+        toSign.writeData(request.applicationParameter)
+        toSign.writeData(request.challengeParameter)
+        toSign.writeData(kh)
+        toSign.writeData(k)
         
-        let s = signWithCert(toSign)
+        let s = signWithCert(toSign.buffer)
         let c = cert.toDer()
         
         return RegisterResponse(publicKey: k, keyHandle: kh, certificate: c, signature: s)
+    }
+    
+    // auth request -> auth response
+    func authenticate(request: AuthenticationRequest) throws -> AuthenticationResponse {
+        let toSign = DataWriter()
+        toSign.writeData(request.applicationParameter)
+        toSign.write(UserPresent)
+        toSign.write(Counter)
+        toSign.writeData(request.challengeParameter)
+        
+        let sig = try signWithKey(request.keyHandle, message: toSign.buffer)
+        
+        return AuthenticationResponse(userPresence: UserPresent, counter: Counter, signature: sig)
     }
 
     // Sign a message with our X509 certificate.

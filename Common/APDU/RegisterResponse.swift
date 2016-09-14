@@ -9,11 +9,6 @@
 import Foundation
 
 struct RegisterResponse: APDUResponseDataProtocol {
-    enum Error: ErrorType {
-        case BadSize
-        case BadCert
-    }
-    
     static let status = APDUTrailer.Status.NoError
     
     let publicKey:   NSData
@@ -69,7 +64,7 @@ struct RegisterResponse: APDUResponseDataProtocol {
         if SelfSignedCertificate.parseX509(d, consumed: &size) == 1 {
             return size
         } else {
-            throw Error.BadCert
+            throw APDUError.BadCert
         }
     }
 }

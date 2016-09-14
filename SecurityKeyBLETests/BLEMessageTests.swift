@@ -61,8 +61,9 @@ class BLEMessageTests: XCTestCase {
         XCTAssertEqual(m2.commandOrStatus.command, .Msg)
         let apdu:APDUCommand = try m2.unwrapAPDU()
         
-        XCTAssert(apdu.commandType == RegisterRequest.self, "expected command type to be register request")
-        let r2 = apdu.data as! RegisterRequest
+        guard let r2 = apdu.registerRequest else {
+            return XCTFail("expected apdu to have a register request")
+        }
         
         XCTAssertEqual(r1.applicationParameter, r2.applicationParameter)
         XCTAssertEqual(r1.challengeParameter, r2.challengeParameter)

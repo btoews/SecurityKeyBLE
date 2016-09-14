@@ -24,8 +24,8 @@ struct RegisterRequest: APDUCommandDataProtocol {
         let reader = DataReader(data: raw)
         
         do {
-            challengeParameter = try reader.readData(Int(U2F_CHAL_SIZE))
-            applicationParameter = try reader.readData(Int(U2F_APPID_SIZE))
+            challengeParameter = try reader.readData(U2F_CHAL_SIZE)
+            applicationParameter = try reader.readData(U2F_APPID_SIZE)
         } catch DataReader.Error.End {
             throw APDUError.BadSize
         }

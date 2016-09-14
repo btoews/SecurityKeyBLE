@@ -23,7 +23,7 @@ class APDUCommandTests: XCTestCase {
     
     func testCommandTypeForCode() {
         XCTAssert(APDUCommand.commandTypeForCode(.Register)          == RegisterRequest.self)
-        XCTAssert(APDUCommand.commandTypeForCode(.Authenticate)      == nil)
+        XCTAssert(APDUCommand.commandTypeForCode(.Authenticate)      == AuthenticationRequest.self)
         XCTAssert(APDUCommand.commandTypeForCode(.Version)           == nil)
         XCTAssert(APDUCommand.commandTypeForCode(.CheckRegister)     == nil)
         XCTAssert(APDUCommand.commandTypeForCode(.AuthenticateBatch) == nil)

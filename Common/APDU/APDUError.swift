@@ -12,4 +12,5 @@ enum APDUError: ErrorType {
     case BadSize
     case BadClass
     case BadCode
+    case BadCert
 }

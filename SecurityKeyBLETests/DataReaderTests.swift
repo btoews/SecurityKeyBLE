@@ -127,6 +127,36 @@ class DataReaderTests: XCTestCase {
         XCTAssertEqual(3, reader.remaining)
     }
     
+    func testReadBytesWithUIntArgs() throws {
+        var raw:[UInt8] = [0x00, 0x01, 0x02, 0x03, 0x04]
+        let data = NSData(bytes: &raw, length: raw.count)
+        let reader = DataReader(data: data, offset: 0)
+        var ores: NSData?
+        var res: NSData
+        
+        let expected = data.subdataWithRange(NSMakeRange(0, 2))
+        XCTAssertEqual(5, reader.remaining)
+        ores = reader.peekData(UInt8(2))
+        XCTAssertEqual(ores, expected)
+        XCTAssertEqual(5, reader.remaining)
+        res = try reader.readData(Int16(2))
+        XCTAssertEqual(res, expected)
+        
+        XCTAssertEqual(3, reader.remaining)
+        ores = reader.peekData(UInt32(4))
+        XCTAssertEqual(ores, nil)
+        XCTAssertEqual(3, reader.remaining)
+        
+        do {
+            res = try reader.readData(UInt64(4))
+            XCTAssert(false, "expected exception")
+        } catch DataReader.Error.End {
+            // pass
+        }
+        
+        XCTAssertEqual(3, reader.remaining)
+    }
+    
     enum Place: UInt8, EndianEnumProtocol {
         typealias RawValue = UInt8
         

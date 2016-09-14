@@ -9,7 +9,8 @@
 import Foundation
 
 let APDUCommandTypes:[APDUCommandDataProtocol.Type] = [
-    RegisterRequest.self
+    RegisterRequest.self,
+    AuthenticationRequest.self
 ]
 
 struct APDUCommand: APDUMessageProtocol {
@@ -42,9 +43,8 @@ struct APDUCommand: APDUMessageProtocol {
         return writer.buffer
     }
     
-    var commandType: APDUCommandDataProtocol.Type? {
-        return APDUCommand.commandTypeForCode(header.ins)
-    }
+    var registerRequest:       RegisterRequest?       { return data as? RegisterRequest }
+    var authenticationRequest: AuthenticationRequest? { return data as? AuthenticationRequest }
     
     static func commandTypeForCode(code: APDUHeader.CommandCode) -> APDUCommandDataProtocol.Type? {
         return APDUCommandTypes.lazy.filter({ $0.cmdCode == code }).first
