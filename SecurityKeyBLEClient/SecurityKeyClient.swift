@@ -9,9 +9,41 @@
 import Foundation
 import CoreBluetooth
 
-class ClientContext: ContextProtocol {
-    var logger: LoggerProtocol?
+enum ClientStatus: StatusProtocol {
+    case Initializing
+    case Initialized
+
+    case Scanning
+    case DeviceFound
+
+    case Connecting
+    case Connected
     
+    case DiscoveringServices
+    case DiscoveredServices
+    
+    case DiscoveringCharacteristics
+    case DiscoveredCharacteristics
+    
+    case ReadingServiceRevision
+    case ReadServiceRevision
+    
+    case ReadingControlPointLength
+    case ReadControlPointLength
+    
+    case Subscribing
+    case Subscribed
+    
+    case SendingRequest
+    case SentRequest
+    
+    case ReceivingResponse
+    case ReceivedResponse
+    
+    case Finished
+}
+
+class ClientContext: StateMachineContext {
     var centralManager:                   CBCentralManager?
     var activePeripheral:                 CBPeripheral?
     var activeService:                    CBService?
@@ -27,9 +59,9 @@ class ClientContext: ContextProtocol {
     required init() {}
 }
 
-class Client: StateMachine<ClientContext>, CBCentralManagerDelegate, CBPeripheralDelegate {
-    override init(logger:LoggerProtocol? = nil) {
-        super.init(logger: logger)
+class Client: StateMachine<ClientContext, ClientStatus>, CBCentralManagerDelegate, CBPeripheralDelegate {
+    override init() {
+        super.init()
         context.centralManager = CBCentralManager(delegate: self, queue: nil)
         failure = ClientInitialState.self
     }
@@ -86,15 +118,15 @@ class Client: StateMachine<ClientContext>, CBCentralManagerDelegate, CBPeriphera
     }
 }
 
-class ClientState: State<ClientContext> {
-    required init(_ m: StateMachine<ClientContext>) {
+class ClientState: State<ClientContext, ClientStatus> {
+    required init(_ m: MachineType) {
         super.init(m)
     }
 }
 
 class ClientInitialState: ClientState {
     override func enter() {
-        context.log("Initializing…")
+        machine.statusUpdate(.Initializing)
         
         guard
             let manager = context.centralManager
@@ -108,10 +140,11 @@ class ClientInitialState: ClientState {
         context.serviceRevisionCharacteristic = nil
         
         if manager.state == .PoweredOn {
+            machine.statusUpdate(.Initialized)
             return proceed(ClientScanState)
         }
         
-        handle(event: "centralStateUpdate", with: handleCentralStateUpdate)
+        handles(event: "centralStateUpdate", with: handleCentralStateUpdate)
     }
     
     func handleCentralStateUpdate() {
@@ -120,7 +153,7 @@ class ClientInitialState: ClientState {
             else { return fail("bad context") }
 
         if manager.state == .PoweredOn {
-            context.debug("centralManager powered on")
+            machine.statusUpdate(.Initialized)
             proceed(ClientScanState)
         } else {
             fail("centralManager not powered on")
@@ -130,7 +163,7 @@ class ClientInitialState: ClientState {
 
 class ClientScanState: ClientState {
     override func enter() {
-        context.log("Scanning for devices…")
+        machine.statusUpdate(.Scanning)
         
         guard
             let manager = context.centralManager
@@ -138,7 +171,7 @@ class ClientScanState: ClientState {
 
         manager.scanForPeripheralsWithServices([u2fServiceUUID], options: nil)
         
-        handle(event: "discoveredPeripheral", with: handleDiscoveredPeripheral)
+        handles(event: "discoveredPeripheral", with: handleDiscoveredPeripheral)
     }
     
     func handleDiscoveredPeripheral() {
@@ -150,9 +183,9 @@ class ClientScanState: ClientState {
             let delegate = machine as? CBPeripheralDelegate
             else { return fail("couldn't cast machine as CBPeripheralDelegate") }
         
-        context.debug("Found peripheral: \(peripheral.name ?? "<no name>")")
-        
         peripheral.delegate = delegate
+        
+        machine.statusUpdate(.DeviceFound)
         proceed(ClientConnectState)
     }
     
@@ -167,7 +200,7 @@ class ClientScanState: ClientState {
 
 class ClientConnectState: ClientState {
     override func enter() {
-        context.log("Connecting to device…")
+        machine.statusUpdate(.Connecting)
         
         guard
             let peripheral = context.activePeripheral,
@@ -175,18 +208,18 @@ class ClientConnectState: ClientState {
         else { return fail("bad context") }
         
         manager.connectPeripheral(peripheral, options: nil)
-        handle(event: "connectedPeripheral", with: handleConncetedPeripheral)
+        handles(event: "connectedPeripheral", with: handleConncetedPeripheral)
     }
     
     func handleConncetedPeripheral() {
-        context.debug("Peripheral connected")
+        machine.statusUpdate(.Connected)
         proceed(ClientDiscoverServiceState)
     }
 }
 
 class ClientDiscoverServiceState: ClientState {
     override func enter() {
-        context.log("Discovering services…")
+        machine.statusUpdate(.DiscoveringServices)
         
         guard
             let peripheral = context.activePeripheral
@@ -194,7 +227,7 @@ class ClientDiscoverServiceState: ClientState {
         
         peripheral.discoverServices([u2fServiceUUID])
         
-        handle(event: "discoveredServices", with: handleDiscoveredServices)
+        handles(event: "discoveredServices", with: handleDiscoveredServices)
     }
     
     func handleDiscoveredServices() {
@@ -205,15 +238,16 @@ class ClientDiscoverServiceState: ClientState {
                 return fail("peripheral doesn't implement U2F service")
         }
         
-        context.debug("Discovered U2F service")
         context.activeService = service
+        
+        machine.statusUpdate(.DiscoveredServices)
         proceed(ClientDiscoverCharacteristicState)
     }
 }
 
 class ClientDiscoverCharacteristicState: ClientState {
     override func enter() {
-        context.log("Discovering characteristics…")
+        machine.statusUpdate(.DiscoveringCharacteristics)
 
         guard
             let peripheral = context.activePeripheral,
@@ -229,7 +263,7 @@ class ClientDiscoverCharacteristicState: ClientState {
             ], forService: service
         )
         
-        handle(event: "discoveredCharacteristics", with: handleDiscoveredCharacteristics)
+        handles(event: "discoveredCharacteristics", with: handleDiscoveredCharacteristics)
     }
     
     func handleDiscoveredCharacteristics() {
@@ -237,8 +271,7 @@ class ClientDiscoverCharacteristicState: ClientState {
             let service = context.activeService,
             let characteristics = service.characteristics
             else { return fail("bad context") }
-        
-        context.debug("Discovered characteristics")
+
         for characteristic in characteristics {
             switch characteristic.UUID {
             case u2fControlPointCharacteristicUUID:
@@ -264,13 +297,14 @@ class ClientDiscoverCharacteristicState: ClientState {
             return fail("services doesn't define all characteristics")
         }
         
+        machine.statusUpdate(.DiscoveredCharacteristics)
         proceed(ClientReadServiceRevisionState)
     }
 }
 
 class ClientReadServiceRevisionState: ClientState {
     override func enter() {
-        context.log("Checking service revision…")
+        machine.statusUpdate(.ReadingServiceRevision)
         
         guard
             let peripheral = context.activePeripheral,
@@ -279,7 +313,7 @@ class ClientReadServiceRevisionState: ClientState {
         
         peripheral.readValueForCharacteristic(characteristic)
         
-        handle(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
+        handles(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
     }
     
     func handleUpdatedCharacteristic() {
@@ -292,14 +326,14 @@ class ClientReadServiceRevisionState: ClientState {
             return fail("unknown service revision")
         }
         
-        context.debug("valid service revision")
+        machine.statusUpdate(.ReadServiceRevision)
         proceed(ClientReadControlPointLengthState)
     }
 }
 
 class ClientReadControlPointLengthState: ClientState {
     override func enter() {
-        context.log("Checking control-point length…")
+        machine.statusUpdate(.ReadingControlPointLength)
         
         guard
             let peripheral = context.activePeripheral,
@@ -308,7 +342,7 @@ class ClientReadControlPointLengthState: ClientState {
         
         peripheral.readValueForCharacteristic(characteristic)
         
-        handle(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
+        handles(event: "updatedCharacteristic", with: handleUpdatedCharacteristic)
     }
     
     func handleUpdatedCharacteristic() {
@@ -320,15 +354,15 @@ class ClientReadControlPointLengthState: ClientState {
         if value.getInt(2) != CharacteristicMaxSize {
             return fail("expected control point size to be \(CharacteristicMaxSize)")
         }
-        
-        context.debug("valid control point length")
+
+        machine.statusUpdate(.ReadControlPointLength)
         proceed(ClientSubscribeToServerState)
     }
 }
 
 class ClientSubscribeToServerState: ClientState {
     override func enter() {
-        context.log("Subscribing…")
+        machine.statusUpdate(.Subscribing)
 
         guard
             let peripheral = context.activePeripheral,
@@ -337,7 +371,7 @@ class ClientSubscribeToServerState: ClientState {
         
         peripheral.setNotifyValue(true, forCharacteristic: characteristic)
 
-        handle(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
+        handles(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
     }
     
     func handleNotificationStateUpdate() {
@@ -353,6 +387,7 @@ class ClientSubscribeToServerState: ClientState {
             return fail("couldn't subscribe to characteristic")
         }
         
+        machine.statusUpdate(.Subscribed)
         proceed(ClientRequestState)
     }
 }
@@ -362,7 +397,7 @@ class ClientRequestState: ClientState {
     var nextFragment: NSData?
 
     override func enter() {
-        context.log("Sending request…")
+        machine.statusUpdate(.SendingRequest)
 
         guard
             let msg = context.activeRequest
@@ -371,7 +406,7 @@ class ClientRequestState: ClientState {
         fragments = msg.fragments.generate()
         
         writeNextFragment()
-        handle(event: "wroteCharacteristic", with: writeNextFragment)
+        handles(event: "wroteCharacteristic", with: writeNextFragment)
     }
     
     func writeNextFragment() {
@@ -392,6 +427,7 @@ class ClientRequestState: ClientState {
         if nextFragment == nil {
             // Don't wait for the server's ACK. We need to get to the response-state
             // quickly so we don't miss a fragment.
+            machine.statusUpdate(.SentRequest)
             return proceed(ClientResponseState)
         }
     }
@@ -401,11 +437,11 @@ class ClientResponseState: ClientState {
     let reader = BLEFragmentReader()
     
     override func enter() {
-        context.log("Waiting for response…")
+        machine.statusUpdate(.ReceivingResponse)
 
-        handle(event: "updatedCharacteristic",   with: handleUpdatedCharacteristic)
-        handle(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
-        handle(event: "wroteCharacteristic",     with: handleWroteCharacteristic)
+        handles(event: "updatedCharacteristic",   with: handleUpdatedCharacteristic)
+        handles(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
+        handles(event: "wroteCharacteristic",     with: handleWroteCharacteristic)
     }
     
     func handleUpdatedCharacteristic() {
@@ -431,6 +467,7 @@ class ClientResponseState: ClientState {
             
             cb(response: msg)
             
+            machine.statusUpdate(.ReceivedResponse)
             proceed(ClientFinishedState)
         }
     }
@@ -456,9 +493,9 @@ class ClientResponseState: ClientState {
 
 class ClientFinishedState: ClientState {
     override func enter() {
-        context.log("Received response…")
+        machine.statusUpdate(.Finished)
 
-        handle(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
+        handles(event: "notificationStateUpdate", with: handleNotificationStateUpdate)
     }
 
     func handleNotificationStateUpdate() {

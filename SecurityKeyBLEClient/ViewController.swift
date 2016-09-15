@@ -8,13 +8,15 @@
 
 import Cocoa
 
-class ViewController: NSViewController, LoggerProtocol {
+class ViewController: NSViewController {
     @IBOutlet weak var statusLabel: NSTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let client = Client(logger: self)
+        let client = Client()
+        
+        client.subscribe(statusUpdated)
         
         guard let msg = bleRegisterRequest() else {
             print("couldn't generate register request")
@@ -52,9 +54,30 @@ class ViewController: NSViewController, LoggerProtocol {
         }
     }
     
-    func log(msg:String) {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.statusLabel.stringValue = msg
+    func statusUpdated(status:ClientStatus) {
+        var msg:String? = nil
+        
+        switch status {
+        case .Initializing:
+            msg = "Initializing…"
+        case .Scanning:
+            msg = "Scanning for U2F devices…"
+        case .Connecting:
+            msg = "Connecting to device…"
+        case .SendingRequest:
+            msg = "Sending request…"
+        case .ReceivingResponse:
+            msg = "Receiving response…"
+        case .Finished:
+            msg = "All done…"
+        default:
+            break
+        }
+        
+        if let m = msg {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.statusLabel.stringValue = m
+            }
         }
     }
 }

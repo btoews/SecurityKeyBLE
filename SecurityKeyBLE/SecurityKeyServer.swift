@@ -9,8 +9,29 @@
 import Foundation
 import CoreBluetooth
 
-class ServerContext: ContextProtocol {
-    var logger: LoggerProtocol?
+enum ServerStatus: StatusProtocol {
+    case Initializing
+    case Initialized
+    
+    case AddingService
+    case AddedService
+    
+    case StartingAdvertising
+    case StartedAdvertising
+    
+    case Advertising
+    case ClientSubscribed
+    
+    case ReceivingRequest
+    case ReceivedRequest
+    
+    case SendingResponse
+    case SentResponse
+    
+    case Finished
+}
+
+class ServerContext: StateMachineContext {
     let authenticator = ServerAuthenticator()
 
     var peripheralManager:                   CBPeripheralManager?
@@ -27,11 +48,10 @@ class ServerContext: ContextProtocol {
     required init() {}
 }
 
-class Server: StateMachine<ServerContext>, CBPeripheralManagerDelegate {
-    override init(logger:LoggerProtocol? = nil) {
-        super.init(logger: logger)
+class Server: StateMachine<ServerContext, ServerStatus>, CBPeripheralManagerDelegate {
+    override init() {
+        super.init()
         failure = ServerInitState.self
-        proceed(ServerInitState.self)
     }
     
     // Reset the peripheral manager
@@ -82,15 +102,15 @@ class Server: StateMachine<ServerContext>, CBPeripheralManagerDelegate {
     }
 }
 
-class ServerState: State<ServerContext> {
-    required init(_ m: StateMachine<ServerContext>) {
+class ServerState: State<ServerContext, ServerStatus> {
+    required init(_ m: MachineType) {
         super.init(m)
     }
 }
 
 class ServerInitState: ServerState {
     override func enter() {
-        context.log("Initializing…")
+        machine.statusUpdate(.Initializing)
         
         machine.reset()
         
@@ -141,12 +161,12 @@ class ServerInitState: ServerState {
         
         context.u2fService = service
         
-        handle(event: "peripheralStateUpdate", with: handlePeripheralStateUpdate)
+        handles(event: "peripheralStateUpdate", with: handlePeripheralStateUpdate)
     }
     
     func handlePeripheralStateUpdate() {
         if context.peripheralManager?.state == .PoweredOn {
-            context.debug("peripheralManager powered on")
+            machine.statusUpdate(.Initialized)
             proceed(ServerAddServiceState)
         } else {
             fail("peripheralManager not powered on")
@@ -156,6 +176,8 @@ class ServerInitState: ServerState {
 
 class ServerAddServiceState: ServerState {
     override func enter() {
+        machine.statusUpdate(.AddingService)
+        
         guard
             let manager = context.peripheralManager,
             let service = context.u2fService
@@ -163,17 +185,18 @@ class ServerAddServiceState: ServerState {
         
         manager.addService(service)
         
-        handle(event: "serviceAdded", with: handleServiceAdded)
+        handles(event: "serviceAdded", with: handleServiceAdded)
     }
     
     func handleServiceAdded() {
-         proceed(ServerStartAdvertisingState)
+        machine.statusUpdate(.AddedService)
+        proceed(ServerStartAdvertisingState)
     }
 }
 
 class ServerStartAdvertisingState: ServerState {
     override func enter() {
-        context.log("Advertising U2F service…")
+        machine.statusUpdate(.StartingAdvertising)
 
         guard
             let manager = context.peripheralManager,
@@ -182,17 +205,19 @@ class ServerStartAdvertisingState: ServerState {
 
         manager.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [service.UUID]])
 
-        handle(event: "advertistingStarted", with: handleAdvertistingStarted)
+        handles(event: "advertistingStarted", with: handleAdvertistingStarted)
     }
     
     func handleAdvertistingStarted() {
+        machine.statusUpdate(.StartedAdvertising)
         proceed(ServerAdvertisingState)
     }
 }
 
 class ServerAdvertisingState: ServerState {
     override func enter() {
-        handle(event: "clientSubscribed", with: handleClientSubscribed)
+        machine.statusUpdate(.Advertising)
+        handles(event: "clientSubscribed", with: handleClientSubscribed)
     }
     
     override func exit() {
@@ -204,6 +229,7 @@ class ServerAdvertisingState: ServerState {
     }
     
     func handleClientSubscribed() {
+        machine.statusUpdate(.ClientSubscribed)
         proceed(ServerRequestState)
     }
 }
@@ -212,9 +238,9 @@ class ServerRequestState: ServerState {
     let bleReader = BLEFragmentReader()
     
     override func enter() {
-        context.log("Receiving request…")
+        machine.statusUpdate(.ReceivingRequest)
 
-        handle(event: "writeRequestReceived", with: handleWriteRequestReceived)
+        handles(event: "writeRequestReceived", with: handleWriteRequestReceived)
     }
     
     func handleWriteRequestReceived() {
@@ -233,6 +259,8 @@ class ServerRequestState: ServerState {
         if bleReader.isComplete {
             guard let cmd = bleReader.message else { return bleError() }
             context.activeBLEResponse = context.authenticator.bleResponse(cmd)
+            
+            machine.statusUpdate(.ReceivedRequest)
             proceed(ServerResponseState)
         }
         
@@ -252,7 +280,7 @@ class ServerResponseState: ServerState {
     var queuedFragment: NSData?
     
     override func enter() {
-        context.log("Sending response…")
+        machine.statusUpdate(.SendingResponse)
         
         guard
             let resp = context.activeBLEResponse
@@ -261,7 +289,7 @@ class ServerResponseState: ServerState {
         fragments = resp.fragments.generate()
 
         writeNextFragment()
-        handle(event: "readyToUpdate", with: writeNextFragment)
+        handles(event: "readyToUpdate", with: writeNextFragment)
     }
     
     override func exit() {
@@ -277,6 +305,7 @@ class ServerResponseState: ServerState {
         guard
             let fragment = queuedFragment ?? fragments?.next()
         else {
+            machine.statusUpdate(.SentResponse)
             return proceed(ServerFinishedState)
         }
 
@@ -294,6 +323,6 @@ class ServerResponseState: ServerState {
 
 class ServerFinishedState: ServerState {
     override func enter() {
-        context.log("Finished")
+        machine.statusUpdate(.Finished)
     }
 }
