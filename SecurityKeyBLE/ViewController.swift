@@ -38,9 +38,9 @@ class ViewController: UIViewController {
         case .ClientSubscribed:
             msg = "Device connected…"
         case .ReceivingRequest:
-            msg = "Sending request…"
+            msg = "Receiving request…"
         case .SendingResponse:
-            msg = "Receiving response…"
+            msg = "Sending response…"
         case .Finished:
             msg = "All done…"
         default:
